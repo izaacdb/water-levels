@@ -23,6 +23,7 @@ from pipeline.contract import (
     Series,
     SourceInfo,
 )
+from pipeline.health import SourceHealth
 
 # A reservoir that hasn't reported for this long has left the source's network
 # (decommissioned, merged into a system, ...). Its history still counts in the
@@ -136,6 +137,12 @@ def _series(by_area: pl.DataFrame, area_ids: list[str], snapshot: str) -> dict[s
     return out
 
 
+def _last_success(h: SourceHealth | None, now: datetime) -> datetime | None:
+    if h is None:
+        return now
+    return datetime.fromisoformat(h.last_success) if h.last_success else None
+
+
 def _round(value: float | None) -> float | None:
     return None if value is None else round(value, 1)
 
@@ -146,7 +153,9 @@ def build_outputs(
     rbds: pl.DataFrame,
     sources: list[SourceMeta],
     now: datetime,
+    health: dict[str, SourceHealth] | None = None,
 ) -> Outputs:
+    health = health or {}
     today = now.date()
     reservoirs = _reservoirs(registries)
     last_seen = store.group_by("reservoir_id").agg(pl.col("observed_on").max().alias("last_seen"))
@@ -203,8 +212,9 @@ def build_outputs(
                 country=s.country,
                 name=s.name,
                 url=s.url,
-                last_fetched=now,
+                last_fetched=_last_success(health.get(s.id), now),
                 last_published=published.get(s.id),
+                last_error=health[s.id].last_error if s.id in health else None,
             )
             for s in sources
         ],
