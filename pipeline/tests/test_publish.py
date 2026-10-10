@@ -151,3 +151,35 @@ def test_series_window_is_ten_years() -> None:
     )
     out = build_outputs(store, {"ES": REGISTRY}, RBDS, [META], now=NOW)
     assert out.series["ES-a"].weeks == ["2016-W41", "2026-W41"]
+
+
+def test_country_status_notes() -> None:
+    from pipeline.health import SourceHealth
+
+    store = _store([("ES-a", date(2026, 9, 1), 30, 100)])
+    health = {"es-miteco": SourceHealth(last_error="ConnectError: down", consecutive_failures=2)}
+    out = build_outputs(store, {"ES": REGISTRY}, RBDS, [META], now=NOW, health=health)
+    spain = out.manifest.countries[0]
+    assert spain.status == "stale"
+    assert spain.note is not None
+    assert "1 Sep 2026" in spain.note
+    assert "latest update" in spain.note.lower()
+
+
+def test_withdrawn_country_keeps_its_data_with_an_explanation() -> None:
+    """E6: a country that stops meeting the bar stays visible, marked and explained."""
+    store = _store([("ES-a", date(2026, 10, 6), 30, 100)])
+    out = build_outputs(
+        store,
+        {"ES": REGISTRY},
+        RBDS,
+        [META],
+        now=NOW,
+        withdrawn={"ES": "The source stopped publishing per-reservoir figures."},
+    )
+    spain = out.manifest.countries[0]
+    assert (spain.status, spain.note) == (
+        "withdrawn",
+        "The source stopped publishing per-reservoir figures.",
+    )
+    assert "ES" in out.current.root

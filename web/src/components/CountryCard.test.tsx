@@ -36,4 +36,16 @@ describe('CountryCard', () => {
     render(<CountryCard name="Spain" entry={{ ...entry, stale: true }} source={source} />)
     expect(screen.getByText(/out of date/i)).toBeInTheDocument()
   })
+  it('explains a withdrawn country (E6)', () => {
+    render(
+      <CountryCard
+        name="Spain"
+        entry={{ ...entry, stale: true }}
+        source={source}
+        status={{ code: 'ES', name: 'Spain', status: 'withdrawn', note: 'No longer meets the inclusion bar.' }}
+      />,
+    )
+    expect(screen.getByText('Withdrawn')).toBeInTheDocument()
+    expect(screen.getByText('No longer meets the inclusion bar.')).toBeInTheDocument()
+  })
 })

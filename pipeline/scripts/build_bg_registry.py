@@ -46,7 +46,10 @@ def main(wikidata: str, *bulletins: str) -> None:
         raw = Path(path).read_bytes()
         obs = parse_pdf(raw) if raw.startswith(b"%PDF") else parse_html(raw)
         for row in obs.iter_rows(named=True):
-            reservoirs.setdefault(row["source_key"], {"name": row["name"], "group": row["group"]})
+            reservoirs.setdefault(
+                row["source_key"],
+                {"name": row["name"], "group": row["group"], "capacity": row["capacity_hm3"]},
+            )
 
     overrides = {r["id"]: r for r in csv.DictReader(OVERRIDES.open())} if OVERRIDES.exists() else {}
     rows, unmatched = [], []
@@ -66,6 +69,8 @@ def main(wikidata: str, *bulletins: str) -> None:
                 "rbd_code": DIRECTORATE_RBD[info["group"]],
                 "lat": f"{lat_lon[0]:.4f}" if lat_lon else "",
                 "lon": f"{lat_lon[1]:.4f}" if lat_lon else "",
+                # Resolves names clipped in archived PDFs (bg_moew.resolve_clipped_names).
+                "capacity_hm3": f"{info['capacity']:.3f}",
             }
         )
     with OUT.open("w", newline="") as fh:

@@ -114,3 +114,32 @@ def test_file_date_is_used_when_the_text_has_none() -> None:
     envelope = json.dumps({"date": "2022-03-01", "content": base64.b64encode(pdf).decode()})
     obs = MoewAdapter().parse(envelope.encode())
     assert obs["observed_on"].unique().to_list() == [date(2022, 3, 1)]
+
+
+def test_names_clipped_by_old_pdf_cells_resolve_by_prefix_and_capacity() -> None:
+    """Archived PDFs clip long names at the cell edge ('Ивайловград' -> 'ivaylovgra');
+    'studen' could be Студена or Студен кладенец, so capacity breaks the tie."""
+    from pipeline.adapters.bg_moew import resolve_clipped_names
+
+    obs = pl.DataFrame(
+        [
+            {
+                "source_key": k,
+                "name": k,
+                "group": "БДИБР",
+                "observed_on": date(2022, 3, 1),
+                "volume_hm3": 1.0,
+                "capacity_hm3": cap,
+            }
+            for k, cap in [
+                ("ivaylovgra", 156.702),
+                ("studen", 387.772),
+                ("studen", 25.2),
+                ("iskar", 655.252),
+                ("nowhere", 1.0),
+            ]
+        ],
+        schema=OBSERVATION_SCHEMA,
+    )
+    resolved = resolve_clipped_names(obs)["source_key"].to_list()
+    assert resolved == ["ivaylovgrad", "studen-kladenets", "studena", "iskar", "nowhere"]

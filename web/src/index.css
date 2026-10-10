@@ -518,3 +518,12 @@ a {
 .compare .chart {
   height: 260px;
 }
+
+.status-note {
+  font-size: 0.8rem;
+  color: var(--warn-ink);
+  background: var(--warn-bg);
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin: 6px 0;
+}

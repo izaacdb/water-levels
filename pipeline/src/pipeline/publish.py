@@ -23,6 +23,7 @@ from pipeline.contract import (
     Series,
     SourceInfo,
 )
+from pipeline.health import SourceHealth
 
 # A reservoir that hasn't reported for this long has left the source's network
 # (decommissioned, merged into a system, ...). Its history still counts in the
@@ -136,6 +137,33 @@ def _series(by_area: pl.DataFrame, area_ids: list[str], snapshot: str) -> dict[s
     return out
 
 
+def _country_status(
+    area: Area,
+    entry: CurrentEntry,
+    sources: list[SourceMeta],
+    health: dict[str, SourceHealth],
+    withdrawn: dict[str, str],
+) -> CountryStatus:
+    """B24/E5/E6: active, stale (with why) or withdrawn (with the maintainers' note)."""
+    if area.id in withdrawn:
+        return CountryStatus(
+            code=area.id, name=area.name, status="withdrawn", note=withdrawn[area.id]
+        )
+    if not entry.stale:
+        return CountryStatus(code=area.id, name=area.name, status="active")
+    source = next((s for s in sources if s.country == area.id), None)
+    note = f"Latest official figures are from {entry.as_of.day} {entry.as_of:%b %Y}."
+    if source and health.get(source.id) and health[source.id].last_error:
+        note += " The latest update from the source failed; showing the last published figures."
+    return CountryStatus(code=area.id, name=area.name, status="stale", note=note)
+
+
+def _last_success(h: SourceHealth | None, now: datetime) -> datetime | None:
+    if h is None:
+        return now
+    return datetime.fromisoformat(h.last_success) if h.last_success else None
+
+
 def _round(value: float | None) -> float | None:
     return None if value is None else round(value, 1)
 
@@ -146,7 +174,11 @@ def build_outputs(
     rbds: pl.DataFrame,
     sources: list[SourceMeta],
     now: datetime,
+    health: dict[str, SourceHealth] | None = None,
+    withdrawn: dict[str, str] | None = None,
 ) -> Outputs:
+    health = health or {}
+    withdrawn = withdrawn or {}
     today = now.date()
     reservoirs = _reservoirs(registries)
     last_seen = store.group_by("reservoir_id").agg(pl.col("observed_on").max().alias("last_seen"))
@@ -189,11 +221,7 @@ def build_outputs(
         generated_at=now,
         snapshot_week=snapshot,
         countries=[
-            CountryStatus(
-                code=a.id,
-                name=a.name,
-                status="stale" if current[a.id].stale else "active",
-            )
+            _country_status(a, current[a.id], sources, health, withdrawn)
             for a in areas
             if a.level == "country"
         ],
@@ -203,8 +231,9 @@ def build_outputs(
                 country=s.country,
                 name=s.name,
                 url=s.url,
-                last_fetched=now,
+                last_fetched=_last_success(health.get(s.id), now),
                 last_published=published.get(s.id),
+                last_error=health[s.id].last_error if s.id in health else None,
             )
             for s in sources
         ],

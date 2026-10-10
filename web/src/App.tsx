@@ -36,6 +36,7 @@ function Panel({ data, state, update }: PanelProps) {
         parent={data.areas.find((a) => a.id === area.parentId)}
         onBack={() => update({ area: null })}
         onSelect={select}
+        countryNote={data.manifest.countries.find((c) => c.code === area.country)?.note ?? undefined}
         onCompare={state.cmp.includes(area.id) || state.cmp.length >= MAX_COMPARE ? undefined : () => addToCompare(area.id)}
       />
     )
@@ -86,7 +87,12 @@ function Panel({ data, state, update }: PanelProps) {
               const source = sourceFor(country.sourceId)
               return countryEntry && source ? (
                 <button type="button" key={country.id} className="card-button" onClick={() => select(country.id)}>
-                  <CountryCard name={country.name} entry={countryEntry} source={source} />
+                  <CountryCard
+                    name={country.name}
+                    entry={countryEntry}
+                    source={source}
+                    status={data.manifest.countries.find((c) => c.code === country.id)}
+                  />
                 </button>
               ) : null
             })}

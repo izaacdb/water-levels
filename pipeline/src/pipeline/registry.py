@@ -30,3 +30,12 @@ def attach_reservoir_ids(
     mapped = obs.join(ids, on="source_key", how="left")
     unknown = sorted(mapped.filter(pl.col("id").is_null())["source_key"].unique().to_list())
     return mapped.filter(pl.col("id").is_not_null()).rename({"id": "reservoir_id"}), unknown
+
+
+def load_withdrawn() -> dict[str, str]:
+    """E6: countries that no longer meet the inclusion bar, with the note shown to users."""
+    path = REGISTRY_DIR / "countries.csv"
+    if not path.exists():
+        return {}
+    rows = pl.read_csv(path, infer_schema=False)
+    return dict(rows.filter(pl.col("status") == "withdrawn").select("code", "note").iter_rows())

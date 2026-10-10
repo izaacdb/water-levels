@@ -144,7 +144,7 @@ def _rows_to_frame(rows: list[list[str]], text: str, fallback: date | None = Non
         )
     if not out:
         raise ValueError("no reservoir rows in bulletin")
-    return pl.DataFrame(out, schema=OBSERVATION_SCHEMA)
+    return resolve_clipped_names(pl.DataFrame(out, schema=OBSERVATION_SCHEMA))
 
 
 def _cell_text(fragment: str) -> str:
@@ -170,6 +170,29 @@ def parse_pdf(raw: bytes, fallback: date | None = None) -> pl.DataFrame:
             for table in page.extract_tables():
                 rows += [[" ".join(c.split()) for c in r if c and c.strip()] for r in table]
     return _rows_to_frame(rows, text, fallback)
+
+
+def resolve_clipped_names(obs: pl.DataFrame) -> pl.DataFrame:
+    """Archived PDFs clip long names at the cell edge ('Ивайловград' -> 'ivaylovgra').
+    An unknown key is matched as a prefix of a registry key; when several fit, the
+    closest capacity wins (each row carries the reservoir's total volume)."""
+    from pipeline.registry import load_registry  # local: registry imports nothing from here
+
+    registry = load_registry("BG").select(
+        "source_key", pl.col("capacity_hm3").cast(pl.Float64, strict=False)
+    )
+    known: dict[str, float | None] = dict(registry.iter_rows())
+
+    def resolve(key: str, capacity: float) -> str:
+        if key in known:
+            return key
+        candidates = [k for k in known if k.startswith(key)]
+        if not candidates:
+            return key
+        return min(candidates, key=lambda k: abs((known[k] or 0) - capacity))
+
+    keys = [resolve(k, c) for k, c in obs.select("source_key", "capacity_hm3").iter_rows()]
+    return obs.with_columns(pl.Series("source_key", keys, dtype=pl.String))
 
 
 def _complete(raw: bytes) -> bool:
