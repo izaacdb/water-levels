@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { AreaDetail } from './components/AreaDetail'
+import { ComparePanel } from './components/ComparePanel'
 import { CountryCard } from './components/CountryCard'
 import { Legend } from './components/Legend'
 import { MapView } from './components/MapView'
@@ -8,66 +9,88 @@ import { Rankings } from './components/Rankings'
 import type { AppData } from './lib/data'
 import { useAppData } from './lib/data'
 import { formatWeek } from './lib/format'
-import type { Mode } from './lib/scale'
+import { MAX_COMPARE, type MapPosition, type ViewState, validateState } from './lib/urlState'
+import { useUrlState } from './lib/useUrlState'
 
-type View = { kind: 'overview' } | { kind: 'rankings' } | { kind: 'area'; id: string; from: 'overview' | 'rankings' }
-
-function Panel({ data, mode, setMode, view, setView }: {
+interface PanelProps {
   data: AppData
-  mode: Mode
-  setMode: (m: Mode) => void
-  view: View
-  setView: (v: View) => void
-}) {
-  const sourceFor = (sourceId: string) => data.manifest.sources.find((s) => s.id === sourceId)
-  const tab = view.kind === 'area' ? view.from : view.kind
-  const select = (id: string) => setView({ kind: 'area', id, from: tab })
+  state: ViewState
+  update: (patch: Partial<ViewState>) => void
+}
 
-  if (view.kind === 'area') {
-    const area = data.areas.find((a) => a.id === view.id)
-    const entry = data.current[view.id]
-    if (area && entry) {
-      return (
-        <AreaDetail
-          key={area.id}
-          area={area}
-          entry={entry}
-          source={sourceFor(area.sourceId)}
-          parent={data.areas.find((a) => a.id === area.parentId)}
-          onBack={() => setView({ kind: view.from })}
-          onSelect={select}
-        />
-      )
-    }
+function Panel({ data, state, update }: PanelProps) {
+  const sourceFor = (sourceId: string) => data.manifest.sources.find((s) => s.id === sourceId)
+  const select = (id: string) => update({ area: id })
+  const addToCompare = (id: string) =>
+    update({ cmp: state.cmp.includes(id) ? state.cmp : [...state.cmp, id].slice(0, MAX_COMPARE), view: 'compare', area: null })
+
+  const area = state.area ? data.areas.find((a) => a.id === state.area) : undefined
+  const entry = area ? data.current[area.id] : undefined
+  if (area && entry) {
+    return (
+      <AreaDetail
+        key={area.id}
+        area={area}
+        entry={entry}
+        source={sourceFor(area.sourceId)}
+        parent={data.areas.find((a) => a.id === area.parentId)}
+        onBack={() => update({ area: null })}
+        onSelect={select}
+        onCompare={state.cmp.includes(area.id) || state.cmp.length >= MAX_COMPARE ? undefined : () => addToCompare(area.id)}
+      />
+    )
   }
+
+  const tabs = [
+    ['overview', 'Overview'],
+    ['rankings', 'Rankings'],
+    ['compare', state.cmp.length ? `Compare (${state.cmp.length})` : 'Compare'],
+  ] as const
 
   return (
     <>
       <nav className="tabs" aria-label="Panel">
-        <button type="button" aria-pressed={tab === 'overview'} onClick={() => setView({ kind: 'overview' })}>
-          Overview
-        </button>
-        <button type="button" aria-pressed={tab === 'rankings'} onClick={() => setView({ kind: 'rankings' })}>
-          Rankings
-        </button>
+        {tabs.map(([view, label]) => (
+          <button key={view} type="button" aria-pressed={state.view === view} onClick={() => update({ view })}>
+            {label}
+          </button>
+        ))}
       </nav>
-      {tab === 'rankings' ? (
-        <Rankings areas={data.areas} current={data.current} onSelect={select} />
-      ) : (
+      {state.view === 'rankings' && (
+        <Rankings
+          areas={data.areas}
+          current={data.current}
+          opts={{ level: state.level, sort: state.sort, dir: state.dir }}
+          onChange={(opts) => update(opts)}
+          onSelect={select}
+        />
+      )}
+      {state.view === 'compare' && (
+        <ComparePanel
+          areas={data.areas}
+          current={data.current}
+          ids={state.cmp}
+          mode={state.mode}
+          onModeChange={(mode) => update({ mode })}
+          onChange={(cmp) => update({ cmp })}
+          onSelect={select}
+        />
+      )}
+      {state.view === 'overview' && (
         <>
-          <ModeToggle mode={mode} onChange={setMode} />
+          <ModeToggle mode={state.mode} onChange={(mode) => update({ mode })} />
           {data.areas
             .filter((a) => a.level === 'country')
-            .map((area) => {
-              const entry = data.current[area.id]
-              const source = sourceFor(area.sourceId)
-              return entry && source ? (
-                <button type="button" key={area.id} className="card-button" onClick={() => select(area.id)}>
-                  <CountryCard name={area.name} entry={entry} source={source} />
+            .map((country) => {
+              const countryEntry = data.current[country.id]
+              const source = sourceFor(country.sourceId)
+              return countryEntry && source ? (
+                <button type="button" key={country.id} className="card-button" onClick={() => select(country.id)}>
+                  <CountryCard name={country.name} entry={countryEntry} source={source} />
                 </button>
               ) : null
             })}
-          <Legend mode={mode} />
+          <Legend mode={state.mode} />
           <p className="note">Zoom in to see river basins, then individual reservoirs. Click any area for its history.</p>
           <p className="note">
             Grey countries are not covered: they don't publish official per-reservoir data at least weekly.
@@ -78,11 +101,51 @@ function Panel({ data, mode, setMode, view, setView }: {
   )
 }
 
+function Explorer({ data }: { data: AppData }) {
+  const [raw, update] = useUrlState()
+  const known = useMemo(() => new Set(data.areas.map((a) => a.id)), [data.areas])
+  // E7: a shared link may name areas that have since been renamed or removed.
+  const [arrival] = useState(() => validateState(raw, known))
+  const missing = arrival.missing
+  const [noticeOpen, setNoticeOpen] = useState(missing.length > 0)
+  const state = validateState(raw, known).state
+  useEffect(() => {
+    // Clean the URL once, on arrival, so a re-shared link is tidy.
+    if (arrival.missing.length) update({ area: arrival.state.area, cmp: arrival.state.cmp })
+  }, [arrival, update])
+  const onMove = useCallback((at: MapPosition) => update({ at }), [update])
+  const onSelect = useCallback((id: string) => update({ area: id }), [update])
+  const names = (ids: string[]) => ids.join(', ')
+
+  return (
+    <main className="layout">
+      <MapView
+        areas={data.areas}
+        current={data.current}
+        mode={state.mode}
+        onSelect={onSelect}
+        initialAt={state.at}
+        onMove={onMove}
+      />
+      <aside className="panel">
+        {noticeOpen && (
+          <div className="notice" role="status">
+            <span>
+              Some areas in this link no longer exist and were left out: <strong>{names(missing)}</strong>
+            </span>
+            <button type="button" className="link-button" onClick={() => setNoticeOpen(false)}>
+              Dismiss
+            </button>
+          </div>
+        )}
+        <Panel data={data} state={state} update={update} />
+      </aside>
+    </main>
+  )
+}
+
 export default function App() {
   const state = useAppData()
-  const [mode, setMode] = useState<Mode>('pct')
-  const [view, setView] = useState<View>({ kind: 'overview' })
-
   return (
     <div className="app">
       <header className="topbar">
@@ -93,23 +156,9 @@ export default function App() {
           </span>
         )}
       </header>
-
       {state.status === 'loading' && <p className="status">Loading the latest official data…</p>}
       {state.status === 'error' && <p className="status error">Couldn't load data: {state.error}</p>}
-
-      {state.status === 'ready' && (
-        <main className="layout">
-          <MapView
-            areas={state.data.areas}
-            current={state.data.current}
-            mode={mode}
-            onSelect={(id) => setView({ kind: 'area', id, from: view.kind === 'rankings' ? 'rankings' : 'overview' })}
-          />
-          <aside className="panel">
-            <Panel data={state.data} mode={mode} setMode={setMode} view={view} setView={setView} />
-          </aside>
-        </main>
-      )}
+      {state.status === 'ready' && <Explorer data={state.data} />}
     </div>
   )
 }

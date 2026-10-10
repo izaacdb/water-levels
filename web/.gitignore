@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 public/data/
+dist-e2e/
+test-results/
+playwright-report/

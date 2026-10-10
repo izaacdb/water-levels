@@ -15,6 +15,7 @@ import type { Areas, Current } from '../contract'
 import { geoUrl } from '../lib/data'
 import { colorFor, type Mode } from '../lib/scale'
 import { tooltipLines } from '../lib/tooltip'
+import type { MapPosition } from '../lib/urlState'
 
 setWorkerUrl(workerUrl)
 
@@ -28,6 +29,9 @@ interface Props {
   current: Current
   mode: Mode
   onSelect?: (areaId: string) => void
+  /** Initial camera (from the URL); defaults to all of Europe. */
+  initialAt?: MapPosition | null
+  onMove?: (at: MapPosition) => void
 }
 
 type Geo = FeatureCollection<Geometry, Record<string, unknown>>
@@ -82,32 +86,43 @@ function popupNode(areaId: string, areas: Map<string, Areas[number]>, current: C
 }
 
 /** Europe map: country → river basin → reservoir, coloured by % full or vs normal. */
-export function MapView({ areas, current, mode, onSelect }: Props) {
+export function MapView({ areas, current, mode, onSelect, initialAt, onMove }: Props) {
   const container = useRef<HTMLDivElement>(null)
   const mapRef = useRef<MapLibreMap | null>(null)
   const geo = useRef<{ countries: Geo; rbd: Geo } | null>(null)
-  const latest = useRef({ areas, current, onSelect })
+  const latest = useRef({ areas, current, onSelect, onMove })
+  const initial = useRef(initialAt)
   const [ready, setReady] = useState(false)
   useEffect(() => {
-    latest.current = { areas, current, onSelect }
-  }, [areas, current, onSelect])
+    latest.current = { areas, current, onSelect, onMove }
+  }, [areas, current, onSelect, onMove])
 
   useEffect(() => {
     if (!container.current) return
     const map = new MapLibreMap({
       container: container.current,
       style: BASEMAP,
-      bounds: [
-        [-24, 32],
-        [42, 70],
-      ],
-      fitBoundsOptions: { padding: 16 },
+      ...(initial.current
+        ? { center: [initial.current.lon, initial.current.lat], zoom: initial.current.zoom }
+        : {
+            bounds: [
+              [-24, 32],
+              [42, 70],
+            ],
+            fitBoundsOptions: { padding: 16 },
+          }),
       attributionControl: { compact: true },
     })
     mapRef.current = map
     // Exposed for end-to-end tests, which drive and inspect the map directly.
     ;(window as unknown as { __map?: MapLibreMap }).__map = map
     map.addControl(new NavigationControl({ showCompass: false }), 'top-right')
+    map.on('moveend', (e) => {
+      // Only user moves belong in the URL, not the initial fit.
+      if (!e.originalEvent) return
+      const { lng, lat } = map.getCenter()
+      latest.current.onMove?.({ zoom: map.getZoom(), lat, lon: lng })
+    })
     const popup = new Popup({ closeButton: false, closeOnClick: false, maxWidth: '260px' })
 
     map.on('load', async () => {

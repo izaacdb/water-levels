@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc -b",
-    "gen:contract": "node scripts/gen-contract.mjs"
+    "gen:contract": "node scripts/gen-contract.mjs",
+    "e2e:serve": "vite build --outDir dist-e2e --emptyOutDir && rm -rf dist-e2e/data && cp -R e2e/fixtures/data dist-e2e/data && vite preview --outDir dist-e2e --port 4174 --strictPort",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "echarts": "^6.1.0",
