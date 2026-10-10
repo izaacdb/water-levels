@@ -1,0 +1,111 @@
+name: Pipeline
+
+# Daily: fetch official sources, update the observation archive on the `data`
+# branch, publish static JSON and deploy the site to GitHub Pages (B4/SC3).
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # The first run backfills every archive once (roughly an hour); later runs take minutes.
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check out the observation archive (data branch)
+        run: |
+          if git ls-remote --exit-code --heads origin data >/dev/null; then
+            git fetch origin data:data
+            git worktree add data-store data
+          else
+            git worktree add --orphan -b data data-store
+          fi
+
+      # mdbtools: Spain's Access database. LibreOffice: Bulgaria's Word bulletins.
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends mdbtools libreoffice-writer-nogui
+      - uses: astral-sh/setup-uv@v6
+      - name: Run pipeline
+        working-directory: pipeline
+        run: |
+          uv sync --locked
+          uv run pipeline run --store ../data-store/observations.parquet --out ../web/public
+
+      - name: Commit updated archive
+        working-directory: data-store
+        run: |
+          git config user.name "water-levels-bot"
+          git config user.email "water-levels-bot@users.noreply.github.com"
+          git add observations.parquet source-health.json
+          if git diff --cached --quiet; then
+            echo "No new observations."
+          else
+            git commit -q -m "data: pipeline run $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push origin data
+          fi
+
+      - name: Raise or close source-failure issues
+        working-directory: pipeline
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          alerts=$(uv run -q pipeline alerts --health ../data-store/source-health.json --threshold 3)
+          echo "$alerts"
+          for source in $(jq -r '.failing | keys[]' <<<"$alerts"); do
+            title="Source failing: $source"
+            body="The daily pipeline has failed to update **$source** for 3+ runs in a row. Its areas are shown as out of date.
+
+          Latest error: \`$(jq -r --arg s "$source" '.failing[$s]' <<<"$alerts")\`
+
+          Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number')
+            if [ -n "$existing" ]; then gh issue comment "$existing" --body "$body"; else gh issue create --title "$title" --body "$body"; fi
+          done
+          for source in $(jq -r '.healthy[]' <<<"$alerts"); do
+            title="Source failing: $source"
+            for n in $(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[].number'); do
+              gh issue close "$n" --comment "Recovered: $source updated successfully in run ${{ github.run_id }}."
+            done
+          done
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Build site
+        working-directory: web
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/
+        run: |
+          npm ci
+          npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,47 @@
+"""Common shape for every official source adapter."""
+
+from __future__ import annotations
+
+import re
+import unicodedata
+from dataclasses import dataclass
+from typing import Protocol
+
+import httpx
+import polars as pl
+
+# Every adapter's parse() returns rows in exactly this shape: one row per
+# reservoir per published date, in the source's own units converted to hm³.
+OBSERVATION_SCHEMA: dict[str, pl.DataType] = {
+    "source_key": pl.String(),
+    "name": pl.String(),
+    "group": pl.String(),  # the source's own grouping (basin, directorate, ...)
+    "observed_on": pl.Date(),
+    "volume_hm3": pl.Float64(),
+    "capacity_hm3": pl.Float64(),
+}
+
+
+@dataclass(frozen=True)
+class SourceMeta:
+    id: str
+    country: str
+    name: str
+    url: str
+
+
+class SourceAdapter(Protocol):
+    meta: SourceMeta
+
+    def fetch(self, client: httpx.Client) -> bytes:
+        """Download the raw publication."""
+        ...
+
+    def parse(self, raw: bytes) -> pl.DataFrame:
+        """Turn a raw publication into rows matching OBSERVATION_SCHEMA."""
+        ...
+
+
+def slugify(text: str) -> str:
+    ascii_text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", ascii_text.lower()).strip("-")

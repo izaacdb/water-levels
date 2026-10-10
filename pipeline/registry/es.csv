@@ -1,0 +1,403 @@
+id,source_key,name,group,rbd_code,lat,lon
+ES-acena,acena,Aceña,Tajo,ES030,40.6227,-4.2209
+ES-agavanzal-na-sa-de,agavanzal-na-sa-de,"Agavanzal, Nª Sª de",Duero,ES020,41.9833,-6.2056
+ES-agrio-aznalcollar,agrio-aznalcollar,Agrio (Aznalcollar),Guadalquivir,ES050,37.551,-6.3031
+ES-aguascebas,aguascebas,Aguascebas,Guadalquivir,ES050,38.0447,-2.9483
+ES-agueda,agueda,Águeda,Duero,ES020,40.5135,-6.4858
+ES-aguijon-el,aguijon-el,"Aguijón, El",Guadiana,ES040,38.4741,-6.9021
+ES-aguilar,aguilar,Aguilar,Duero,ES020,42.8159,-4.3315
+ES-alange,alange,Alange,Guadiana,ES040,38.7158,-6.2453
+ES-alarcon,alarcon,Alarcón,Júcar,ES080,39.6999,-2.2073
+ES-albarellos,albarellos,Albarellos,Miño - Sil,ES010,42.3872,-8.2142
+ES-albina,albina,Albiña,Ebro,ES091,43.0021,-2.6211
+ES-alcala-del-rio,alcala-del-rio,Alcalá del Río,Guadalquivir,ES050,37.5556,-5.8947
+ES-alcaniz-estanca,alcaniz-estanca,Alcañiz (Estanca),Ebro,ES091,41.0613,-0.1926
+ES-alcantara,alcantara,Alcántara,Tajo,ES030,39.7775,-6.4373
+ES-alcollarin,alcollarin,Alcollarín,Guadiana,ES040,39.2664,-5.7576
+ES-alcorlo,alcorlo,Alcorlo,Tajo,ES030,41.0273,-3.0338
+ES-aldeadavila,aldeadavila,Aldeadávila,Duero,ES020,41.256,-6.5781
+ES-alfilorios,alfilorios,Alfilorios,Cantábrico Occidental,ES018,43.2877,-5.9173
+ES-alfonso-xiii,alfonso-xiii,Alfonso XIII,Segura,ES070,38.2061,-1.6052
+ES-algar,algar,Algar,Júcar,ES080,39.7935,-0.386
+ES-algeciras,algeciras,Algeciras,Segura,ES070,37.8934,-1.4031
+ES-alloz,alloz,Alloz,Ebro,ES091,42.7284,-1.9445
+ES-almendra,almendra,Almendra,Duero,ES020,41.2187,-6.1782
+ES-almodovar,almodovar,Almodóvar,Guadalete-Barbate,ES063,36.1548,-5.6412
+ES-almoguera,almoguera,Almoguera,Tajo,ES030,40.2914,-2.9231
+ES-alsa-mediajo,alsa-mediajo,Alsa - Mediajo,Cantábrico Occidental,ES018,43.0838,-3.9987
+ES-amadorio,amadorio,Amadorio,Júcar,ES080,38.5441,-0.2644
+ES-anarbe,anarbe,Añarbe,Cantábrico Oriental,ES017,43.2252,-1.8728
+ES-anchuricas,anchuricas,Anchuricas,Segura,ES070,38.1955,-2.5465
+ES-andevalo,andevalo,Andévalo,Guadiana,ES040,37.6457,-7.3266
+ES-aracena,aracena,Aracena,Guadalquivir,ES050,37.9351,-6.4844
+ES-arbon,arbon,Arbón,Cantábrico Occidental,ES018,43.4312,-6.7622
+ES-arcos-de-la-frontera,arcos-de-la-frontera,Arcos de la Frontera,Guadalete-Barbate,ES063,36.7628,-5.7855
+ES-arenos,arenos,Arenós,Júcar,ES080,40.1042,-0.5783
+ES-arenoso,arenoso,Arenoso,Guadalquivir,ES050,38.061,-4.4259
+ES-argos,argos,Argos,Segura,ES070,38.1633,-1.7388
+ES-arlanzon,arlanzon,Arlanzón,Duero,ES020,42.2526,-3.3338
+ES-arquillo-de-san-blas,arquillo-de-san-blas,Arquillo de San Blas,Júcar,ES080,40.3682,-1.2344
+ES-atance-el,atance-el,"Atance, El",Tajo,ES030,41.0989,-2.7715
+ES-atazar-el,atazar-el,"Atazar, El",Tajo,ES030,40.9185,-3.5156
+ES-azutan,azutan,Azután,Tajo,ES030,39.8211,-5.0073
+ES-bachimana-lago,bachimana-lago,Bachimaña (Lago),Ebro,ES091,42.7856,-0.2241
+ES-banos,banos,Baños,Tajo,ES030,40.2954,-5.8856
+ES-bao,bao,Bao,Miño - Sil,ES010,42.1911,-7.1395
+ES-barasona,barasona,Barasona,Ebro,ES091,42.1551,0.3286
+ES-barbate,barbate,Barbate,Guadalete-Barbate,ES063,36.3985,-5.6951
+ES-barca-la,barca-la,"Barca, La",Cantábrico Occidental,ES018,43.3027,-6.3565
+ES-barcena,barcena,Bárcena,Miño - Sil,ES010,42.6274,-6.5333
+ES-barrie-de-la-maza,barrie-de-la-maza,Barrie de la Maza,Galicia Costa,ES014,42.8999,-8.7374
+ES-barrios-de-luna,barrios-de-luna,Barrios de Luna,Duero,ES020,42.8844,-5.906
+ES-baserca,baserca,Baserca,Ebro,ES091,42.5876,0.76
+ES-belena,belena,Beleña,Tajo,ES030,40.9585,-3.2017
+ES-belesar,belesar,Belesar,Miño - Sil,ES010,42.7592,-7.63
+ES-bellus,bellus,Bellús,Júcar,ES080,38.9204,-0.4592
+ES-bembezar,bembezar,Bembézar,Guadalquivir,ES050,37.9662,-5.2858
+ES-benageber,benageber,Benagéber,Júcar,ES080,39.7799,-1.122
+ES-beniarres,beniarres,Beniarrés,Júcar,ES080,38.804,-0.3748
+ES-beninar,beninar,Benínar,Cuenca Mediterránea Andaluza,ES060,36.896,-3.0283
+ES-bermejales,bermejales,Bermejales,Guadalquivir,ES050,36.9739,-3.8786
+ES-beznar,beznar,Béznar,Cuenca Mediterránea Andaluza,ES060,36.9225,-3.5559
+ES-boadella,boadella,Boadella,Cuencas Internas de Cataluña,ES100,42.3474,2.8107
+ES-bolarque,bolarque,Bolarque,Tajo,ES030,40.4264,-2.7879
+ES-bolera-la,bolera-la,"Bolera, La",Guadalquivir,ES050,37.7892,-2.9021
+ES-boqueron,boqueron,Boquerón,Guadiana,ES040,39.1566,-6.4074
+ES-borbollon,borbollon,Borbollon,Tajo,ES030,40.1424,-6.5536
+ES-bornos,bornos,Bornos,Guadalete-Barbate,ES063,36.8282,-5.7045
+ES-bramatuero-alto,bramatuero-alto,Bramatuero Alto,Ebro,ES091,42.7911,-0.2133
+ES-brena-ii-la,brena-ii-la,"Breña II, La",Guadalquivir,ES050,37.8636,-5.0255
+ES-brena-la,brena-la,"Breña, La",Guadalquivir,ES050,37.8278,-5.0434
+ES-brovales,brovales,Brovales,Guadiana,ES040,38.3567,-6.6982
+ES-bubal,bubal,Búbal,Ebro,ES091,42.7043,-0.3105
+ES-buendia,buendia,Buendía,Tajo,ES030,40.3699,-2.6006
+ES-burdalo,burdalo,Búrdalo,Guadiana,ES040,39.1997,-5.9428
+ES-burgomillodo,burgomillodo,Burgomillodo,Duero,ES020,41.3313,-3.8799
+ES-burguillo-puente-nuevo,burguillo-puente-nuevo,Burguillo - Puente Nuevo,Tajo,ES030,40.4343,-4.599
+ES-buseo,buseo,Buseo,Júcar,ES080,39.5855,-0.9495
+ES-caceres-guadiloba,caceres-guadiloba,Cáceres - Guadiloba,Tajo,ES030,39.4841,-6.2824
+ES-cala,cala,Cala,Guadalquivir,ES050,37.7297,-6.1172
+ES-calanda,calanda,Calanda,Ebro,ES091,40.8983,-0.2129
+ES-camarasa,camarasa,Camarasa,Ebro,ES091,41.9625,0.8588
+ES-camarillas,camarillas,Camarillas,Segura,ES070,38.3691,-1.6382
+ES-campanana-la,campanana-la,"Campañana, La",Miño - Sil,ES010,42.5033,-6.7622
+ES-camporredondo,camporredondo,Camporredondo,Duero,ES020,42.9134,-4.7206
+ES-canales,canales,Canales,Guadalquivir,ES050,37.1559,-3.4579
+ES-canchales,canchales,Canchales,Guadiana,ES040,38.9767,-6.5178
+ES-cancho-del-fresno,cancho-del-fresno,Cancho del Fresno,Guadiana,ES040,39.406,-5.3878
+ES-canelles,canelles,Canelles,Ebro,ES091,42.0238,0.6236
+ES-canon-de-santolea,canon-de-santolea,Cañón de Santolea,Ebro,ES091,40.755,-0.3355
+ES-cantillana,cantillana,Cantillana,Guadalquivir,ES050,37.595,-5.8001
+ES-carpio-el,carpio-el,"Carpio, El",Guadalquivir,ES050,38.0017,-4.4494
+ES-casares-de-arbas,casares-de-arbas,Casares de Arbas,Duero,ES020,42.9299,-5.7706
+ES-casasola,casasola,Casasola,Cuenca Mediterránea Andaluza,ES060,36.8149,-4.4993
+ES-caspe,caspe,Caspe,Ebro,ES091,41.1235,-0.0207
+ES-castilseras,castilseras,Castilseras,Guadiana,ES040,38.7436,-4.788
+ES-castrejon,castrejon,Castrejón,Tajo,ES030,39.85,-4.2758
+ES-castrelo,castrelo,Castrelo,Miño - Sil,ES010,42.3241,-7.9843
+ES-castro,castro,Castro,Duero,ES020,41.5739,-6.1674
+ES-castro-de-las-cogotas,castro-de-las-cogotas,Castro de las Cogotas,Duero,ES020,40.7008,-4.6976
+ES-castro-el,castro-el,"Castro, El",Tajo,ES030,39.7949,-3.7556
+ES-catllar,catllar,Catllar,Cuencas Internas de Cataluña,ES100,41.2133,1.3308
+ES-cavallers,cavallers,Cavallers,Ebro,ES091,42.5907,0.8564
+ES-cazalegas,cazalegas,Cazalegas,Tajo,ES030,40.0263,-4.6791
+ES-cecebre,cecebre,Cecebre,Galicia Costa,ES014,43.2711,-8.2786
+ES-cedillo,cedillo,Cedillo,Tajo,ES030,39.658,-7.2133
+ES-celemin,celemin,Celemín,Guadalete-Barbate,ES063,36.3075,-5.7481
+ES-cenajo,cenajo,Cenajo,Segura,ES070,38.3862,-1.8781
+ES-cenza,cenza,Cenza,Miño - Sil,ES010,42.2033,-7.2632
+ES-cernadilla,cernadilla,Cernadilla,Duero,ES020,42.0216,-6.5446
+ES-certescans,certescans,Certescáns,Ebro,ES091,42.7096,1.3018
+ES-cervera,cervera,Cervera,Duero,ES020,42.8728,-4.5428
+ES-chandrexa,chandrexa,Chandrexa,Miño - Sil,ES010,42.25,-7.4032
+ES-chanza,chanza,Chanza,Guadiana,ES040,37.6254,-7.4593
+ES-charco-redondo,charco-redondo,Charco Redondo,Cuenca Mediterránea Andaluza,ES060,36.2514,-5.5616
+ES-cierva-la,cierva-la,"Cierva, La",Segura,ES070,38.0645,-1.4936
+ES-cijara,cijara,Cijara,Guadiana,ES040,39.3154,-4.8463
+ES-ciurana,ciurana,Ciurana,Ebro,ES091,41.2543,0.923
+ES-cohilla-la,cohilla-la,"Cohilla, La",Cantábrico Occidental,ES018,43.1241,-4.3955
+ES-colomera,colomera,Colomera,Guadalquivir,ES050,37.4144,-3.7095
+ES-compuerto,compuerto,Compuerto,Duero,ES020,42.8767,-4.7845
+ES-concepcion,concepcion,Concepción,Cuenca Mediterránea Andaluza,ES060,36.5575,-4.9625
+ES-conchas-las,conchas-las,"Conchas, Las",Miño - Sil,ES010,41.9694,-7.9841
+ES-conde-guadalhorce,conde-guadalhorce,Conde Guadalhorce,Cuenca Mediterránea Andaluza,ES060,36.914,-4.8242
+ES-contreras,contreras,Contreras,Júcar,ES080,39.6188,-1.5345
+ES-cordobilla,cordobilla,Cordobilla,Guadalquivir,ES050,37.3506,-4.7059
+ES-cornalbo,cornalbo,Cornalbo,Guadiana,ES040,38.9946,-6.1855
+ES-cortes-ii,cortes-ii,Cortes II,Júcar,ES080,39.2379,-1.0048
+ES-corumbel-bajo,corumbel-bajo,Corumbel Bajo,"Tinto, Odiel y Piedras",ES064,37.4412,-6.5578
+ES-crevillente,crevillente,Crevillente,Segura,ES070,38.2616,-0.7942
+ES-cubilar,cubilar,Cubilar,Guadiana,ES040,39.2463,-5.4707
+ES-cubillas,cubillas,Cubillas,Guadalquivir,ES050,37.2821,-3.6714
+ES-cuerda-del-pozo,cuerda-del-pozo,Cuerda del Pozo,Duero,ES020,41.8677,-2.7656
+ES-cueva-foradada,cueva-foradada,Cueva Foradada,Ebro,ES091,40.9732,-0.6942
+ES-cuevas-de-almanzora,cuevas-de-almanzora,Cuevas de Almanzora,Cuenca Mediterránea Andaluza,ES060,37.3454,-1.935
+ES-derivacion-retortillo,derivacion-retortillo,Derivación Retortillo,Guadalquivir,ES050,37.7596,-5.3136
+ES-doiras,doiras,Doiras,Cantábrico Occidental,ES018,43.3116,-6.84
+ES-dona-aldonza,dona-aldonza,Doña Aldonza,Guadalquivir,ES050,37.9398,-3.2988
+ES-ebro,ebro,Ebro,Ebro,ES091,43.0063,-3.9882
+ES-edrada-mao,edrada-mao,Edrada-Mao,Miño - Sil,ES010,42.3327,-7.5332
+ES-eiras,eiras,Eiras,Galicia Costa,ES014,42.3415,-8.4742
+ES-el-naranjero,el-naranjero,El Naranjero,Júcar,ES080,39.2698,-0.8847
+ES-el-portillo,el-portillo,El Portillo,Guadalquivir,ES050,37.8176,-2.7882
+ES-el-vicario,el-vicario,El Vicario,Guadiana,ES040,39.0662,-3.9175
+ES-encinarejo,encinarejo,Encinarejo,Guadalquivir,ES050,38.1942,-3.9858
+ES-enciso,enciso,Enciso,Ebro,ES091,42.1307,-2.2889
+ES-entrepenas,entrepenas,Entrepeñas,Tajo,ES030,40.5867,-2.6716
+ES-escales,escales,Escales,Ebro,ES091,42.3621,0.7491
+ES-escalona,escalona,Escalona,Júcar,ES080,39.1342,-0.7224
+ES-escarra,escarra,Escarra,Ebro,ES091,42.7404,-0.363
+ES-eugui,eugui,Eúgui,Ebro,ES091,42.9851,-1.5165
+ES-eume,eume,Eume,Galicia Costa,ES014,43.3791,-7.9553
+ES-fernandina-la,fernandina-la,"Fernandina, La",Guadalquivir,ES050,38.1748,-3.5686
+ES-fervenza,fervenza,Fervenza,Galicia Costa,ES014,43.0014,-8.9662
+ES-finisterre,finisterre,Finisterre,Tajo,ES030,39.6264,-3.6937
+ES-flix,flix,Flix,Ebro,ES091,41.2332,0.5332
+ES-foix,foix,Foix,Cuencas Internas de Cataluña,ES100,41.2586,1.6413
+ES-forata,forata,Forata,Júcar,ES080,39.3422,-0.883
+ES-forcadas-as,forcadas-as,"Forcadas, As",Galicia Costa,ES014,43.6043,-8.0735
+ES-francisco-abellan,francisco-abellan,Francisco Abellán,Guadalquivir,ES050,37.3002,-3.2786
+ES-fresneda,fresneda,Fresneda,Guadalquivir,ES050,38.5403,-3.6265
+ES-frieira,frieira,Frieira,Miño - Sil,ES010,42.2249,-8.1548
+ES-fuensanta,fuensanta,Fuensanta,Segura,ES070,38.3711,-2.265
+ES-gabriel-y-galan,gabriel-y-galan,Gabriel y Galán,Tajo,ES030,40.3163,-6.13
+ES-garcia-de-sola,garcia-de-sola,García de Sola,Guadiana,ES040,39.2545,-5.1168
+ES-gargaligas,gargaligas,Gargáligas,Guadiana,ES040,39.1968,-5.355
+ES-gasset,gasset,Gasset,Guadiana,ES040,39.153,-3.9557
+ES-gergal,gergal,Gergal,Guadalquivir,ES050,37.6167,-6.054
+ES-giribaile,giribaile,Giribaile,Guadalquivir,ES050,38.1056,-3.4067
+ES-gonzalez-lacasa,gonzalez-lacasa,González Lacasa,Ebro,ES091,42.1834,-2.6822
+ES-grado-el,grado-el,"Grado, El",Ebro,ES091,42.2278,0.2203
+ES-guadalcacin-ii,guadalcacin-ii,Guadalcacín II,Guadalete-Barbate,ES063,36.6492,-5.6981
+ES-guadalen,guadalen,Guadalén,Guadalquivir,ES050,38.202,-3.4603
+ES-guadalest,guadalest,Guadalest,Júcar,ES080,38.6852,-0.2018
+ES-guadalhorce-guadalteba,guadalhorce-guadalteba,Guadalhorce-Guadalteba,Cuenca Mediterránea Andaluza,ES060,36.9687,-4.8093
+ES-guadalmellato,guadalmellato,Guadalmellato,Guadalquivir,ES050,38.0743,-4.6853
+ES-guadalmena,guadalmena,Guadalmena,Guadalquivir,ES050,38.4193,-2.8937
+ES-guadarranque,guadarranque,Guadarranque,Cuenca Mediterránea Andaluza,ES060,36.3231,-5.4775
+ES-guajaraz,guajaraz,Guajaraz,Tajo,ES030,39.7813,-4.0879
+ES-guiamets,guiamets,Guiamets,Ebro,ES091,41.097,0.7639
+ES-guijo-de-granadilla,guijo-de-granadilla,Guijo de Granadilla,Tajo,ES030,40.2005,-6.1372
+ES-guillena,guillena,Guillena,Guadalquivir,ES050,37.6471,-6.0927
+ES-guistolas,guistolas,Guístolas,Miño - Sil,ES010,42.3372,-7.3196
+ES-hornachuelos,hornachuelos,Hornachuelos,Guadalquivir,ES050,37.83,-5.25
+ES-horno-tejero,horno-tejero,Horno Tejero,Guadiana,ES040,39.1704,-6.4337
+ES-huesna,huesna,Huesna,Guadalquivir,ES050,37.809,-5.6886
+ES-hurones-los,hurones-los,"Hurones, Los",Guadalete-Barbate,ES063,36.6933,-5.5239
+ES-ibai-eder,ibai-eder,Ibai-Eder,Cuencas Internas del País Vasco,ES017,43.1211,-2.2211
+ES-ibiur,ibiur,Ibiur,Cantábrico Oriental,ES017,43.0725,-2.1214
+ES-ip,ip,Ip,Ebro,ES091,42.7208,-0.4578
+ES-irabia,irabia,Irabia,Ebro,ES091,42.996,-1.147
+ES-iruena,iruena,Irueña,Duero,ES020,40.4051,-6.6198
+ES-itoiz,itoiz,Itoiz,Ebro,ES091,42.8468,-1.3482
+ES-iznajar,iznajar,Iznájar,Guadalquivir,ES050,37.2689,-4.2921
+ES-jandula,jandula,Jándula,Guadalquivir,ES050,38.2904,-3.9427
+ES-jarosa-la,jarosa-la,"Jarosa, La",Tajo,ES030,40.6676,-4.1234
+ES-jarrama,jarrama,Jarrama,"Tinto, Odiel y Piedras",ES064,37.6712,-6.5005
+ES-jerte-plasencia,jerte-plasencia,Jerte - Plasencia,Tajo,ES030,40.082,-6.0009
+ES-jose-toran,jose-toran,José Torán,Guadalquivir,ES050,37.7658,-5.4697
+ES-la-baells,la-baells,La Baells,Cuencas Internas de Cataluña,ES100,42.1488,1.8957
+ES-la-cabezuela,la-cabezuela,La Cabezuela,Guadiana,ES040,,
+ES-la-colada,la-colada,La Colada,Guadiana,ES040,38.5109,-5.0013
+ES-la-llosa-del-cavall,la-llosa-del-cavall,La Llosa del Cavall,Cuencas Internas de Cataluña,ES100,42.1195,1.6093
+ES-la-muela,la-muela,La Muela,Júcar,ES080,39.2332,-0.9286
+ES-la-pedrera,la-pedrera,La Pedrera,Segura,ES070,38.009,-0.862
+ES-la-serena,la-serena,La Serena,Guadiana,ES040,38.8699,-5.1843
+ES-la-toba,la-toba,La Toba,Júcar,ES080,40.2044,-1.9014
+ES-lanuza,lanuza,Lanuza,Ebro,ES091,42.7596,-0.3217
+ES-las-fitas,las-fitas,Las Fitas,Ebro,ES091,41.8037,-0.0649
+ES-laverne,laverne,Laverné,Ebro,ES091,42.0817,-1.0808
+ES-lechago,lechago,Lechago,Ebro,ES091,40.83,-1.39
+ES-limonero,limonero,Limonero,Cuenca Mediterránea Andaluza,ES060,36.7733,-4.4294
+ES-linares-del-arroyo,linares-del-arroyo,Linares del Arroyo,Duero,ES020,41.4996,-3.5311
+ES-llauset,llauset,Llauset,Ebro,ES091,42.5834,0.6884
+ES-llerena,llerena,Llerena,Guadiana,ES040,38.2996,-5.9105
+ES-loriguilla,loriguilla,Loriguilla,Júcar,ES080,39.678,-0.9238
+ES-los-machos,los-machos,Los Machos,"Tinto, Odiel y Piedras",ES064,37.3285,-7.2218
+ES-los-molinos,los-molinos,Los Molinos,Guadiana,ES040,38.5119,-6.1019
+ES-loteta-la,loteta-la,Loteta (La),Ebro,ES091,41.8128,-1.3352
+ES-maidevera,maidevera,Maidevera,Ebro,ES091,41.5841,-1.7658
+ES-malpasillo-jauja,malpasillo-jauja,Malpasillo ( Jauja ),Guadalquivir,ES050,37.2946,-4.6769
+ES-mansilla,mansilla,Mansilla,Ebro,ES091,42.1458,-2.9487
+ES-mar-lago,mar-lago,Mar (Lago),Ebro,ES091,42.5234,1.0091
+ES-maria-cristina,maria-cristina,María Cristina,Júcar,ES080,40.0466,-0.1634
+ES-marmolejo,marmolejo,Marmolejo,Guadalquivir,ES050,38.0622,-4.1687
+ES-martin-gonzalo,martin-gonzalo,Martín Gonzalo,Guadalquivir,ES050,38.1013,-4.3323
+ES-matalavilla,matalavilla,Matalavilla,Miño - Sil,ES010,42.8358,-6.4309
+ES-mediano,mediano,Mediano,Ebro,ES091,42.3618,0.1822
+ES-melonares-los,melonares-los,"Melonares, Los",Guadalquivir,ES050,37.7652,-5.8934
+ES-mequinenza,mequinenza,Mequinenza,Ebro,ES091,41.3379,-0.0397
+ES-minilla-la,minilla-la,"Minilla, La",Guadalquivir,ES050,37.6948,-6.203
+ES-molino-de-chincha,molino-de-chincha,Molino de Chincha,Tajo,ES030,40.5438,-2.1682
+ES-moneva,moneva,Moneva,Ebro,ES091,41.1632,-0.8314
+ES-monteagudo,monteagudo,Monteagudo,Ebro,ES091,41.387,-2.1803
+ES-montearagon,montearagon,Montearagón,Ebro,ES091,42.2074,-0.3712
+ES-montefurado,montefurado,Montefurado,Miño - Sil,ES010,42.3634,-7.2297
+ES-montijo,montijo,Montijo,Guadiana,ES040,38.9351,-6.4178
+ES-montoro,montoro,Montoro,Guadalquivir,ES050,38.5448,-4.128
+ES-nagore,nagore,Nagore,Ebro,ES091,42.8505,-1.3723
+ES-navacerrada,navacerrada,Navacerrada,Tajo,ES030,40.7191,-4.0081
+ES-navalcan,navalcan,Navalcán,Tajo,ES030,40.0359,-5.1036
+ES-navamuno,navamuno,Navamuño,Tajo,ES030,40.3425,-5.7815
+ES-negratin,negratin,Negratín,Guadalquivir,ES050,37.5871,-2.867
+ES-negro-lago,negro-lago,Negro (Lago),Ebro,ES091,42.5394,1.0421
+ES-nogales,nogales,Nogales,Guadiana,ES040,38.5558,-6.7268
+ES-odiel,odiel,Odiel,"Tinto, Odiel y Piedras",ES064,37.7921,-6.6106
+ES-oliana,oliana,Oliana,Ebro,ES091,42.1394,1.3119
+ES-olivargas,olivargas,Olivargas,"Tinto, Odiel y Piedras",ES064,37.75,-6.83
+ES-ordunte,ordunte,Ordunte,Cantábrico Oriental,ES017,43.1516,-3.2975
+ES-orellana,orellana,Orellana,Guadiana,ES040,39.0471,-5.396
+ES-pajares,pajares,Pajares,Ebro,ES091,42.078,-2.593
+ES-palmaces,palmaces,Pálmaces,Tajo,ES030,41.0667,-2.9191
+ES-pardo-el,pardo-el,"Pardo, El",Tajo,ES030,40.573,-3.791
+ES-parras-las,parras-las,Parras (Las),Ebro,ES091,40.8253,-0.919
+ES-peares-os,peares-os,"Peares, Os",Miño - Sil,ES010,42.528,-7.7049
+ES-pedro-marin,pedro-marin,Pedro Marín,Guadalquivir,ES050,37.9145,-3.3631
+ES-pena,pena,Pena,Ebro,ES091,40.8126,0.1329
+ES-pena-la,pena-la,"Peña, La",Ebro,ES091,40.8126,0.1329
+ES-penarroya,penarroya,Peñarroya,Guadiana,ES040,39.0316,-2.9688
+ES-penarrubia,penarrubia,Peñarrubia,Miño - Sil,ES010,42.4836,-6.823
+ES-pias-san-agustin,pias-san-agustin,Pías (San Agustín),Miño - Sil,ES010,42.1139,-6.989
+ES-picadas,picadas,Picadas,Tajo,ES030,40.3375,-4.2584
+ES-piedra-aguda,piedra-aguda,Piedra Aguda,Guadiana,ES040,38.6661,-7.0289
+ES-piedras,piedras,Piedras,"Tinto, Odiel y Piedras",ES064,37.3911,-7.2624
+ES-pinilla,pinilla,Pinilla,Tajo,ES030,40.9353,-3.799
+ES-pintado-el,pintado-el,"Pintado, El",Guadalquivir,ES050,38.0092,-5.9567
+ES-ponton-alto-el,ponton-alto-el,"Pontón Alto, El",Duero,ES020,40.9072,-4.0275
+ES-porma-juan-benet,porma-juan-benet,Porma-(Juan Benet),Duero,ES020,42.951,-5.284
+ES-portaje,portaje,Portaje,Tajo,ES030,39.8754,-6.5195
+ES-portas-las,portas-las,"Portas, Las",Miño - Sil,ES010,42.0961,-7.2684
+ES-portina-la,portina-la,"Portiña, La",Tajo,ES030,40.0032,-4.8403
+ES-portodemouros,portodemouros,Portodemouros,Galicia Costa,ES014,42.8487,-8.1317
+ES-prada,prada,Prada,Miño - Sil,ES010,42.2758,-7.0327
+ES-proserpina,proserpina,Proserpina,Guadiana,ES040,38.9719,-6.3612
+ES-pto-vallehermoso,pto-vallehermoso,Pto. Vallehermoso,Guadiana,ES040,38.8572,-3.1561
+ES-puebla-de-cazalla,puebla-de-cazalla,Puebla de Cazalla,Guadalquivir,ES050,37.1164,-5.2185
+ES-puente-de-santolea,puente-de-santolea,Puente de Santolea,Ebro,ES091,40.7471,-0.3434
+ES-puente-nuevo,puente-nuevo,Puente Nuevo,Guadalquivir,ES050,38.138,-4.9755
+ES-puente-porto,puente-porto,Puente Porto,Duero,ES020,42.1073,-6.8265
+ES-puentes,puentes,Puentes,Segura,ES070,37.7432,-1.8356
+ES-puentes-viejas,puentes-viejas,Puentes Viejas,Tajo,ES030,41.0074,-3.6098
+ES-quentar,quentar,Quéntar,Guadalquivir,ES050,37.2107,-3.432
+ES-quiebrajano,quiebrajano,Quiebrajano,Guadalquivir,ES050,37.6258,-3.7148
+ES-rabanos,rabanos,Rábanos,Duero,ES020,41.73,-2.4612
+ES-regajo,regajo,Regajo,Júcar,ES080,39.8935,-0.5272
+ES-requejada,requejada,Requejada,Duero,ES020,42.9265,-4.5021
+ES-respomuso,respomuso,Respomuso,Ebro,ES091,42.8139,-0.2902
+ES-retortillo,retortillo,Retortillo,Guadalquivir,ES050,37.8549,-5.3706
+ES-rialb,rialb,Rialb,Ebro,ES091,41.9998,1.2471
+ES-riano,riano,Riaño,Duero,ES020,42.984,-5.0107
+ES-ribarroja,ribarroja,Ribarroja,Ebro,ES091,41.3184,0.3539
+ES-ribeira-a,ribeira-a,"Ribeira, A",Galicia Costa,ES014,43.4753,-7.8069
+ES-ricobayo,ricobayo,Ricobayo,Duero,ES020,41.6748,-5.9484
+ES-riocobo,riocobo,Riocobo,Galicia Costa,ES014,43.6704,-7.4453
+ES-rioseco,rioseco,Rioseco,Cantábrico Occidental,ES018,43.2236,-5.4631
+ES-riosequillo,riosequillo,Riosequillo,Tajo,ES030,40.9667,-3.6766
+ES-riudecanyes,riudecanyes,Riudecanyes,Cuencas Internas de Cataluña,ES100,41.1369,0.9522
+ES-rivera-de-gata,rivera-de-gata,Rivera de Gata,Tajo,ES030,40.145,-6.6298
+ES-rosarito,rosarito,Rosarito,Tajo,ES030,40.0998,-5.2725
+ES-rozas-las,rozas-las,"Rozas, Las",Miño - Sil,ES010,42.9214,-6.334
+ES-ruecas,ruecas,Ruecas,Guadiana,ES040,39.2822,-5.4805
+ES-rules,rules,Rules,Cuenca Mediterránea Andaluza,ES060,36.8749,-3.4741
+ES-rumblar,rumblar,Rumblar,Guadalquivir,ES050,38.1606,-3.8054
+ES-saburo-lago,saburo-lago,Saburo (Lago),Ebro,ES091,42.5298,1.0137
+ES-salas,salas,Salas,Miño - Sil,ES010,41.9202,-7.913
+ES-salime,salime,Salime,Cantábrico Occidental,ES018,43.1449,-6.8938
+ES-sallente,sallente,Sallente,Ebro,ES091,42.5038,0.99
+ES-salor,salor,Salor,Tajo,ES030,39.3562,-6.2798
+ES-san-anton,san-anton,San Antón,Cantábrico Oriental,ES017,43.2728,-1.7738
+ES-san-bartolome,san-bartolome,San Bartolomé,Ebro,ES091,42.2183,-1.1502
+ES-san-clemente,san-clemente,San Clemente,Guadalquivir,ES050,37.87,-2.6438
+ES-san-estevo,san-estevo,San. Estevo,Miño - Sil,ES010,42.3985,-7.5764
+ES-san-jose,san-jose,San José,Duero,ES020,41.4072,-5.2477
+ES-san-juan,san-juan,San Juan,Tajo,ES030,40.3948,-4.379
+ES-san-lorenzo,san-lorenzo,San Lorenzo,Ebro,ES091,41.8632,0.8458
+ES-san-martino,san-martino,San Martiño,Miño - Sil,ES010,42.3925,-7.1262
+ES-san-pedro,san-pedro,San Pedro,Miño - Sil,ES010,42.4337,-7.6822
+ES-san-rafael-de-navallana,san-rafael-de-navallana,San Rafael de Navallana,Guadalquivir,ES050,37.9781,-4.6465
+ES-san-salvador,san-salvador,San Salvador,Ebro,ES091,41.7648,0.2026
+ES-san-sebastian,san-sebastian,San Sebastián,Miño - Sil,ES010,42.1549,-6.9213
+ES-sancho,sancho,Sancho,"Tinto, Odiel y Piedras",ES064,37.4721,-7.0316
+ES-sant-pons,sant-pons,Sant Pons,Cuencas Internas de Cataluña,ES100,41.9818,1.5916
+ES-santa-ana,santa-ana,Santa Ana,Ebro,ES091,41.9289,0.5909
+ES-santa-eulalia,santa-eulalia,Santa Eulalia,Miño - Sil,ES010,42.3401,-7.0516
+ES-santa-maria-de-belsue,santa-maria-de-belsue,Santa María de Belsué,Ebro,ES091,42.308,-0.3516
+ES-santa-teresa,santa-teresa,Santa Teresa,Duero,ES020,40.5943,-5.5825
+ES-santillana,santillana,Santillana,Tajo,ES030,40.7235,-3.8336
+ES-santolea,santolea,Santolea,Ebro,ES091,40.7471,-0.3434
+ES-santomera,santomera,Santomera,Segura,ES070,38.1104,-1.0921
+ES-sau,sau,Sau,Cuencas Internas de Cataluña,ES100,41.9765,2.3896
+ES-saucelle,saucelle,Saucelle,Duero,ES020,41.1292,-6.7458
+ES-sequeiros,sequeiros,Sequeiros,Miño - Sil,ES010,42.4228,-7.2306
+ES-serones,serones,Serones,Duero,ES020,40.6795,-4.452
+ES-sichar,sichar,Sichar,Júcar,ES080,40.0156,-0.25
+ES-sierra-boyera,sierra-boyera,Sierra Boyera,Guadalquivir,ES050,38.2744,-5.2762
+ES-sierra-brava,sierra-brava,Sierra Brava,Guadiana,ES040,39.2326,-5.6388
+ES-siles,siles,Siles,Guadalquivir,ES050,38.4041,-2.6122
+ES-sistema-aguas-limpias,sistema-aguas-limpias,Sistema Aguas Limpias,Ebro,ES091,42.8139,-0.2902
+ES-sistema-alto-caldares,sistema-alto-caldares,Sistema Alto Caldarés,Ebro,ES091,42.5907,0.8564
+ES-sistema-capdella,sistema-capdella,Sistema Capdella,Ebro,ES091,42.5102,1.0027
+ES-sistema-escarra,sistema-escarra,Sistema Escarra,Ebro,ES091,42.7404,-0.363
+ES-sistema-lagos-espot,sistema-lagos-espot,Sistema Lagos Espot,Ebro,ES091,42.5821,1.0031
+ES-sistema-valle-de-aran,sistema-valle-de-aran,Sistema Valle de Arán,Ebro,ES091,42.75,0.8
+ES-sobron,sobron,Sobrón,Ebro,ES091,42.765,-3.1545
+ES-somiedo-lagos,somiedo-lagos,Somiedo (Lagos),Cantábrico Occidental,ES018,43.03,-6.2
+ES-sotonera,sotonera,Sotonera,Ebro,ES091,42.1286,-0.6766
+ES-sta-uxia,sta-uxia,Sta Uxia,Galicia Costa,ES014,42.9316,-9.088
+ES-susqueda,susqueda,Susqueda,Cuencas Internas de Cataluña,ES100,41.9787,2.4711
+ES-taibilla,taibilla,Taibilla,Segura,ES070,38.1849,-2.2577
+ES-tajera-la,tajera-la,"Tajera, La",Tajo,ES030,40.8545,-2.5922
+ES-talave,talave,Talave,Segura,ES070,38.5101,-1.894
+ES-tanes,tanes,Tanes,Cantábrico Occidental,ES018,43.204,-5.4013
+ES-tentudia,tentudia,Tentudia,Guadiana,ES040,38.0919,-6.3154
+ES-terradets,terradets,Terradets,Ebro,ES091,42.0722,0.888
+ES-terroba,terroba,Terroba,Ebro,ES091,42.2523,-2.4485
+ES-torcas-las,torcas-las,"Torcas, Las",Ebro,ES091,41.2825,-1.1005
+ES-torcon,torcon,Torcón,Tajo,ES030,39.6183,-4.3665
+ES-torre-de-abrahan,torre-de-abrahan,Torre de Abrahán,Guadiana,ES040,39.3953,-4.2447
+ES-torre-del-aguila,torre-del-aguila,Torre del Águila,Guadalquivir,ES050,37.0392,-5.7194
+ES-torrejon-tajo-tietar,torrejon-tajo-tietar,Torrejón (Tajo - Tietar),Tajo,ES030,39.7963,-5.8408
+ES-tort-lago,tort-lago,Tort (Lago),Ebro,ES091,42.525,0.9822
+ES-tous-la-ribera,tous-la-ribera,Tous - La Ribera,Júcar,ES080,39.1943,-0.7091
+ES-tranco-de-beas,tranco-de-beas,Tranco de Beas,Guadalquivir,ES050,38.1304,-2.7917
+ES-tranquera-la,tranquera-la,"Tranquera, La",Ebro,ES091,41.2366,-1.7981
+ES-tremp-o-talarn,tremp-o-talarn,Tremp ó Talárn,Ebro,ES091,42.2097,0.9453
+ES-ulldecona,ulldecona,Ulldecona,Júcar,ES080,40.6804,0.2248
+ES-ullivarri,ullivarri,Ullivarri,Ebro,ES091,42.9188,-2.5724
+ES-urdalur,urdalur,Urdalur,Ebro,ES091,42.9144,-2.2406
+ES-urdiceto,urdiceto,Urdiceto,Ebro,ES091,42.6652,0.2811
+ES-urkulu,urkulu,Urkulu,Cuencas Internas del País Vasco,ES017,43.0193,-2.4772
+ES-urrunaga,urrunaga,Urrunaga,Ebro,ES091,42.995,-2.6619
+ES-uzquiza,uzquiza,Úzquiza,Duero,ES020,42.2927,-3.3422
+ES-vadiello,vadiello,Vadiello,Ebro,ES091,42.2536,-0.2754
+ES-vado-el,vado-el,"Vado, El",Tajo,ES030,41.0253,-3.3037
+ES-vadomojon,vadomojon,Vadomojón,Guadalquivir,ES050,37.6203,-4.1971
+ES-val-el,val-el,"Val, El",Ebro,ES091,41.8784,-1.807
+ES-valdecanas,valdecanas,Valdecañas,Tajo,ES030,39.8196,-5.4322
+ES-valdeinfierno,valdeinfierno,Valdeinfierno,Segura,ES070,37.8137,-1.9804
+ES-valdeobispo,valdeobispo,Valdeobispo,Tajo,ES030,40.1395,-6.1959
+ES-valdepatao,valdepatao,Valdepatao,Ebro,ES091,41.5505,0.0586
+ES-valmayor,valmayor,Valmayor,Tajo,ES030,40.555,-4.0631
+ES-valparaiso,valparaiso,Valparaíso,Duero,ES020,41.9705,-6.3608
+ES-valuengo,valuengo,Valuengo,Guadiana,ES040,38.3073,-6.6388
+ES-vega-del-jabalon,vega-del-jabalon,Vega del Jabalón,Guadiana,ES040,38.7721,-3.7392
+ES-velle,velle,Velle,Miño - Sil,ES010,42.4108,-7.7836
+ES-vellon-el-pedrezuela,vellon-el-pedrezuela,"Vellón,El-(Pedrezuela)",Tajo,ES030,40.77,-3.6489
+ES-vencias-las,vencias-las,"Vencías, Las",Duero,ES020,41.4207,-3.9599
+ES-viboras,viboras,Víboras,Guadalquivir,ES050,37.6347,-3.9881
+ES-vilasouto,vilasouto,Vilasouto,Miño - Sil,ES010,42.6657,-7.4107
+ES-villafranca,villafranca,Villafranca,Guadalquivir,ES050,37.9586,-4.5328
+ES-villagonzalo,villagonzalo,Villagonzalo,Duero,ES020,40.837,-5.5104
+ES-villagudin,villagudin,Villagudín,Galicia Costa,ES014,43.1036,-8.5024
+ES-villalba-de-los-barros,villalba-de-los-barros,Villalba de los Barros,Guadiana,ES040,38.5468,-6.4996
+ES-villalcampo,villalcampo,Villalcampo,Duero,ES020,41.4835,-6.0688
+ES-villameca,villameca,Villameca,Duero,ES020,42.6587,-6.0776
+ES-villar-del-rey,villar-del-rey,Villar del Rey,Guadiana,ES040,39.2008,-6.8491
+ES-villar-el,villar-el,"Villar, El",Tajo,ES030,40.9667,-3.5616
+ES-vinuela-la,vinuela-la,"Viñuela, La",Cuenca Mediterránea Andaluza,ES060,36.8825,-4.174
+ES-yeguas,yeguas,Yeguas,Guadalquivir,ES050,38.1014,-4.2163
+ES-yesa,yesa,Yesa,Ebro,ES091,42.606,-1.0945
+ES-zahara-el-gastor,zahara-el-gastor,Zahara-El Gastor,Guadalete-Barbate,ES063,36.8338,-5.3625
+ES-zocueca,zocueca,Zocueca,Guadalquivir,ES050,38.1049,-3.8334
+ES-zufre,zufre,Zufre,Guadalquivir,ES050,37.8296,-6.3219
+ES-zujar,zujar,Zújar,Guadiana,ES040,38.9083,-5.4416

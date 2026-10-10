@@ -1,0 +1,51 @@
+import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import type { CurrentEntry, SourceInfo } from '../contract'
+import { CountryCard } from './CountryCard'
+
+const source: SourceInfo = {
+  id: 'es-miteco',
+  country: 'ES',
+  name: 'MITECO',
+  url: 'https://www.miteco.gob.es/',
+}
+const entry: CurrentEntry = {
+  pct: 58.3,
+  asOf: '2026-10-06',
+  stale: false,
+  nReporting: 375,
+  nTotal: 402,
+  normalPct: 43.6,
+  anomalyPts: 14.7,
+  normalYears: 10,
+  flags: [],
+}
+
+describe('CountryCard', () => {
+  it('shows % full, as-of date, coverage and a source link', () => {
+    render(<CountryCard name="Spain" entry={entry} source={source} />)
+    expect(screen.getByText('58.3%')).toBeInTheDocument()
+    expect(screen.getByText('+14.7 pts vs normal')).toBeInTheDocument()
+    expect(screen.getByText(/6 Oct 2026/)).toBeInTheDocument()
+    expect(screen.getByText(/375 of 402 reservoirs/)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /MITECO/ })).toHaveAttribute('href', source.url)
+    expect(screen.queryByText(/out of date/i)).not.toBeInTheDocument()
+  })
+
+  it('marks stale data as out of date', () => {
+    render(<CountryCard name="Spain" entry={{ ...entry, stale: true }} source={source} />)
+    expect(screen.getByText(/out of date/i)).toBeInTheDocument()
+  })
+  it('explains a withdrawn country (E6)', () => {
+    render(
+      <CountryCard
+        name="Spain"
+        entry={{ ...entry, stale: true }}
+        source={source}
+        status={{ code: 'ES', name: 'Spain', status: 'withdrawn', note: 'No longer meets the inclusion bar.' }}
+      />,
+    )
+    expect(screen.getByText('Withdrawn')).toBeInTheDocument()
+    expect(screen.getByText('No longer meets the inclusion bar.')).toBeInTheDocument()
+  })
+})
