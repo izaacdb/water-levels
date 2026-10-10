@@ -40,6 +40,8 @@ class StreamCompany:
     dataset_prefix: str  # e.g. "Yorkshire Water Reservoir Levels" (+ a year, or nothing)
     owner: str
     cadence: Cadence = "weekly"
+    # When a company's datasets overlap, read only these titles.
+    titles: tuple[str, ...] = ()
 
 
 YORKSHIRE = StreamCompany(
@@ -49,7 +51,43 @@ YORKSHIRE = StreamCompany(
     dataset_prefix="Yorkshire Water Reservoir Levels",
     owner="ywAGOLstreamData",
 )
-STREAM_COMPANIES = [YORKSHIRE]
+# These publish weekly or daily readings, but only every month or so (B3′, B24′).
+WESSEX = StreamCompany(
+    source_id="uk-wessex",
+    name="Wessex Water — Reservoir levels",
+    url=f"{HUB}/search?q=Wessex%20Water%20Reservoir%20Levels",
+    dataset_prefix="Wessex Water Reservoir Levels",
+    owner="WessexWaterData",
+    cadence="monthly",
+)
+SOUTHERN = StreamCompany(
+    source_id="uk-southern",
+    name="Southern Water — Reservoir levels",
+    url=f"{HUB}/search?q=Southern%20Water%20Monthly%20Reservoir%20Levels",
+    dataset_prefix="Southern Water Monthly Reservoir Levels",
+    owner="DSlidel_southernwater",
+    cadence="monthly",
+    titles=("Southern Water Monthly Reservoir Levels 2002 to Present",),
+)
+SOUTH_WEST = StreamCompany(
+    source_id="uk-south-west",
+    name="South West Water — Reservoir levels",
+    url=f"{HUB}/search?q=South%20West%20Water%20Reservoir%20Levels",
+    dataset_prefix="South West Water (SWB) Reservoir Levels",
+    owner="JEvans_Pennon",
+    cadence="monthly",
+)
+SES = StreamCompany(
+    source_id="uk-ses",
+    name="SES Water — Reservoir levels",
+    url=f"{HUB}/search?q=SES%20Water%20Reservoir%20Levels",
+    dataset_prefix="SES Water Reservoir Levels",
+    owner="SESWater2",
+    cadence="monthly",
+)
+# Not included: South Staffs Water (its feed ends in March 2026 and swaps day and
+# month in some dates) and Dŵr Cymru Welsh Water (no data after December 2024).
+STREAM_COMPANIES = [YORKSHIRE, WESSEX, SOUTHERN, SOUTH_WEST, SES]
 
 
 def display_name(raw: str) -> str:
@@ -136,6 +174,7 @@ class StreamAdapter:
                 p.get("type") == "Feature Service"
                 and p.get("owner") == self.company.owner
                 and title.startswith(self.company.dataset_prefix)
+                and (not self.company.titles or title in self.company.titles)
             ):
                 year = _YEAR.search(title)
                 found.append((int(year.group(1)) if year else 9999, p["url"]))
