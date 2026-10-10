@@ -402,3 +402,119 @@ a {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
 }
+
+.notice {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.secondary-button {
+  align-self: flex-start;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+.compare {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.compare-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.compare-list li {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  grid-template-areas: 'swatch name remove' '. sub remove';
+  column-gap: 8px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--ring);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.compare-list .swatch {
+  grid-area: swatch;
+}
+.compare-name {
+  grid-area: name;
+  text-align: left;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+.compare-list .compare-sub {
+  grid-area: sub;
+}
+.compare-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.remove {
+  grid-area: remove;
+  border: 0;
+  background: none;
+  font-size: 1.2rem;
+  color: var(--muted);
+  cursor: pointer;
+  min-width: 32px;
+  min-height: 32px;
+}
+.compare-search {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}
+.compare-search input {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 8px 10px;
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.compare-results {
+  list-style: none;
+  margin: -6px 0 0;
+  padding: 4px;
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.compare-results button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+.compare-results button:hover,
+.compare-results button:focus-visible {
+  background: var(--page);
+}
+
+.compare .chart {
+  height: 260px;
+}

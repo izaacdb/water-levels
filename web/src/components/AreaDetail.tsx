@@ -17,9 +17,11 @@ interface Props {
   parent?: Area
   onBack: () => void
   onSelect: (id: string) => void
+  /** Absent when the area is already in the comparison or it's full. */
+  onCompare?: () => void
 }
 
-export function AreaDetail({ area, entry, source, parent, onBack, onSelect }: Props) {
+export function AreaDetail({ area, entry, source, parent, onBack, onSelect, onCompare }: Props) {
   const series = useSeries(area.id)
   return (
     <section className="detail" aria-labelledby="detail-title">
@@ -81,6 +83,12 @@ export function AreaDetail({ area, entry, source, parent, onBack, onSelect }: Pr
           </>
         )}
       </dl>
+
+      {onCompare && (
+        <button type="button" className="secondary-button" onClick={onCompare}>
+          + Add to comparison
+        </button>
+      )}
 
       <h3>Last 10 years</h3>
       {series.status === 'ready' ? (
