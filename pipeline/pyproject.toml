@@ -24,6 +24,7 @@ dev = [
     "pyshp>=3.1.6",
     "pytest>=9.1.1",
     "ruff>=0.17.0",
+    "shapely>=2.2.0",
 ]
 
 [project.scripts]

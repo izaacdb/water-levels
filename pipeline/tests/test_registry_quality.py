@@ -34,3 +34,15 @@ def test_portuguese_reservoirs_have_a_district_and_coordinates_inside_portugal()
     lon = located["lon"].cast(pl.Float64)
     assert lat.is_between(36.9, 42.2).all()
     assert lon.is_between(-9.6, -6.1).all()
+
+
+def test_czech_reservoirs_have_districts_and_located_ones_are_in_czechia() -> None:
+    reg = load_registry("CZ")
+    rbds = set(load_rbds()["code"].to_list())
+    assert reg["rbd_code"].is_in(rbds).all()
+    located = reg.filter(pl.col("lat") != "")
+    assert located.height >= 90
+    assert located["lat"].cast(pl.Float64).is_between(48.5, 51.1).all()
+    assert located["lon"].cast(pl.Float64).is_between(12.0, 18.9).all()
+    # Assigned by geography, not by enterprise: Bedřichov (Povodí Labe) drains to the Oder.
+    assert reg.filter(pl.col("source_key") == "bedrichov")["rbd_code"].item() == "CZ6000"

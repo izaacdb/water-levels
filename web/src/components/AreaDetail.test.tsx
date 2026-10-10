@@ -39,4 +39,9 @@ describe('AreaDetail', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Spain' }))
     expect(onSelect).toHaveBeenCalledWith('ES')
   })
+  it('reads "insufficient history" when there is no normal yet (E2)', () => {
+    const fresh = { ...entry, anomalyPts: null, normalPct: null, normalYears: 0 }
+    render(<AreaDetail area={area} entry={fresh} source={source} parent={parent} onBack={() => {}} onSelect={() => {}} />)
+    expect(screen.getByText('vs normal: insufficient history')).toBeInTheDocument()
+  })
 })

@@ -9,12 +9,13 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from pipeline.adapters.base import SourceAdapter
+from pipeline.adapters.cz_povodi import PovodiAdapter
 from pipeline.adapters.es_miteco import MitecoAdapter
 from pipeline.adapters.pt_apa import ApaAdapter
 from pipeline.contract import SCHEMA_PATH, contract_schema
 from pipeline.run import run
 
-ADAPTERS: list[SourceAdapter] = [MitecoAdapter(), ApaAdapter()]
+ADAPTERS: list[SourceAdapter] = [MitecoAdapter(), ApaAdapter(), PovodiAdapter()]
 
 
 def _schema(_: argparse.Namespace) -> None:
