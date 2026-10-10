@@ -8,7 +8,7 @@ const area = (id: string, level: Area['level'] = 'region'): Area => ({
   name: id,
   country: 'ES',
   capacityHm3: 100,
-  sourceId: 'es-miteco',
+  sourceIds: ['es-miteco'],
 })
 const entry = (pct: number, anomalyPts: number | null, stale = false): CurrentEntry => ({
   pct,

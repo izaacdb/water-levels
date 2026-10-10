@@ -27,6 +27,7 @@ class WddAdapter:
         country="CY",
         name="Water Development Department — Dam monitoring system",
         url="https://dams.wdd.moa.gov.cy/",
+        cadence="daily",
     )
 
     def fetch(self, client: httpx.Client) -> bytes:

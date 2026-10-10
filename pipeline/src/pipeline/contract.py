@@ -14,7 +14,7 @@ from typing import Annotated, Any, Literal
 from pydantic import BaseModel, ConfigDict, Field, RootModel
 from pydantic.alias_generators import to_camel
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 SCHEMA_PATH = Path(__file__).resolve().parents[2] / "schema" / "contract.schema.json"
 
 IsoWeek = Annotated[str, Field(pattern=r"^\d{4}-W\d{2}$")]
@@ -37,6 +37,7 @@ class SourceInfo(_Model):
     country: str
     name: str
     url: str
+    cadence: Literal["daily", "weekly", "monthly"] = "weekly"
     last_fetched: datetime | None = None
     last_published: date | None = None
     last_error: str | None = None
@@ -57,7 +58,8 @@ class Area(_Model):
     country: str
     parent_id: str | None = None
     capacity_hm3: float
-    source_id: str
+    # A reservoir's own source; a region or country lists every source behind it (B2′).
+    source_ids: Annotated[list[str], Field(min_length=1)]
     centroid: Annotated[list[float], Field(min_length=2, max_length=2)] | None = None
 
 

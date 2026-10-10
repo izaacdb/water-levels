@@ -1,0 +1,50 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "title": "Yorkshire Water Reservoir Levels 2022",
+    "type": "Feature Service",
+    "owner": "ywAGOLstreamData",
+    "url": "https://services-eu1.arcgis.com/1WqkK5cDKUbF0CkH/arcgis/rest/services/Yorkshire%20Water%20Reservoir%20Levels%202022/FeatureServer"
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "title": "Yorkshire Water Reservoir Levels 2026",
+    "type": "Feature Service",
+    "owner": "ywAGOLstreamData",
+    "url": "https://services-eu1.arcgis.com/1WqkK5cDKUbF0CkH/arcgis/rest/services/Yorkshire%20Water%20Reservoir%20Levels%202026/FeatureServer"
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "title": "Yorkshire Water Reservoir Levels 2023",
+    "type": "Feature Service",
+    "owner": "ywAGOLstreamData",
+    "url": "https://services-eu1.arcgis.com/1WqkK5cDKUbF0CkH/arcgis/rest/services/Yorkshire%20Water%20Reservoir%20Levels%202023/FeatureServer"
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "title": "Yorkshire Water Reservoir Levels 2025",
+    "type": "Feature Service",
+    "owner": "ywAGOLstreamData",
+    "url": "https://services-eu1.arcgis.com/1WqkK5cDKUbF0CkH/arcgis/rest/services/Yorkshire%20Water%20Reservoir%20Levels%202025/FeatureServer"
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "title": "Yorkshire Water Reservoir Levels 2024",
+    "type": "Feature Service",
+    "owner": "ywAGOLstreamData",
+    "url": "https://services-eu1.arcgis.com/1WqkK5cDKUbF0CkH/arcgis/rest/services/Yorkshire%20Water%20Reservoir%20Levels%202024/FeatureServer"
+   }
+  }
+ ]
+}

@@ -1,10 +1,11 @@
 import { Suspense } from 'react'
 import type { Area, CurrentEntry, SourceInfo } from '../contract'
 import { useSeries } from '../lib/data'
-import { countryName, formatDate, formatPct } from '../lib/format'
+import { countryName, formatDate, formatPct, sourceLabel } from '../lib/format'
 import { pctColor } from '../lib/scale'
 import { flagNotes, normalLine } from '../lib/tooltip'
 import { TrendChart, YearOnYearChart } from './LazyCharts'
+import { SourceLinks } from './SourceLinks'
 
 
 const LEVEL = { country: 'Country', region: 'River basin district', reservoir: 'Reservoir' } as const
@@ -13,7 +14,7 @@ const hm3 = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 })
 interface Props {
   area: Area
   entry: CurrentEntry
-  source?: SourceInfo
+  sources: SourceInfo[]
   parent?: Area
   onBack: () => void
   onSelect: (id: string) => void
@@ -23,7 +24,7 @@ interface Props {
   countryNote?: string
 }
 
-export function AreaDetail({ area, entry, source, parent, onBack, onSelect, onCompare, countryNote }: Props) {
+export function AreaDetail({ area, entry, sources, parent, onBack, onSelect, onCompare, countryNote }: Props) {
   const series = useSeries(area.id)
   return (
     <section className="detail" aria-labelledby="detail-title">
@@ -80,13 +81,11 @@ export function AreaDetail({ area, entry, source, parent, onBack, onSelect, onCo
             </dd>
           </>
         )}
-        {source && (
+        {sources.length > 0 && (
           <>
-            <dt>Source</dt>
+            <dt>{sourceLabel(sources)}</dt>
             <dd>
-              <a href={source.url} target="_blank" rel="noreferrer">
-                {source.name}
-              </a>
+              <SourceLinks sources={sources} />
             </dd>
           </>
         )}

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { Area, CurrentEntry } from '../contract'
 import { tooltipLines } from './tooltip'
 
-const area: Area = { id: 'ES050', level: 'region', name: 'Guadalquivir', country: 'ES', capacityHm3: 8000, sourceId: 'es-miteco' }
+const area: Area = { id: 'ES050', level: 'region', name: 'Guadalquivir', country: 'ES', capacityHm3: 8000, sourceIds: ['es-miteco'] }
 const entry: CurrentEntry = {
   pct: 69.1,
   anomalyPts: 35.7,

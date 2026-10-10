@@ -31,7 +31,7 @@ def test_manifest_serialises_with_camel_case_keys() -> None:
     )
     data = json.loads(manifest.model_dump_json(by_alias=True, exclude_none=True))
     assert data["snapshotWeek"] == "2026-W41"
-    assert data["schemaVersion"] == 1
+    assert data["schemaVersion"] == 2
     assert data["sources"][0]["lastPublished"] == "2026-10-06"
 
 
@@ -42,7 +42,7 @@ def test_snapshot_week_must_be_iso_week() -> None:
 
 def test_area_level_is_constrained() -> None:
     with pytest.raises(ValidationError):
-        Area(id="ES", level="planet", name="Spain", country="ES", capacity_hm3=1, source_id="x")
+        Area(id="ES", level="planet", name="Spain", country="ES", capacity_hm3=1, source_ids=["x"])
 
 
 def test_current_entry_can_carry_a_flagged_value_as_published() -> None:

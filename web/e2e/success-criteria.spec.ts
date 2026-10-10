@@ -12,14 +12,24 @@ test('SC4: whether a country is above or below normal is on the landing page', a
 test('SC7: every figure has an as-of date and a reachable source link', async ({ page }) => {
   await page.goto('/')
   const cards = page.locator('.card')
-  await expect(cards).toHaveCount(2)
+  await expect(cards).toHaveCount(3)
   for (const card of await cards.all()) {
     await expect(card).toContainText(/As of \d{1,2} \w{3} \d{4}/)
-    await expect(card.getByRole('link')).toHaveAttribute('href', /^https:\/\//)
+    for (const link of await card.getByRole('link').all()) {
+      await expect(link).toHaveAttribute('href', /^https:\/\//)
+    }
   }
   await page.goto('/?area=ES050')
   await expect(page.locator('.facts')).toContainText(/As of/)
   await expect(page.locator('.facts').getByRole('link')).toHaveAttribute('href', /^https:\/\//)
+})
+
+test('B1a/B2′: a partly covered country says so and links every source', async ({ page }) => {
+  await page.goto('/')
+  const uk = page.locator('.card', { has: page.getByRole('heading', { name: 'United Kingdom' }) })
+  await expect(uk).toContainText('England only (test fixture)')
+  await expect(uk).toContainText('Sources:')
+  await expect(uk.getByRole('link')).toHaveCount(2)
 })
 
 test('B10/B12: the map toggles mode and the legend follows', async ({ page }) => {

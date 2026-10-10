@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 import unicodedata
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Literal, Protocol
 
 import httpx
 import polars as pl
@@ -20,6 +20,11 @@ OBSERVATION_SCHEMA: dict[str, pl.DataType] = {
     "volume_hm3": pl.Float64(),
     "capacity_hm3": pl.Float64(),
 }
+# Sources that publish only % full may add this column; volume and capacity are then
+# completed from the registry's capacity when the rows are mapped (D7).
+PCT_FULL = "pct_full"
+
+Cadence = Literal["daily", "weekly", "monthly"]
 
 
 @dataclass(frozen=True)
@@ -28,6 +33,7 @@ class SourceMeta:
     country: str
     name: str
     url: str
+    cadence: Cadence = "weekly"
 
 
 class PartialFetch(Exception):
