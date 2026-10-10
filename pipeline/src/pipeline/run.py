@@ -58,5 +58,5 @@ def run(
     merged = store.merge(store.load(store_path), pl.concat(fresh))
     store.save(merged, store_path)
     outputs = build_outputs(merged, registries, load_rbds(), [a.meta for a in adapters], now=now)
-    write_outputs(*outputs, out_dir=out_dir)
+    write_outputs(outputs, out_dir=out_dir)
     return report

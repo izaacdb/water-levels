@@ -81,11 +81,32 @@ class Current(RootModel[dict[str, CurrentEntry]]):
     pass
 
 
+class Series(_Model):
+    """One area's weekly history over the 10-year window (B6), as parallel arrays.
+
+    Columnar keeps ~520 weeks x ~400 areas small; index i of every array is weeks[i].
+    """
+
+    area_id: str
+    weeks: list[IsoWeek]
+    pct: list[float]
+    normal: list[float | None]
+    p10: list[float | None]
+    p90: list[float | None]
+    n: list[int]
+
+
 def contract_schema() -> dict[str, Any]:
     """Combined JSON Schema for every published file, keyed by file."""
     defs: dict[str, Any] = {}
     files: dict[str, Any] = {}
-    for name, model in (("Manifest", Manifest), ("Areas", Areas), ("Current", Current)):
+    models: tuple[tuple[str, type[BaseModel]], ...] = (
+        ("Manifest", Manifest),
+        ("Areas", Areas),
+        ("Current", Current),
+        ("Series", Series),
+    )
+    for name, model in models:
         schema = model.model_json_schema(
             by_alias=True, ref_template="#/$defs/{model}", mode="serialization"
         )
