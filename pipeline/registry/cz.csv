@@ -1,0 +1,110 @@
+id,source_key,name,group,rbd_code,lat,lon
+CZ-bedrichov,bedrichov,Bedřichov,Povodí Labe,CZ6000,50.8156,15.1356
+CZ-blatno-f-m,blatno-f-m,Blatno F-M,Povodí Ohře,CZ5000,,
+CZ-bojkovice,bojkovice,Bojkovice,Povodí Moravy,CZ1000,49.0522,17.8481
+CZ-boskovice,boskovice,Boskovice,Povodí Moravy,CZ1000,49.4955,16.6984
+CZ-brezova,brezova,Březová,Povodí Ohře,CZ5000,50.1995,12.8551
+CZ-brno,brno,Brno,Povodí Moravy,CZ1000,49.2323,16.5190
+CZ-bystricka,bystricka,Bystřička,Povodí Moravy,CZ1000,49.4228,18.0200
+CZ-ceske-udoli,ceske-udoli,České Údolí,Povodí Vltavy,CZ5000,49.7181,13.3583
+CZ-chribska,chribska,Chřibská,Povodí Ohře,CZ5000,50.8500,14.5253
+CZ-dalesice,dalesice,Dalešice,Povodí Moravy,CZ1000,49.1248,16.1220
+CZ-dalesice-prepocitana,dalesice-prepocitana,Dalešice - přepočítaná,Povodí Moravy,CZ1000,49.1248,16.1220
+CZ-dratenik,dratenik,Dráteník,Povodí Vltavy,CZ5000,,
+CZ-flaje,flaje,Fláje,Povodí Ohře,CZ5000,50.6867,13.5822
+CZ-fojtka,fojtka,Fojtka,Povodí Labe,CZ5000,,
+CZ-frystak,frystak,Fryšták,Povodí Moravy,CZ1000,49.2636,17.6911
+CZ-hamry,hamry,Hamry,Povodí Labe,CZ5000,49.7312,15.9171
+CZ-harcov,harcov,Harcov,Povodí Labe,CZ6000,50.7686,15.0708
+CZ-hnevkovice,hnevkovice,Hněvkovice,Povodí Vltavy,CZ5000,49.1817,14.4458
+CZ-horka,horka,Horka,Povodí Ohře,CZ5000,,
+CZ-horni-becva,horni-becva,Horní Bečva,Povodí Moravy,CZ1000,49.4219,18.3161
+CZ-hracholusky,hracholusky,Hracholusky,Povodí Vltavy,CZ5000,49.7913,13.1742
+CZ-hubenov,hubenov,Hubenov,Povodí Moravy,CZ1000,,
+CZ-humenice,humenice,Humenice,Povodí Vltavy,CZ5000,48.7713,14.7408
+CZ-husinec,husinec,Husinec,Povodí Vltavy,CZ5000,49.0359,13.9842
+CZ-janov,janov,Janov,Povodí Ohře,CZ5000,,
+CZ-jesenice,jesenice,Jesenice,Povodí Ohře,CZ5000,50.0628,12.4517
+CZ-jevisovice,jevisovice,Jevišovice,Povodí Moravy,CZ1000,48.9916,15.9800
+CZ-jirkov,jirkov,Jirkov,Povodí Ohře,CZ5000,50.5094,13.4092
+CZ-josefuv-dul,josefuv-dul,Josefův Důl,Povodí Labe,CZ5000,50.7946,15.1955
+CZ-kadan,kadan,Kadaň,Povodí Ohře,CZ5000,50.3782,13.2557
+CZ-kamenicka,kamenicka,Kamenička,Povodí Ohře,CZ5000,50.5118,13.3306
+CZ-kamyk,kamyk,Kamýk,Povodí Vltavy,CZ5000,49.6334,14.2469
+CZ-karhof,karhof,Karhof,Povodí Vltavy,CZ5000,,
+CZ-karolinka,karolinka,Karolinka,Povodí Moravy,CZ1000,49.3414,18.2423
+CZ-klabava,klabava,Klabava,Povodí Vltavy,CZ5000,49.7511,13.5474
+CZ-klicava,klicava,Klíčava,Povodí Vltavy,CZ5000,50.0644,13.9339
+CZ-korensko,korensko,Kořensko,Povodí Vltavy,CZ5000,49.2408,14.3792
+CZ-korycany,korycany,Koryčany,Povodí Moravy,CZ1000,49.1167,17.1964
+CZ-krimov,krimov,Křímov,Povodí Ohře,CZ5000,,
+CZ-krizanovice,krizanovice,Křižanovice,Povodí Labe,CZ5000,,
+CZ-kruzberk,kruzberk,Kružberk,Povodí Odry,CZ6000,49.8231,17.6625
+CZ-labska,labska,Labská,Povodí Labe,CZ5000,50.7120,15.5849
+CZ-landstejn,landstejn,Landštejn,Povodí Moravy,CZ1000,49.0236,15.2415
+CZ-laz,laz,Láz,Povodí Vltavy,CZ5000,49.6600,13.8950
+CZ-les-kralovstvi,les-kralovstvi,Les Království,Povodí Labe,CZ5000,50.4579,15.7676
+CZ-letovice,letovice,Letovice,Povodí Moravy,CZ1000,,
+CZ-lipno-1,lipno-1,Lipno 1,Povodí Vltavy,CZ5000,48.6328,14.2371
+CZ-lipno-2,lipno-2,Lipno 2,Povodí Vltavy,CZ5000,48.6258,14.3039
+CZ-lucina,lucina,Lučina,Povodí Vltavy,CZ5000,49.8061,12.5820
+CZ-ludkovice,ludkovice,Ludkovice,Povodí Moravy,CZ1000,49.1231,17.7284
+CZ-luhacovice,luhacovice,Luhačovice,Povodí Moravy,CZ1000,,
+CZ-marianske-lazne,marianske-lazne,Mariánské Lázně,Povodí Ohře,CZ5000,49.9981,12.7064
+CZ-mlynice,mlynice,Mlýnice,Povodí Labe,CZ6000,50.8423,15.0297
+CZ-mohelno,mohelno,Mohelno,Povodí Moravy,CZ1000,49.1019,16.1775
+CZ-moravka,moravka,Morávka,Povodí Odry,CZ6000,49.5806,18.5375
+CZ-mostiste,mostiste,Mostiště,Povodí Moravy,CZ1000,49.3950,16.0133
+CZ-mseno,mseno,Mšeno,Povodí Labe,CZ6000,50.7336,15.1731
+CZ-myslivny-f-m,myslivny-f-m,Myslivny F-M,Povodí Ohře,CZ5000,50.4133,12.8717
+CZ-nechranice,nechranice,Nechranice,Povodí Ohře,CZ5000,50.3631,13.3947
+CZ-nova-rise,nova-rise,Nová Říše,Povodí Moravy,CZ1000,49.1559,15.5436
+CZ-nove-mlyny-dolni-nadrz,nove-mlyny-dolni-nadrz,Nové Mlýny - Dolní nádrž,Povodí Moravy,CZ1000,48.9028,16.6208
+CZ-nove-mlyny-horni-nadrz,nove-mlyny-horni-nadrz,Nové Mlýny - Horní nádrž,Povodí Moravy,CZ1000,48.9028,16.6208
+CZ-nove-mlyny-stredni-nadrz,nove-mlyny-stredni-nadrz,Nové Mlýny - Střední nádrž,Povodí Moravy,CZ1000,48.9028,16.6208
+CZ-nyrsko,nyrsko,Nýrsko,Povodí Vltavy,CZ5000,49.2576,13.1462
+CZ-obecnice,obecnice,Obecnice,Povodí Vltavy,CZ5000,,
+CZ-olesna,olesna,Olešná,Povodí Odry,CZ6000,49.6639,18.3167
+CZ-opatovice,opatovice,Opatovice,Povodí Moravy,CZ1000,,
+CZ-orlik,orlik,Orlík,Povodí Vltavy,CZ5000,49.6060,14.1810
+CZ-parizov,parizov,Pařížov,Povodí Labe,CZ5000,49.8286,15.5697
+CZ-pastviny,pastviny,Pastviny,Povodí Labe,CZ5000,50.0880,16.5606
+CZ-pilska-u-pribrame,pilska-u-pribrame,Pilská (u Příbramě),Povodí Vltavy,CZ5000,49.5906,15.9269
+CZ-pilska-u-zdaru,pilska-u-zdaru,Pilská u Žďáru,Povodí Vltavy,CZ5000,,
+CZ-plumlov,plumlov,Plumlov,Povodí Moravy,CZ1000,49.4693,17.0328
+CZ-podhora,podhora,Podhora,Povodí Ohře,CZ5000,49.9633,12.8133
+CZ-prisecnice,prisecnice,Přísečnice,Povodí Ohře,CZ5000,,
+CZ-rimov,rimov,Římov,Povodí Vltavy,CZ5000,48.8472,14.4858
+CZ-rozkos,rozkos,Rozkoš,Povodí Labe,CZ5000,50.3772,16.0697
+CZ-sance,sance,Šance,Povodí Odry,CZ6000,49.5103,18.4158
+CZ-sec,sec,Seč,Povodí Labe,CZ5000,49.8363,15.6527
+CZ-sedlec-f-m,sedlec-f-m,Sedlec F-M,Povodí Ohře,CZ5000,,
+CZ-sedlice,sedlice,Sedlice,Povodí Vltavy,CZ5000,49.5139,15.2694
+CZ-skalka,skalka,Skalka,Povodí Ohře,CZ5000,50.0791,12.3536
+CZ-slapy,slapy,Slapy,Povodí Vltavy,CZ5000,49.8237,14.4341
+CZ-slezska-harta,slezska-harta,Slezská Harta,Povodí Odry,CZ6000,49.8903,17.5814
+CZ-slusovice,slusovice,Slušovice,Povodí Moravy,CZ1000,49.2766,17.8045
+CZ-sobenov,sobenov,Soběnov,Povodí Vltavy,CZ5000,48.7439,14.5514
+CZ-sous,sous,Souš,Povodí Labe,CZ5000,50.7963,15.3135
+CZ-stanovice,stanovice,Stanovice,Povodí Ohře,CZ5000,50.1764,12.8781
+CZ-staviste,staviste,Staviště,Povodí Vltavy,CZ5000,49.5688,15.9550
+CZ-stechovice,stechovice,Štěchovice,Povodí Vltavy,CZ5000,49.8500,14.4333
+CZ-strz,strz,Strž,Povodí Vltavy,CZ5000,49.6092,15.9538
+CZ-suchomasty,suchomasty,Suchomasty,Povodí Vltavy,CZ5000,,
+CZ-svihov-zelivka,svihov-zelivka,Švihov (Želivka),Povodí Vltavy,CZ5000,49.7253,15.0891
+CZ-terlicko,terlicko,Těrlicko,Povodí Odry,CZ6000,49.7740,18.5161
+CZ-trnavka,trnavka,Trnávka,Povodí Vltavy,CZ5000,49.5228,15.2118
+CZ-ujezd,ujezd,Újezd,Povodí Ohře,CZ5000,50.5013,13.4766
+CZ-vidhostice-f-m,vidhostice-f-m,Vidhostice F-M,Povodí Ohře,CZ5000,50.1612,13.3950
+CZ-vir-i,vir-i,Vír I,Povodí Moravy,CZ1000,49.5642,16.3097
+CZ-vrane,vrane,Vrané,Povodí Vltavy,CZ5000,49.9381,14.3749
+CZ-vranov,vranov,Vranov,Povodí Moravy,CZ1000,48.9061,15.8194
+CZ-vrchlice,vrchlice,Vrchlice,Povodí Labe,CZ5000,49.9269,15.2269
+CZ-vresnik,vresnik,Vřesník,Povodí Vltavy,CZ5000,49.5295,15.2433
+CZ-vsechlapy,vsechlapy,Všechlapy,Povodí Ohře,CZ5000,50.6111,13.7840
+CZ-vyrovice,vyrovice,Výrovice,Povodí Moravy,CZ1000,48.9275,16.0976
+CZ-zaskalska,zaskalska,Záskalská,Povodí Vltavy,CZ5000,49.7908,13.8784
+CZ-zermanice,zermanice,Žermanice,Povodí Odry,CZ6000,49.7323,18.4459
+CZ-zhejral,zhejral,Zhejral,Povodí Vltavy,CZ5000,,
+CZ-zlutice,zlutice,Žlutice,Povodí Vltavy,CZ5000,50.0881,13.1281
+CZ-znojmo,znojmo,Znojmo,Povodí Moravy,CZ1000,48.8528,16.0361
