@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import type { Area, Current } from '../contract'
 import { countryName, formatAnomaly, formatDate, formatPct } from '../lib/format'
 import { type RankOptions, type Ranked, rankAreas } from '../lib/rankings'
@@ -7,6 +6,8 @@ import { colorFor } from '../lib/scale'
 interface Props {
   areas: Area[]
   current: Current
+  opts: RankOptions
+  onChange: (opts: RankOptions) => void
   onSelect: (id: string) => void
 }
 
@@ -31,8 +32,7 @@ function Row({ row, index, sort, onSelect }: { row: Ranked; index?: number; sort
   )
 }
 
-export function Rankings({ areas, current, onSelect }: Props) {
-  const [opts, setOpts] = useState<RankOptions>({ level: 'region', sort: 'pct', dir: 'desc' })
+export function Rankings({ areas, current, opts, onChange: setOpts, onSelect }: Props) {
   const { ranked, awaiting, unranked } = rankAreas(areas, current, opts)
   return (
     <section className="rankings" aria-label="Rankings">
