@@ -20,6 +20,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # The first run backfills every archive once (roughly an hour); later runs take minutes.
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
         with:

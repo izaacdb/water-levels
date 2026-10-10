@@ -11,7 +11,11 @@ export default defineConfig({
     baseURL: 'http://localhost:4174',
     launchOptions: { args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] },
   },
-  projects: [{ name: 'desktop', use: { ...devices['Desktop Chrome'] } }],
+  // SC6: everything runs at phone size too.
+  projects: [
+    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
+    { name: 'mobile', use: { ...devices['Pixel 7'] } },
+  ],
   webServer: {
     command: 'npm run e2e:serve',
     url: 'http://localhost:4174',

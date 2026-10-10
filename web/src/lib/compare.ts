@@ -34,7 +34,7 @@ export function compareOption(items: CompareItem[], mode: Mode) {
     mode === 'pct' ? s.pct[i] : s.normal[i] == null ? null : Math.round((s.pct[i] - s.normal[i]!) * 10) / 10
   return {
     animation: false,
-    grid: { left: 44, right: 12, top: 12, bottom: 28 },
+    grid: { left: 44, right: 96, top: 12, bottom: 28 },
     xAxis: {
       type: 'time' as const,
       axisLine: { lineStyle: { color: INK.axis } },
@@ -71,6 +71,9 @@ export function compareOption(items: CompareItem[], mode: Mode) {
       itemStyle: { color: COMPARE_COLORS[slot] },
       symbol: 'none',
       connectNulls: false,
+      // Direct labels: identity never rests on colour alone (some slots are under 3:1).
+      endLabel: { show: true, formatter: area.name, color: INK.primary, fontSize: 11, width: 88, overflow: 'truncate' as const },
+      labelLayout: { moveOverlap: 'shiftY' as const },
       ...(mode === 'anom'
         ? { markLine: { silent: true, symbol: 'none', label: { show: false }, data: [{ yAxis: 0 }], lineStyle: { color: INK.axis, type: 'solid' as const } } }
         : {}),

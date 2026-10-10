@@ -12,7 +12,8 @@
     "typecheck": "tsc -b",
     "gen:contract": "node scripts/gen-contract.mjs",
     "e2e:serve": "vite build --outDir dist-e2e --emptyOutDir && rm -rf dist-e2e/data && cp -R e2e/fixtures/data dist-e2e/data && vite preview --outDir dist-e2e --port 4174 --strictPort",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "budget": "node scripts/check-budget.mjs"
   },
   "dependencies": {
     "echarts": "^6.1.0",
@@ -21,6 +22,7 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.64.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
