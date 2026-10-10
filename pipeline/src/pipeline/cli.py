@@ -13,6 +13,7 @@ from pipeline.adapters.base import SourceAdapter
 from pipeline.adapters.bg_moew import MoewAdapter
 from pipeline.adapters.cy_wdd import WddAdapter
 from pipeline.adapters.cz_povodi import PovodiAdapter
+from pipeline.adapters.el_eydap import EydapAdapter
 from pipeline.adapters.es_miteco import MitecoAdapter
 from pipeline.adapters.pt_apa import ApaAdapter
 from pipeline.adapters.uk_anglian import AnglianAdapter
@@ -34,6 +35,7 @@ ADAPTERS: list[SourceAdapter] = [
     StoragePagesAdapter(HAFREN_DYFRDWY),
     AnglianAdapter(),
     ScottishWaterAdapter(),
+    EydapAdapter(),
 ]
 
 

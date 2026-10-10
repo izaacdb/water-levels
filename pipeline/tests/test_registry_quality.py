@@ -77,3 +77,13 @@ def test_uk_reservoirs_belong_to_a_known_source_and_lie_in_great_britain() -> No
     assert reservoirs["lat"].cast(pl.Float64).is_not_null().all()
     assert reservoirs["lat"].cast(pl.Float64).is_between(49.8, 60.9).all()
     assert reservoirs["lon"].cast(pl.Float64).is_between(-8.2, 1.8).all()
+
+
+def test_greek_reservoirs_have_cited_capacities_and_lie_in_greece() -> None:
+    reg = load_registry("EL")
+    assert set(reg["source_key"]) == {"mornos", "evinos", "yliki", "marathonas"}
+    assert reg["rbd_code"].is_in(set(load_rbds()["code"].to_list())).all()
+    assert reg["capacity_hm3"].cast(pl.Float64).is_not_null().all()
+    assert (reg["capacity_source"].str.len_chars() > 0).all()
+    assert reg["lat"].cast(pl.Float64).is_between(34.8, 41.8).all()
+    assert reg["lon"].cast(pl.Float64).is_between(19.3, 29.7).all()

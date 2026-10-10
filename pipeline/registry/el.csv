@@ -1,0 +1,5 @@
+id,source_key,name,group,rbd_code,lat,lon,capacity_hm3,capacity_source
+EL-mornos,mornos,Μόρνος,ΕΥΔΑΠ,EL04,38.5413,22.1522,780,Greek Committee on Large Dams (eemf.gr): reservoir capacity 780×10⁶ m³
+EL-evinos,evinos,Εύηνος,ΕΥΔΑΠ,EL04,38.6681,21.8356,113,Greek Committee on Large Dams (eemf.gr): reservoir capacity 113×10⁶ m³
+EL-yliki,yliki,Υλίκη,ΕΥΔΑΠ,EL07,38.4070,23.2420,590,Operational capacity 590 million m³ (natural lake; EYDAP's record high is 584.8 hm³)
+EL-marathonas,marathonas,Μαραθώνας,ΕΥΔΑΠ,EL06,38.1762,23.8835,41,NTUA risk assessment of Marathon reservoir spillway: reservoir capacity 41 hm³
