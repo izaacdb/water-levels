@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { AreaDetail } from './components/AreaDetail'
 import { ComparePanel } from './components/ComparePanel'
 import { CountryCard } from './components/CountryCard'
 import { Legend } from './components/Legend'
-import { MapView } from './components/MapView'
+import { MapView } from './components/LazyMap'
 import { ModeToggle } from './components/ModeToggle'
 import { Rankings } from './components/Rankings'
 import type { AppData } from './lib/data'
@@ -86,14 +86,14 @@ function Panel({ data, state, update }: PanelProps) {
               const countryEntry = data.current[country.id]
               const source = sourceFor(country.sourceId)
               return countryEntry && source ? (
-                <button type="button" key={country.id} className="card-button" onClick={() => select(country.id)}>
-                  <CountryCard
-                    name={country.name}
-                    entry={countryEntry}
-                    source={source}
-                    status={data.manifest.countries.find((c) => c.code === country.id)}
-                  />
-                </button>
+                <CountryCard
+                  key={country.id}
+                  name={country.name}
+                  entry={countryEntry}
+                  source={source}
+                  status={data.manifest.countries.find((c) => c.code === country.id)}
+                  onOpen={() => select(country.id)}
+                />
               ) : null
             })}
           <Legend mode={state.mode} />
@@ -105,6 +105,19 @@ function Panel({ data, state, update }: PanelProps) {
       )}
     </>
   )
+}
+
+const FOCUS_ZOOM = { country: 4.6, region: 5.8, reservoir: 8 } as const
+
+/** Where to point the map for a selected area: its centroid, or its reservoirs' middle. */
+function focusFor(data: AppData, areaId: string | null): { center: [number, number]; zoom: number } | null {
+  const area = areaId ? data.areas.find((a) => a.id === areaId) : undefined
+  if (!area) return null
+  if (area.centroid) return { center: area.centroid as [number, number], zoom: FOCUS_ZOOM[area.level] }
+  const points = data.areas.filter((a) => a.country === area.id && a.level === 'reservoir' && a.centroid)
+  if (!points.length) return null
+  const mean = (i: 0 | 1) => points.reduce((sum, a) => sum + (a.centroid as number[])[i], 0) / points.length
+  return { center: [mean(0), mean(1)], zoom: FOCUS_ZOOM[area.level] }
 }
 
 function Explorer({ data }: { data: AppData }) {
@@ -120,19 +133,23 @@ function Explorer({ data }: { data: AppData }) {
     if (arrival.missing.length) update({ area: arrival.state.area, cmp: arrival.state.cmp })
   }, [arrival, update])
   const onMove = useCallback((at: MapPosition) => update({ at }), [update])
+  const focus = useMemo(() => focusFor(data, state.area), [data, state.area])
   const onSelect = useCallback((id: string) => update({ area: id }), [update])
   const names = (ids: string[]) => ids.join(', ')
 
   return (
-    <main className="layout">
-      <MapView
-        areas={data.areas}
-        current={data.current}
-        mode={state.mode}
-        onSelect={onSelect}
-        initialAt={state.at}
-        onMove={onMove}
-      />
+    <main className={state.area || state.view !== 'overview' ? 'layout focus' : 'layout'}>
+      <Suspense fallback={<div className="map map-loading" aria-hidden />}>
+        <MapView
+          areas={data.areas}
+          current={data.current}
+          mode={state.mode}
+          onSelect={onSelect}
+          initialAt={state.at}
+          onMove={onMove}
+          focus={focus}
+        />
+      </Suspense>
       <aside className="panel">
         {noticeOpen && (
           <div className="notice" role="status">

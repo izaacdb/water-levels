@@ -2,6 +2,7 @@
 import { LineChart } from 'echarts/charts'
 import { GridComponent, MarkLineComponent, TooltipComponent } from 'echarts/components'
 import * as echarts from 'echarts/core'
+import { LabelLayout } from 'echarts/features'
 import type { EChartsCoreOption } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { useEffect, useRef } from 'react'
@@ -10,7 +11,7 @@ import { trendOption, yearOnYearOption } from '../lib/charts'
 import { type CompareItem, compareOption } from '../lib/compare'
 import type { Mode } from '../lib/scale'
 
-echarts.use([LineChart, GridComponent, TooltipComponent, MarkLineComponent, CanvasRenderer])
+echarts.use([LineChart, GridComponent, TooltipComponent, MarkLineComponent, LabelLayout, CanvasRenderer])
 
 function EChart({ option, label }: { option: EChartsCoreOption; label: string }) {
   const ref = useRef<HTMLDivElement>(null)

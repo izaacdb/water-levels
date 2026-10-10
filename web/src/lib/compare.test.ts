@@ -13,7 +13,7 @@ const series = (id: string, pct: number[], normal: (number | null)[]): Series =>
   n: [1, 1],
 })
 
-type S = { name: string; data: [number, number | null][]; lineStyle: { color: string } }
+type S = { name: string; data: [number, number | null][]; lineStyle: { color: string }; endLabel: { show: boolean } }
 const seriesOf = (o: unknown) => (o as { series: S[] }).series
 
 describe('assignSlots', () => {
@@ -37,6 +37,7 @@ describe('compareOption', () => {
     expect(s.map((x) => x.name)).toEqual(['A', 'B'])
     expect(s.map((x) => x.lineStyle.color)).toEqual([COMPARE_COLORS[0], COMPARE_COLORS[1]])
     expect(s[0].data.map((d) => d[1])).toEqual([40, 50])
+    expect(s.every((x) => x.endLabel.show)).toBe(true)
   })
 
   it('plots vs normal as % full minus normal, with gaps where there is no normal', () => {

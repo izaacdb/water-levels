@@ -8,15 +8,25 @@ interface Props {
   entry: CurrentEntry
   source: SourceInfo
   status?: CountryStatus
+  /** Opens the country's detail; the title becomes the button (no nested controls). */
+  onOpen?: () => void
 }
 
-export function CountryCard({ name, entry, source, status }: Props) {
+export function CountryCard({ name, entry, source, status, onOpen }: Props) {
   const withdrawn = status?.status === 'withdrawn'
   return (
     <article className="card">
       <header className="card-head">
         <span className="swatch" style={{ background: pctColor(entry.pct) }} aria-hidden />
-        <h2>{name}</h2>
+        <h2>
+          {onOpen ? (
+            <button type="button" className="card-title" onClick={onOpen}>
+              {name}
+            </button>
+          ) : (
+            name
+          )}
+        </h2>
         {withdrawn ? (
           <span className="stale">Withdrawn</span>
         ) : (

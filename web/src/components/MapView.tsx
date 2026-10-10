@@ -32,6 +32,8 @@ interface Props {
   /** Initial camera (from the URL); defaults to all of Europe. */
   initialAt?: MapPosition | null
   onMove?: (at: MapPosition) => void
+  /** Area to bring into view when it's selected. */
+  focus?: { center: [number, number]; zoom: number } | null
 }
 
 type Geo = FeatureCollection<Geometry, Record<string, unknown>>
@@ -86,7 +88,7 @@ function popupNode(areaId: string, areas: Map<string, Areas[number]>, current: C
 }
 
 /** Europe map: country → river basin → reservoir, coloured by % full or vs normal. */
-export function MapView({ areas, current, mode, onSelect, initialAt, onMove }: Props) {
+export function MapView({ areas, current, mode, onSelect, initialAt, onMove, focus }: Props) {
   const container = useRef<HTMLDivElement>(null)
   const mapRef = useRef<MapLibreMap | null>(null)
   const geo = useRef<{ countries: Geo; rbd: Geo } | null>(null)
@@ -256,7 +258,12 @@ export function MapView({ areas, current, mode, onSelect, initialAt, onMove }: P
     })
     map.on('mouseout', () => popup.remove())
 
+    // The panel grows on phones when an area opens, so the map must follow its container.
+    const resize = new ResizeObserver(() => map.resize())
+    resize.observe(container.current)
+
     return () => {
+      resize.disconnect()
       popup.remove()
       map.remove()
       mapRef.current = null
@@ -270,6 +277,18 @@ export function MapView({ areas, current, mode, onSelect, initialAt, onMove }: P
     ;(map.getSource('rbd') as GeoJSONSource).setData(colour(geo.current.rbd, current, mode))
     ;(map.getSource('reservoirs') as GeoJSONSource).setData(colour(reservoirPoints(areas), current, mode))
   }, [ready, areas, current, mode])
+
+  // A shared link's camera wins over flying to its selected area (B22).
+  const skipFirstFocus = useRef(!!initialAt)
+  useEffect(() => {
+    const map = mapRef.current
+    if (!ready || !map || !focus) return
+    if (skipFirstFocus.current) {
+      skipFirstFocus.current = false
+      return
+    }
+    map.flyTo({ center: focus.center, zoom: focus.zoom, duration: 800 })
+  }, [ready, focus])
 
   return <div ref={container} className="map" role="region" aria-label="Map of reservoir storage in Europe" />
 }

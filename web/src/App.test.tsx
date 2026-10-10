@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 
-vi.mock('./components/MapView', () => ({ MapView: () => <div data-testid="map" /> }))
+vi.mock('./components/LazyMap', () => ({ MapView: () => <div data-testid="map" /> }))
 
 const payloads: Record<string, unknown> = {
   'data/manifest.json': {
