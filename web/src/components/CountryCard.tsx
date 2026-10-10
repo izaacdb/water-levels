@@ -1,6 +1,7 @@
 import type { CurrentEntry, SourceInfo } from '../contract'
 import { formatDate, formatPct } from '../lib/format'
 import { pctColor } from '../lib/scale'
+import { normalLine } from '../lib/tooltip'
 
 interface Props {
   name: string
@@ -19,6 +20,7 @@ export function CountryCard({ name, entry, source }: Props) {
       <p className="hero">
         {formatPct(entry.pct)} <span className="hero-label">full</span>
       </p>
+      <p className="normal">{normalLine(entry)}</p>
       <p className="meta">
         As of {formatDate(entry.asOf)} · {entry.nReporting} of {entry.nTotal} reservoirs
       </p>

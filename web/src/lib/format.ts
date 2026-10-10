@@ -13,3 +13,21 @@ export function formatWeek(isoWeek: string): string {
   const [year, week] = isoWeek.split('-W')
   return `Week ${Number(week)}, ${year}`
 }
+
+/** +12.3 pts / −4.0 pts (true minus sign). */
+export function formatAnomaly(pts: number): string {
+  // Round the magnitude so −4.25 and +4.25 round the same way.
+  const magnitude = Math.round(Math.abs(pts) * 10) / 10
+  const sign = magnitude === 0 ? '±' : pts > 0 ? '+' : '−'
+  return `${sign}${magnitude.toFixed(1)} pts`
+}
+
+const COUNTRY_NAMES: Record<string, string> = {
+  ES: 'Spain',
+  PT: 'Portugal',
+  BG: 'Bulgaria',
+  CY: 'Cyprus',
+  CZ: 'Czechia',
+}
+
+export const countryName = (code: string) => COUNTRY_NAMES[code] ?? code
