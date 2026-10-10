@@ -137,8 +137,6 @@
       "additionalProperties": false,
       "properties": {
         "pct": {
-          "maximum": 100,
-          "minimum": 0,
           "type": "number"
         },
         "anomalyPts": {

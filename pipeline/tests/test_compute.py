@@ -117,3 +117,22 @@ def test_is_stale(as_of: date, expected: bool) -> None:
 def test_is_stale_when_whole_snapshot_is_old() -> None:
     # Even the snapshot week itself is stale if nothing has been published for 14+ days.
     assert is_stale(date(2026, 9, 1), "2026-W36", today=date(2026, 10, 10)) is True
+
+
+def test_implausible_value_is_shown_as_published_on_its_own_reservoir() -> None:
+    """E4: the reservoir's own area keeps the published value, flagged; aggregates skip it."""
+    weekly = weekly_snapshot(
+        store([("A", date(2026, 10, 6), 50, 100), ("B", date(2026, 10, 6), 150, 100)])
+    )
+    members = pl.DataFrame(
+        {
+            "reservoir_id": ["A", "B", "A", "B"],
+            "area_id": ["ES", "ES", "A", "B"],
+        }
+    )
+    out = {r["area_id"]: r for r in aggregate(weekly, members).iter_rows(named=True)}
+    assert out["B"]["pct"] == pytest.approx(150.0)
+    assert out["B"]["flag"] == "over_capacity"
+    assert out["A"]["flag"] is None
+    assert out["ES"]["pct"] == pytest.approx(50.0)
+    assert out["ES"]["flag"] is None

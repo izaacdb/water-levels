@@ -45,9 +45,24 @@ def test_area_level_is_constrained() -> None:
         Area(id="ES", level="planet", name="Spain", country="ES", capacity_hm3=1, source_id="x")
 
 
-def test_current_entry_pct_bounds() -> None:
+def test_current_entry_can_carry_a_flagged_value_as_published() -> None:
+    """E4: an over-capacity reading is shown as published, with its flag."""
+    entry = CurrentEntry(
+        pct=101,
+        as_of=date(2026, 1, 1),
+        stale=False,
+        n_reporting=1,
+        n_total=1,
+        flags=["over_capacity"],
+    )
+    assert entry.flags == ["over_capacity"]
+
+
+def test_normal_pct_is_bounded() -> None:
     with pytest.raises(ValidationError):
-        CurrentEntry(pct=101, as_of=date(2026, 1, 1), stale=False, n_reporting=1, n_total=1)
+        CurrentEntry(
+            pct=50, normal_pct=101, as_of=date(2026, 1, 1), stale=False, n_reporting=1, n_total=1
+        )
 
 
 def test_committed_schema_matches_models() -> None:

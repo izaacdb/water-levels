@@ -181,6 +181,7 @@ def build_outputs(
             stale=is_stale(row["as_of"], snapshot, today=today),
             n_reporting=row["n_reporting"],
             n_total=row["n_total"],
+            flags=[row["flag"]] if row["flag"] else [],
         )
 
     published = dict(store.group_by("source_id").agg(pl.col("observed_on").max()).iter_rows())

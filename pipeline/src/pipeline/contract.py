@@ -66,7 +66,8 @@ class Areas(RootModel[list[Area]]):
 
 
 class CurrentEntry(_Model):
-    pct: Pct
+    # As published: may fall outside 0-100 when flagged (E4).
+    pct: float
     anomaly_pts: float | None = None
     normal_pct: Pct | None = None
     normal_years: int = 0
