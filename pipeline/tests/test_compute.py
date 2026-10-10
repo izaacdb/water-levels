@@ -104,14 +104,17 @@ def test_snapshot_week_is_latest_published_week_not_beyond_today() -> None:
 
 
 @pytest.mark.parametrize(
-    ("as_of", "expected"),
+    ("as_of", "today", "expected"),
     [
-        (date(2026, 10, 6), False),  # published in the snapshot week
-        (date(2026, 9, 29), True),  # missed the snapshot week (B24)
+        (date(2026, 10, 6), date(2026, 10, 10), False),  # published in the snapshot week
+        # Saturday of W41: a weekly source last seen in W40 is still within its cycle...
+        (date(2026, 9, 29), date(2026, 10, 10), False),
+        # ...but once W41 is complete it has missed a whole week (B24).
+        (date(2026, 9, 29), date(2026, 10, 12), True),
     ],
 )
-def test_is_stale(as_of: date, expected: bool) -> None:
-    assert is_stale(as_of, "2026-W41", today=date(2026, 10, 10)) is expected
+def test_is_stale(as_of: date, today: date, expected: bool) -> None:
+    assert is_stale(as_of, "2026-W41", today=today) is expected
 
 
 def test_is_stale_when_whole_snapshot_is_old() -> None:
@@ -136,3 +139,13 @@ def test_implausible_value_is_shown_as_published_on_its_own_reservoir() -> None:
     assert out["A"]["flag"] is None
     assert out["ES"]["pct"] == pytest.approx(50.0)
     assert out["ES"]["flag"] is None
+
+
+def test_weekly_sources_are_not_stale_when_daily_sources_enter_a_new_week() -> None:
+    """Monday 12 Oct: daily sources have W42 data, weekly Spain still has Tuesday 6 Oct (W41)."""
+    today = date(2026, 10, 12)
+    snap = snapshot_week([date(2026, 10, 6), date(2026, 10, 12)], today=today)
+    assert snap == "2026-W42"
+    assert is_stale(date(2026, 10, 6), snap, today=today) is False
+    # A source that missed the whole of W41 is out of date.
+    assert is_stale(date(2026, 9, 29), snap, today=today) is True

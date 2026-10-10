@@ -16,4 +16,11 @@ def snapshot_week(latest_dates: Iterable[date], today: date) -> str:
 
 
 def is_stale(as_of: date, snapshot: str, today: date) -> bool:
-    return iso_week_label(as_of) < snapshot or today - as_of > MAX_AGE
+    """B24: out of date if the source missed a whole completed week of the snapshot.
+
+    Sources publish on different days (daily vs weekly). Judging against the last
+    *completed* week stops a weekly source looking stale for a day or two every week
+    once daily sources have rolled into the new one.
+    """
+    last_completed = iso_week_label(today - timedelta(days=7))
+    return iso_week_label(as_of) < min(snapshot, last_completed) or today - as_of > MAX_AGE
