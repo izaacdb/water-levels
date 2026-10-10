@@ -4,12 +4,13 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import NamedTuple
 
 import polars as pl
 
 from pipeline.adapters.base import SourceMeta
 from pipeline.compute.aggregate import aggregate
-from pipeline.compute.normal import with_normals
+from pipeline.compute.normal import WINDOW_YEARS, with_normals
 from pipeline.compute.stale import is_stale, snapshot_week
 from pipeline.compute.weekly import weekly_snapshot
 from pipeline.contract import (
@@ -19,6 +20,7 @@ from pipeline.contract import (
     Current,
     CurrentEntry,
     Manifest,
+    Series,
     SourceInfo,
 )
 
@@ -106,6 +108,34 @@ def area_catalogue(
     return areas
 
 
+class Outputs(NamedTuple):
+    manifest: Manifest
+    areas: Areas
+    current: Current
+    series: dict[str, Series]
+
+
+def _series(by_area: pl.DataFrame, area_ids: list[str], snapshot: str) -> dict[str, Series]:
+    """B6: each area's weekly history over the 10 years ending at the snapshot week."""
+    year, week = snapshot.split("-W")
+    start = f"{int(year) - WINDOW_YEARS}-W{week}"
+    window = by_area.filter(
+        (pl.col("week") >= start) & (pl.col("week") <= snapshot) & pl.col("area_id").is_in(area_ids)
+    ).sort("area_id", "week")
+    out: dict[str, Series] = {}
+    for (area_id,), rows in window.group_by("area_id", maintain_order=True):
+        out[str(area_id)] = Series(
+            area_id=str(area_id),
+            weeks=rows["week"].to_list(),
+            pct=rows["pct"].round(1).to_list(),
+            normal=rows["normal_pct"].round(1).to_list(),
+            p10=rows["normal_p10"].round(1).to_list(),
+            p90=rows["normal_p90"].round(1).to_list(),
+            n=rows["n_reporting"].to_list(),
+        )
+    return out
+
+
 def _round(value: float | None) -> float | None:
     return None if value is None else round(value, 1)
 
@@ -116,7 +146,7 @@ def build_outputs(
     rbds: pl.DataFrame,
     sources: list[SourceMeta],
     now: datetime,
-) -> tuple[Manifest, Areas, Current]:
+) -> Outputs:
     today = now.date()
     reservoirs = _reservoirs(registries)
     last_seen = store.group_by("reservoir_id").agg(pl.col("observed_on").max().alias("last_seen"))
@@ -178,13 +208,23 @@ def build_outputs(
             for s in sources
         ],
     )
-    return manifest, Areas(areas), Current(current)
+    series = _series(by_area, [a.id for a in areas], snapshot)
+    return Outputs(manifest, Areas(areas), Current(current), series)
 
 
-def write_outputs(manifest: Manifest, areas: Areas, current: Current, out_dir: Path) -> None:
+def write_outputs(outputs: Outputs, out_dir: Path) -> None:
     data_dir = out_dir / "data"
-    data_dir.mkdir(parents=True, exist_ok=True)
-    for name, model in (("manifest", manifest), ("areas", areas), ("current", current)):
-        (data_dir / f"{name}.json").write_text(
-            model.model_dump_json(by_alias=True, exclude_none=True)
-        )
+    series_dir = data_dir / "series"
+    series_dir.mkdir(parents=True, exist_ok=True)
+    for stale_file in series_dir.glob("*.json"):
+        stale_file.unlink()
+    files: list[tuple[Path, Manifest | Areas | Current | Series]] = [
+        (data_dir / "manifest.json", outputs.manifest),
+        (data_dir / "areas.json", outputs.areas),
+        (data_dir / "current.json", outputs.current),
+        *((series_dir / f"{area_id}.json", s) for area_id, s in outputs.series.items()),
+    ]
+    for path, model in files:
+        # Series keep their nulls: array positions must stay aligned.
+        keep_nulls = isinstance(model, Series)
+        path.write_text(model.model_dump_json(by_alias=True, exclude_none=not keep_nulls))

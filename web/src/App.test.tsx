@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 
@@ -34,6 +34,8 @@ describe('App', () => {
     expect(screen.getByTestId('map')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Spain' })).toBeInTheDocument()
     expect(screen.getByText(/not covered/i, { selector: 'p' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Rankings' }))
+    expect(screen.getByLabelText('Sort by')).toBeInTheDocument()
   })
 
   it('reports a load failure', async () => {

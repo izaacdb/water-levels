@@ -10,6 +10,7 @@ export interface Contract {
 Manifest?: Manifest
 Areas?: Areas
 Current?: Current
+Series?: Series
 }
 /**
  * This interface was referenced by `Contract`'s JSON-Schema
@@ -80,4 +81,21 @@ stale: boolean
 nReporting: number
 nTotal: number
 flags?: string[]
+}
+/**
+ * One area's weekly history over the 10-year window (B6), as parallel arrays.
+ * 
+ * Columnar keeps ~520 weeks x ~400 areas small; index i of every array is weeks[i].
+ * 
+ * This interface was referenced by `Contract`'s JSON-Schema
+ * via the `definition` "Series".
+ */
+export interface Series {
+areaId: string
+weeks: string[]
+pct: number[]
+normal: (number | null)[]
+p10: (number | null)[]
+p90: (number | null)[]
+n: number[]
 }

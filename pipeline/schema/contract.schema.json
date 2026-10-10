@@ -11,6 +11,9 @@
     },
     "Current": {
       "$ref": "#/$defs/Current"
+    },
+    "Series": {
+      "$ref": "#/$defs/Series"
     }
   },
   "$defs": {
@@ -231,6 +234,84 @@
         "sources"
       ],
       "title": "Manifest",
+      "type": "object"
+    },
+    "Series": {
+      "additionalProperties": false,
+      "description": "One area's weekly history over the 10-year window (B6), as parallel arrays.\n\nColumnar keeps ~520 weeks x ~400 areas small; index i of every array is weeks[i].",
+      "properties": {
+        "areaId": {
+          "type": "string"
+        },
+        "weeks": {
+          "items": {
+            "pattern": "^\\d{4}-W\\d{2}$",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "pct": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "normal": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "p10": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "p90": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "n": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "areaId",
+        "weeks",
+        "pct",
+        "normal",
+        "p10",
+        "p90",
+        "n"
+      ],
+      "title": "Series",
       "type": "object"
     },
     "SourceInfo": {

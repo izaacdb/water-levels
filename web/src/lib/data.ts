@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { Areas, Current, Manifest } from '../contract'
+import type { Areas, Current, Manifest, Series } from '../contract'
 
 const base = import.meta.env.BASE_URL
 
@@ -37,3 +37,30 @@ export function useAppData(): Loadable<AppData> {
 }
 
 export const geoUrl = (name: string) => `${base}geo/${name}`
+
+const seriesCache = new Map<string, Promise<Series>>()
+
+export function loadSeries(areaId: string): Promise<Series> {
+  let pending = seriesCache.get(areaId)
+  if (!pending) {
+    pending = getJson<Series>(`data/series/${encodeURIComponent(areaId)}.json`)
+    pending.catch(() => seriesCache.delete(areaId))
+    seriesCache.set(areaId, pending)
+  }
+  return pending
+}
+
+export function useSeries(areaId: string): Loadable<Series> {
+  const [state, setState] = useState<{ id: string; value: Loadable<Series> }>({ id: areaId, value: { status: 'loading' } })
+  useEffect(() => {
+    let live = true
+    loadSeries(areaId).then(
+      (data) => live && setState({ id: areaId, value: { status: 'ready', data } }),
+      (err: unknown) => live && setState({ id: areaId, value: { status: 'error', error: String(err) } }),
+    )
+    return () => {
+      live = false
+    }
+  }, [areaId])
+  return state.id === areaId ? state.value : { status: 'loading' }
+}
