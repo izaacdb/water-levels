@@ -32,6 +32,15 @@ describe('trendOption', () => {
   })
 })
 
+describe('trendOption axis', () => {
+  it('always spans the 10-year window, even with one week of history (B6)', () => {
+    const one: Series = { ...series, weeks: ['2026-W41'], pct: [58.3], normal: [null], p10: [null], p90: [null], n: [1] }
+    const x = (trendOption(one) as unknown as { xAxis: { min: number; max: number } }).xAxis
+    expect(new Date(x.max).toISOString().slice(0, 10)).toBe('2026-10-05')
+    expect(new Date(x.min).toISOString().slice(0, 10)).toBe('2016-10-05')
+  })
+})
+
 describe('yearOnYearOption', () => {
   it('has one line per year on a week-of-year axis, the current year emphasised', () => {
     const s = seriesOf(yearOnYearOption(series))
