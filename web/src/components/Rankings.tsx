@@ -24,6 +24,8 @@ function Row({ row, index, sort, onSelect }: { row: Ranked; index?: number; sort
           <span className="rank-sub">
             {row.area.level === 'country' ? 'Country' : countryName(row.area.country)}
             {row.entry.stale && ` · last ${formatDate(row.entry.asOf)}`}
+            {sort === 'anom' && row.entry.anomalyPts != null && (row.entry.normalYears ?? 10) < 10 &&
+              ` · normal from ${row.entry.normalYears} yrs`}
           </span>
         </span>
         <span className="rank-value">{value}</span>

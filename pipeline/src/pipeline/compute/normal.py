@@ -21,12 +21,24 @@ def with_normals(by_area: pl.DataFrame) -> pl.DataFrame:
     """Add normal_pct, normal_p10, normal_p90, normal_years and anomaly_pts.
 
     Normal for (area, week) is the mean % full for the same ISO week across the
-    previous WINDOW_YEARS years (not including this one). It needs MIN_YEARS of
-    history; otherwise it's null and the area reads "insufficient history".
+    previous WINDOW_YEARS years (not including this one). A year without a value
+    for that exact week uses its neighbouring week instead (fortnightly
+    historical sources). It needs MIN_YEARS of history; otherwise it's null and
+    the area reads "insufficient history".
     """
     keyed = _keyed(by_area)
-    reference = keyed.select(
+    base = keyed.select(
         "area_id", "_wk", pl.col("_year").alias("_ref_year"), pl.col("pct").alias("_ref")
+    )
+    # Each reference year contributes its value for the same ISO week or, when that
+    # week is missing (sources with fortnightly history), the neighbouring week.
+    reference = pl.concat(
+        [
+            base.with_columns(
+                (pl.col("_wk") + shift).alias("_wk"), pl.lit(abs(shift)).alias("_dist")
+            )
+            for shift in (0, -1, 1)
+        ]
     )
     stats = (
         keyed.select("area_id", "week", "_year", "_wk")
@@ -35,6 +47,9 @@ def with_normals(by_area: pl.DataFrame) -> pl.DataFrame:
             (pl.col("_ref_year") < pl.col("_year"))
             & (pl.col("_ref_year") >= pl.col("_year") - WINDOW_YEARS)
         )
+        .sort("_dist")
+        .group_by("area_id", "week", "_ref_year", maintain_order=True)
+        .first()
         .group_by("area_id", "week")
         .agg(
             pl.col("_ref").mean().alias("_mean"),

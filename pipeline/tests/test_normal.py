@@ -70,3 +70,24 @@ def test_areas_do_not_mix() -> None:
     assert out.filter(pl.col("area_id") == "A", pl.col("week") == "2020-W41")[
         "normal_pct"
     ].item() == pytest.approx(10.0)
+
+
+def test_sparse_history_uses_the_nearest_week_within_one() -> None:
+    """Sources with fortnightly history rarely hit the exact ISO week every year;
+    the neighbouring week stands in for that year (same time of year)."""
+    history = [
+        (2020, 40, 30.0),
+        (2021, 42, 34.0),
+        (2022, 41, 32.0),
+        (2023, 40, 30.0),
+        (2024, 42, 34.0),
+    ]
+    r = row(with_normals(weeks([*history, (2025, 41, 40.0)])), "2025-W41")
+    assert r["normal_years"] == 5
+    assert r["normal_pct"] == pytest.approx(32.0)
+
+
+def test_exact_week_wins_over_neighbours() -> None:
+    history = [(2020 + i, 41, 50.0) for i in range(5)] + [(2020 + i, 40, 0.0) for i in range(5)]
+    r = row(with_normals(weeks([*history, (2025, 41, 60.0)])), "2025-W41")
+    assert r["normal_pct"] == pytest.approx(50.0)
