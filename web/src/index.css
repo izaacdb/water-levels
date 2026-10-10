@@ -240,3 +240,165 @@ a {
   display: inline-block;
   margin: 4px 0 0;
 }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--hairline);
+}
+.tabs button {
+  border: 0;
+  background: none;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+}
+.tabs button[aria-pressed='true'] {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom-color: var(--ink);
+}
+.card-button {
+  all: unset;
+  display: block;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.card-button:hover .card,
+.card-button:focus-visible .card {
+  border-color: var(--accent);
+}
+.link-button {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  align-self: flex-start;
+}
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.detail h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+.detail h3,
+.rankings h3 {
+  font-size: 0.85rem;
+  margin: 14px 0 4px;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+}
+.facts dt {
+  color: var(--muted);
+}
+.facts dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.chart {
+  width: 100%;
+  height: 200px;
+}
+.chart-loading {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  background: var(--surface);
+  border-radius: 8px;
+}
+.chart-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0;
+}
+.rank-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: end;
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}
+.rank-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.rank-controls select,
+.dir-button {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 5px 8px;
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.dir-button {
+  cursor: pointer;
+}
+.rank-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.rank-row {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 4px;
+  border-bottom: 1px solid var(--hairline);
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+.rank-row:hover,
+.rank-row:focus-visible {
+  background: var(--surface);
+}
+.rank-index {
+  width: 2ch;
+  text-align: right;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.rank-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.rank-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rank-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.rank-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}

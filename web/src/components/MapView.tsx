@@ -27,6 +27,7 @@ interface Props {
   areas: Areas
   current: Current
   mode: Mode
+  onSelect?: (areaId: string) => void
 }
 
 type Geo = FeatureCollection<Geometry, Record<string, unknown>>
@@ -81,15 +82,15 @@ function popupNode(areaId: string, areas: Map<string, Areas[number]>, current: C
 }
 
 /** Europe map: country → river basin → reservoir, coloured by % full or vs normal. */
-export function MapView({ areas, current, mode }: Props) {
+export function MapView({ areas, current, mode, onSelect }: Props) {
   const container = useRef<HTMLDivElement>(null)
   const mapRef = useRef<MapLibreMap | null>(null)
   const geo = useRef<{ countries: Geo; rbd: Geo } | null>(null)
-  const latest = useRef({ areas, current })
+  const latest = useRef({ areas, current, onSelect })
   const [ready, setReady] = useState(false)
   useEffect(() => {
-    latest.current = { areas, current }
-  }, [areas, current])
+    latest.current = { areas, current, onSelect }
+  }, [areas, current, onSelect])
 
   useEffect(() => {
     if (!container.current) return
@@ -233,7 +234,11 @@ export function MapView({ areas, current, mode }: Props) {
       map.getCanvas().style.cursor = 'pointer'
     }
     map.on('mousemove', update)
-    map.on('click', update)
+    map.on('click', (e) => {
+      update(e)
+      const id = pick(e)
+      if (id && latest.current.current[id]) latest.current.onSelect?.(id)
+    })
     map.on('mouseout', () => popup.remove())
 
     return () => {
