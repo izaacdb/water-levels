@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import type { Area, CurrentEntry, SourceInfo } from '../contract'
 import { useSeries } from '../lib/data'
-import { countryName, formatDate, formatPct, sourceLabel } from '../lib/format'
+import { TOTAL_ONLY_NOTE, countryName, formatDate, formatPct, sourceLabel } from '../lib/format'
 import { pctColor } from '../lib/scale'
 import { flagNotes, normalLine } from '../lib/tooltip'
 import { TrendChart, YearOnYearChart } from './LazyCharts'
@@ -63,17 +63,22 @@ export function AreaDetail({ area, entry, sources, parent, onBack, onSelect, onC
       </p>
       <p className="normal">{normalLine(entry)}</p>
       {countryNote && <p className="status-note">{countryNote}</p>}
+      {area.totalOnly && <p className="status-note">{TOTAL_ONLY_NOTE}</p>}
       {flagNotes(entry).map((note) => (
         <p key={note} className="notice">
           {note}. Shown as published; left out of basin and country totals.
         </p>
       ))}
       <dl className="facts">
-        <dt>Capacity</dt>
-        <dd>{hm3.format(area.capacityHm3)} hm³</dd>
+        {!area.totalOnly && (
+          <>
+            <dt>Capacity</dt>
+            <dd>{hm3.format(area.capacityHm3)} hm³</dd>
+          </>
+        )}
         <dt>As of</dt>
         <dd>{formatDate(entry.asOf)}</dd>
-        {area.level !== 'reservoir' && (
+        {area.level !== 'reservoir' && !area.totalOnly && (
           <>
             <dt>Reporting</dt>
             <dd>

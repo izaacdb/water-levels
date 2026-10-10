@@ -25,6 +25,12 @@ describe('tooltipLines', () => {
     })
   })
 
+  it('calls a published total what it is rather than counting reservoirs (B25)', () => {
+    const t = tooltipLines({ ...area, totalOnly: true }, { ...entry, nReporting: 1, nTotal: 1 })
+    expect(t.lines).toContain('Published total, not per reservoir')
+    expect(t.lines.join(' ')).not.toMatch(/reservoirs reporting/)
+  })
+
   it('says insufficient history when there is no normal (E2)', () => {
     const t = tooltipLines(area, { ...entry, anomalyPts: null, normalPct: null, normalYears: 2 })
     expect(t.lines[1]).toBe('vs normal: insufficient history')

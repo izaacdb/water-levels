@@ -60,6 +60,9 @@ class Area(_Model):
     capacity_hm3: float
     # A reservoir's own source; a region or country lists every source behind it (B2′).
     source_ids: Annotated[list[str], Field(min_length=1)]
+    # B25: the figure is a source's published total (e.g. Scottish Water), with no
+    # per-reservoir figures or capacity behind it.
+    total_only: bool | None = None
     centroid: Annotated[list[float], Field(min_length=2, max_length=2)] | None = None
 
 

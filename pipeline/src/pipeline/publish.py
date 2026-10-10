@@ -63,6 +63,10 @@ def _reservoirs(registries: dict[str, pl.DataFrame], sources: list[SourceMeta]) 
                     if "source_id" in reg.columns
                     else pl.lit(default_source.get(country, ""))
                 ).alias("source_id"),
+                # B25: "total" rows are a source's published total, not a reservoir.
+                (pl.col("kind").fill_null("") if "kind" in reg.columns else pl.lit("")).alias(
+                    "kind"
+                ),
             )
             for country, reg in registries.items()
         ]
@@ -70,10 +74,16 @@ def _reservoirs(registries: dict[str, pl.DataFrame], sources: list[SourceMeta]) 
 
 
 def membership(reservoirs: pl.DataFrame) -> pl.DataFrame:
-    """Every (reservoir, area) pair: its country, its river basin district and itself."""
+    """Every (reservoir, area) pair: its country, its river basin district and itself.
+
+    B25: a published total belongs to its district only.
+    """
+    is_total = pl.col("kind") == "total" if "kind" in reservoirs.columns else pl.lit(False)
     return pl.concat(
         [
-            reservoirs.select("reservoir_id", pl.col(col).alias("area_id"))
+            reservoirs.filter(~is_total | (pl.lit(col) == "rbd_code")).select(
+                "reservoir_id", pl.col(col).alias("area_id")
+            )
             for col in ("country", "rbd_code", "reservoir_id")
         ]
     )
@@ -101,6 +111,11 @@ def area_catalogue(reservoirs: pl.DataFrame, rbds: pl.DataFrame) -> dict[str, Ar
     centres = reservoirs.group_by("rbd_code", "country").agg(
         pl.col("lon").mean().round(3), pl.col("lat").mean().round(3)
     )
+    totals_only = set(
+        reservoirs.group_by("rbd_code")
+        .agg((pl.col("kind") == "total").all().alias("all_totals"))
+        .filter("all_totals")["rbd_code"]
+    )
     for row in centres.iter_rows(named=True):
         located = row["lon"] is not None and row["lat"] is not None
         areas[row["rbd_code"]] = Area(
@@ -112,8 +127,9 @@ def area_catalogue(reservoirs: pl.DataFrame, rbds: pl.DataFrame) -> dict[str, Ar
             capacity_hm3=0,
             source_ids=sources[row["rbd_code"]],
             centroid=[row["lon"], row["lat"]] if located else None,
+            total_only=True if row["rbd_code"] in totals_only else None,
         )
-    for row in reservoirs.iter_rows(named=True):
+    for row in reservoirs.filter(pl.col("kind") != "total").iter_rows(named=True):
         located = row["lon"] is not None and row["lat"] is not None
         areas[row["reservoir_id"]] = Area(
             id=row["reservoir_id"],
@@ -237,8 +253,10 @@ def build_outputs(
     areas: list[Area] = []
     current: dict[str, CurrentEntry] = {}
     for row in latest.sort("area_id").iter_rows(named=True):
-        area = catalogue[row["area_id"]].model_copy(
-            update={"capacity_hm3": round(row["capacity_hm3"], 1)}
+        area = catalogue[row["area_id"]]
+        # A published total has no real capacity behind it (B25).
+        area = area.model_copy(
+            update={"capacity_hm3": 0 if area.total_only else round(row["capacity_hm3"], 1)}
         )
         areas.append(area)
         current[area.id] = CurrentEntry(

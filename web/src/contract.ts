@@ -62,6 +62,7 @@ capacityHm3: number
  * @minItems 1
  */
 sourceIds: [string, ...(string)[]]
+totalOnly?: (boolean | null)
 centroid?: ([number, number] | null)
 }
 /**

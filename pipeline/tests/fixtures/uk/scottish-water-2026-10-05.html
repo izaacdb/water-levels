@@ -1,0 +1,3601 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 9]><html lang="en" class="ie9 no-js"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '186164405409351',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v3.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- stops telephone number appearing as link on iOS -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- Favicon -->
+    <link rel="icon"
+          type="image/x-icon"
+          href="/sites/scottishwater/images/favicon.ico" />
+    <!-- Apple touch icon -->
+    <link rel="apple-touch-icon"
+          href="/sites/scottishwater/images/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="/sites/scottishwater/fonts/font_awesome/css/all.min.css" />
+    <link rel="stylesheet" href="/sites/scottishwater/css/mtc_style.min.css" media="screen, print">
+    <link rel="assetlinks.json" href="/.well-known/assetlinks.json" />
+
+            <link rel="stylesheet" href="/sites/shared/shared.css" media="screen, print">
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript">localStorage.clear();</script>
+
+    
+
+    <script src="/scripts/Sitecore.Foundation.Frameworks.min.js"></script>
+<script src="/scripts/Sitecore.Foundation.Theming.min.js"></script>
+
+    <link href="/styles/vendor.min.css" rel="stylesheet" media="screen, print"/>
+
+
+    
+    
+
+    <!-- Latest compiled and minified JavaScript -->
+    
+
+    <script src="/sites/scottishwater/js/plugins/mtc_cookies.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_easing.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_jquery.mobile.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_jquery_ui_touch_punch.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_lazy_loader.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_match_height.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_overlay.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_picturefill.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_placeholder.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_slick.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_waypoints.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_stickykit.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_responsive_tables.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_google_maps.js"></script>
+    <script src="/sites/scottishwater/js/plugins/mtc_number_arrows.js"></script>
+    <script src="/sites/scottishwater/js/datepicker.js"></script>
+    <script src="/sites/scottishwater/js/functions.js"></script>
+    <script src="/sites/scottishwater/js/script.js"></script>
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAHwmBrBKWvPAE3xo2g21u2d72eFm8gYV8&libraries=places&callback=initGoogleMaps"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!--Start Form Hosting Scripts-->
+    <script src=https://mktdplp102cdn.azureedge.net/public/latest/js/form-loader.js?v =1.84.2007></script>
+    <script src=https://mktdplp102cdn.azureedge.net/public/latest/js/ws-tracking.js?v =1.84.2007></script>
+    <!--End Form Hosting Scripts-->
+    <script type="text/javascript">
+        $(document).on('submit', '.formStyles', function () {
+            setTimeout(function () {
+                datepicker();
+            }, 5000);
+        });
+
+        /*Recite ME code*/
+        var serviceUrl = "//api.reciteme.com/asset/js?key=";
+        var serviceKey = "05e9679c427f27b3f7f2bd00a1415d25a6e9ce37";
+        var options = { "Parser": { "Html": { "skipConcatenation": { "selectors": [".mainMenu li a"] } } } };  // Options can be added as needed
+        var autoLoad = false;
+        var enableFragment = "#reciteEnable";
+        var loaded = [], frag = !1; window.location.hash === enableFragment && (frag = !0); function loadScript(c, b) { var a = document.createElement("script"); a.type = "text/javascript"; a.readyState ? a.onreadystatechange = function () { if ("loaded" == a.readyState || "complete" == a.readyState) a.onreadystatechange = null, void 0 != b && b() } : void 0 != b && (a.onload = function () { b() }); a.src = c; document.getElementsByTagName("head")[0].appendChild(a) } function _rc(c) { c += "="; for (var b = document.cookie.split(";"), a = 0; a < b.length; a++) { for (var d = b[a]; " " == d.charAt(0);)d = d.substring(1, d.length); if (0 == d.indexOf(c)) return d.substring(c.length, d.length) } return null } function loadService(c) { for (var b = serviceUrl + serviceKey, a = 0; a < loaded.length; a++)if (loaded[a] == b) return; loaded.push(b); loadScript(serviceUrl + serviceKey, function () { "function" === typeof _reciteLoaded && _reciteLoaded(); "function" == typeof c && c(); Recite.load(options); Recite.Event.subscribe("Recite:load", function () { Recite.enable() }) }) } "true" == _rc("Recite.Persist") && loadService(); if (autoLoad && "false" != _rc("Recite.Persist") || frag) document.addEventListener ? document.addEventListener("DOMContentLoaded", function (c) { loadService() }) : loadService();
+
+    </script>
+
+    <title>Water Resources - Scottish Water</title>
+
+
+
+<meta property="og:title" content="" />
+<meta property="og:image" content="" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="https://www.scottishwater.co.uk/Your-Home/Your-Water/Managing-Water-Resources/Scotlands-Water-Resource-Levels" />
+<meta property="og:type" content="" />
+<meta property="fb:app_id" content="193411214127451" />
+        <script>
+            (function (w, d, s, l, i) {
+                    w[l] = w[l] || []; w[l].push({
+                        'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-KXX9L5K');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google tag (gtag.js) -->
+        <!-- Google tag (gtag.js) -->
+        <script async src=https://www.googletagmanager.com/gtag/js?id=G-1Q5DWR09VV> </script>
+        <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-1Q5DWR09VV');</script>
+        <!--Clarity Analytics-->
+        <script type="text/javascript">(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, "clarity", "script", "n66d2qf8rc");</script>
+ 
+    
+    
+<meta name="VIcurrentDateTime" content="639272595195802555" />
+<meta name="VirtualFolder" content="/" />
+<script type="text/javascript" src="/layouts/system/VisitorIdentification.js"></script>
+
+</head>
+<body data-site="scottishwater" data-maps-api-key="AIzaSyAHwmBrBKWvPAE3xo2g21u2d72eFm8gYV8" class="scottishwater"> 
+            <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXX9L5K"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=G-1Q5DWR09VV"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+
+    
+
+
+
+<div class="siteWrapper">
+    <div class="locationBar js_locationBar">
+    <div class="innerWrap">
+        <div class="locationFoundWrap js_locationFoundWrap">
+            <div class="locationBarContent">
+                <h4>It looks like you’re in , is this correct?</h4>
+
+                    <p>Your location helps us personalise the site for you - showing you what’s happening in your area</p>
+
+            </div> <!-- .locationBarContent -->
+            <div class="buttonWrap">
+                <a href="" class="button confirmLocationButton js_closeButton">Yes, correct!</a>
+                <a href="" class="button changeLocationButton js_changeLocationButton">No, change location</a>
+            </div> <!-- .buttonWrap -->
+        </div> <!-- .locationFoundWrap -->
+        <div class="changeLocationWrap js_changeLocationWrap">
+            <div class="locationBarContent">
+                <p>Enter your postcode to track the status of supply in your area, see local news quickly and more...</p>
+            </div> <!-- .locationBarContent -->
+            <form action="#" class="js_postcodeLookupForm">
+                <div class="row noBorder">
+                    <div class="inputWrap">
+                        <input type="text" class="text" placeholder="Enter postcode">
+                    </div> <!-- .inputWrap -->
+                    <button type="submit" class="button personaliseButton js_personaliseButton">
+                        Personalise <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div> <!-- .row -->
+            </form>
+        </div> <!-- .changeLocationWrap -->
+        <a href="" class="closeButton js_closeButton">X <span class="mobileHide">Close</span></a>
+    </div> <!-- .innerWrap -->
+</div> <!-- .locationBar -->
+    <div id="header">
+    <div class="wrapper">
+        
+
+<a href="/" class="logo">
+    <img src="/-/media/scottishwater/images/project-files/images/logo/logo.png?bc=Black&amp;as=0&amp;h=218&amp;iar=0&amp;w=472&amp;hash=82CBE2665167C23F8F555E72AFEEE32B" alt="Scottish Water logo" DisableWebEdit="False" />
+</a>
+        <div class="headerContentWrap">
+            
+<div class="locationWrap">
+        <span>
+            <span class="hide">Showing </span>
+            updates for <strong>
+                Scotland
+            </strong>
+        </span>
+        <a href="" tabindex="2">Show local updates</a>
+</div> <!-- .locationWrap -->
+            <div class="pull-right">
+
+                
+
+<div class="secondaryMenu js_secondaryMenu">
+    <nav>
+    <script>
+        $(document).ready(function () {
+            $(".navlink").each(function () {
+                if ($(this).parents('.mobileSecondMenuWrap').length) {
+                    $(this).prop('tabindex', '4');
+                }
+                else {
+                    $(this).prop('tabindex', '3');
+                }
+            });
+
+           
+        });
+    </script>
+    <ul>
+                <li class="" id="navli">
+                <a href="/about-us/careers" target="" class="navlink">
+                    Careers
+                </a>
+                </li>
+                <li class="" id="navli">
+                <a href="/make-a-payment" target="" class="navlink">
+                    Pay Invoice
+                </a>
+                </li>
+                <li class="" id="navli">
+                <a href="/help-and-resources/contact-us" target="" class="navlink">
+                    Contact Us
+                </a>
+                </li>
+        <li>
+
+            <a id="reciteMeD15C7207" class="reciteMestyle navlink" href=""  tabindex="3"  data-id="navlink"><i class="fa-solid fa-universal-access"></i> Accessibility Toolbar</a>
+        </li>
+    </ul>
+</nav>
+</div> <!-- .secondaryMenu -->
+
+<div class="searchWrap js_withPredictiveSearch js_predictiveAutoCompleteDesktop">
+    <form action="/search" novalidate="novalidate">
+        <div class="row inlineIconButton">
+            <input type="text" class="text js_predictiveSearchInput" name="query" placeholder="What are you looking for?" value="" title="What are you looking for?" aria-label="Search our website">
+
+            <button type="submit" aria-label="Submit search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div> <!-- .row -->
+    </form>
+
+    <div class="predictiveSearchWrap js_predictiveSearchWrap">
+        <div class="predictiveResultsWrap js_predictiveResultsWrap">
+            <span>Popular results for "<span class="searchTerm js_searchTerm"></span>"</span>
+        </div> <!-- .predictiveResultsWrap -->
+
+        <a href="/search" class="viewAllresults js_viewAllresults">View all results</a>
+    </div> <!-- .predictiveSearchWrap -->
+</div>
+
+
+
+            </div>
+            
+        </div> <!-- .headerContentWrap -->       
+            
+<div class="mobileMenuButtonsWrap">
+    <span class="mobileButton js_mobileButton menu js_menu" tabindex="3">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+        Menu
+    </span>
+        <span class="mobileButton js_mobileButton support js_support" tabindex="4">
+            <i class="fa fa-question-circle" aria-hidden="true"></i>
+            Help &amp; Support
+        </span>
+
+    
+</div> <!-- .mobileMenuButtons -->
+
+<div class="flyoutWrap js_flyoutWrap">
+
+    <div class="mainMenuWrap js_mainMenuWrap">
+    <nav>
+            <ul class="mainMenu">
+                    <li class="hasChildren" aria-keyshortcuts="Press Escape to toggle the &#39;Your Home&#39; menu" >
+
+
+                        <a href="/your-home" target="" tabindex="3">
+                            Your Home<span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown js_dropdown">
+                            <div class="innerWrap">
+                                <h4>
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    <a href="/your-home">
+                                        Your Home
+                                    </a>
+                                </h4>
+
+                                    <ul>
+                                                <li>
+                                                    <a href="/your-home/your-water" target="">
+                                                        Your Water
+                                                    </a>
+                                                    <p>Follow your water from source to tap, and learn about your pipework responsibilities, or how to connect to our network</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/your-home/your-waste-water" target="">
+                                                        Your Waste Water
+                                                    </a>
+                                                    <p>Find out more about our waste water services such as; septic tanks, sewage pollution and sewer flooding.</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/your-home/your-charges" target="">
+                                                        Your Charges
+                                                    </a>
+                                                    <p>Check here for a detailed breakdown of your water and waste water charges</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/your-home/save-water" target="">
+                                                        Water is Always Worth Saving
+                                                    </a>
+                                                    <p>Help protect a precious resource and make small changes to save water and energy</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/your-home/campaigns" target="">
+                                                        Campaigns
+                                                    </a>
+                                                    <p>Help keep Scotland’s water cycle running smoothly and stay safe with our simple how-to guides</p>
+                                                </li>
+                                                  <li class="imageLink link-1">
+                                                    <a href="/your-home/save-water/how-much-water-do-you-use" target="">
+                                                        Water Usage Calculator
+                                                    </a>
+                                                    <p>Calculate how much water and energy you use daily around your home</p>
+                                                </li>
+                                                  <li class="imageLink link-2">
+                                                    <a href="/your-home/your-water/water-quality/water-quality" target="">
+                                                        Check the quality of your water
+                                                    </a>
+                                                    <p>Enter your post code to find out more about water quality in your area</p>
+                                                </li>
+                                    </ul>
+                                    <div class="dropdownCTAWrap">
+                                                <div class="dropdownCTA">
+                                                    <a href="/your-home/save-water/how-much-water-do-you-use" target="">
+<img src="/-/media/scottishwater/images/customers/childwithglass285x285.png" alt="Child with glass" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            Water Usage Calculator
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                                <div class="dropdownCTA">
+                                                    <a href="/your-home/your-water/water-quality/water-quality" target="">
+<img src="/-/media/scottishwater/images/customer-interactions/191018watereffpic285x285flip.png" alt="Water wise" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            Check the quality of your water
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                    </div> <!-- .dropdownCTAWrap -->
+                            </div> <!-- .innerWrap -->
+                        </div> <!-- .dropdown -->
+                    </li>
+                    <li class="hasChildren" aria-keyshortcuts="Press Escape to toggle the &#39;In Your Area&#39; menu" >
+
+
+                        <a href="/in-your-area" target="" tabindex="3">
+                            In Your Area<span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown js_dropdown">
+                            <div class="innerWrap">
+                                <h4>
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    <a href="/in-your-area">
+                                        In Your Area
+                                    </a>
+                                </h4>
+
+                                    <ul>
+                                                <li>
+                                                    <a href="/in-your-area/acm" target="">
+                                                        Community Events
+                                                    </a>
+                                                    <p>Details of our latest community events</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/in-your-area/keeping-you-informed" target="">
+                                                        Keeping You Informed
+                                                    </a>
+                                                    <p>We’ll keep you informed when our work affects you</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/in-your-area/latest-in-your-area" target="">
+                                                        Latest In Your Area
+                                                    </a>
+                                                    <p>Our interactive map gives information about supply issues and current investment projects across Scotland</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/in-your-area/visiting-our-reservoirs" target="">
+                                                        Visiting our Reservoirs
+                                                    </a>
+                                                    <p>We look after around 300 of Scotland’s reservoirs that we welcome you to come and enjoy</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/in-your-area/volunteering-in-your-area" target="">
+                                                        Volunteering in Your Area
+                                                    </a>
+                                                    <p>Our employee volunteering programme can support you through education, conservation and community activities</p>
+                                                </li>
+                                                  <li class="imageLink link-1">
+                                                    <a href="/in-your-area/acm/acm" target="">
+                                                        Annual Consultative Meeting
+                                                    </a>
+                                                    <p>Find out about all the latest investments and supply updates in your area</p>
+                                                </li>
+                                                  <li class="imageLink link-2">
+                                                    <a href="/in-your-area/latest-in-your-area" target="">
+                                                        Current Service Updates
+                                                    </a>
+                                                    <p>Check our interactive map or use your post code for service updates in your area</p>
+                                                </li>
+                                    </ul>
+                                    <div class="dropdownCTAWrap">
+                                                <div class="dropdownCTA">
+                                                    <a href="/in-your-area/acm/acm" target="">
+<img src="/-/media/scottishwater/images/community-events/020822_acm2022_285x285.png" alt="ACM" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            Annual Consultative Meeting
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                                <div class="dropdownCTA">
+                                                    <a href="/in-your-area/latest-in-your-area" target="">
+<img src="/-/media/scottishwater/images/field-operations/240718serviceupdates285x285.jpg" alt="Field Operations" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            Current Service Updates
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                    </div> <!-- .dropdownCTAWrap -->
+                            </div> <!-- .innerWrap -->
+                        </div> <!-- .dropdown -->
+                    </li>
+                    <li class="hasChildren" aria-keyshortcuts="Press Escape to toggle the &#39;Business &amp; Developers&#39; menu" >
+
+
+                        <a href="/business-and-developers" target="" tabindex="3">
+                            Business &amp; Developers<span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown js_dropdown">
+                            <div class="innerWrap">
+                                <h4>
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    <a href="/business-and-developers">
+                                        Business &amp; Developers
+                                    </a>
+                                </h4>
+
+                                    <ul>
+                                                <li>
+                                                    <a href="/business-and-developers/business-customers" target="">
+                                                        Business Customers
+                                                    </a>
+                                                    <p>Our services as a wholesale supplier</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/business-and-developers/byelaws-and-trade-effluent" target="">
+                                                        Byelaws and Trade Effluent
+                                                    </a>
+                                                    <p>Understand your water and waste water responsibilities under the law</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/business-and-developers/new-connecting-to-our-network" target="">
+                                                        Connecting to Our Network
+                                                    </a>
+                                                    <p>Get connected to the water and waste water network</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/business-and-developers/licensed-providers" target="">
+                                                        Licensed Providers
+                                                    </a>
+                                                    <p>Our services for Licensed Providers (LPs) </p>
+                                                </li>
+                                                <li>
+                                                    <a href="/business-and-developers/metering-services" target="">
+                                                        Metering Services
+                                                    </a>
+                                                    <p>Our products and services to help you become more water efficient</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/business-and-developers/development-services" target="">
+                                                        Development Services
+                                                    </a>
+                                                    <p>Access our Readiness Indicator and customer portal where you can submit &amp; track applications to connect to our network.</p>
+                                                </li>
+                                                  <li class="imageLink link-1">
+                                                    <a href="/business-and-developers/scientific-services" target="">
+                                                        Scientific Services
+                                                    </a>
+                                                    <p>We offer a wide range of high quality services</p>
+                                                </li>
+                                    </ul>
+                                    <div class="dropdownCTAWrap">
+                                                <div class="dropdownCTA">
+                                                    <a href="/business-and-developers/scientific-services" target="">
+<img src="/-/media/scottishwater/images/scientific-services/240718scientificservices285x285.jpg" alt="Scientific Services" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            Scientific Services
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                    </div> <!-- .dropdownCTAWrap -->
+                            </div> <!-- .innerWrap -->
+                        </div> <!-- .dropdown -->
+                    </li>
+                    <li class="hasChildren" aria-keyshortcuts="Press Escape to toggle the &#39;About Us&#39; menu" >
+
+
+                        <a href="/about-us" target="" tabindex="3">
+                            About Us<span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown js_dropdown">
+                            <div class="innerWrap">
+                                <h4>
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    <a href="/about-us">
+                                        About Us
+                                    </a>
+                                </h4>
+
+                                    <ul>
+                                                <li>
+                                                    <a href="/about-us/diversity-and-inclusion" target="">
+                                                        Diversity &amp; Inclusion
+                                                    </a>
+                                                    <p>How we embrace diversity and encourage inclusion at Scottish Water</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us/energy-and-sustainability" target="">
+                                                        Energy and Sustainability
+                                                    </a>
+                                                    <p>Our approach to energy management, development and sustainability</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us/scottish-water-horizons" target="">
+                                                        Scottish Water Horizons
+                                                    </a>
+                                                    <p>Visit the pages of Scottish Water Horizons</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us/what-we-do" target="">
+                                                        What We Do
+                                                    </a>
+                                                    <p>Our customers are at the heart of our role and responsibilities to deliver the highest quality service across Scotland</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us/who-we-are" target="">
+                                                        Who We Are
+                                                    </a>
+                                                    <p>Meet the team at Scottish Water and discover more about our Investment Programme</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us/procurement-and-supply-chain" target="">
+                                                        Procurement &amp; Supply Chain
+                                                    </a>
+                                                    <p>Find out about our industry leading procurement process</p>
+                                                </li>
+                                                  <li class="imageLink link-1">
+                                                    <a href="/about-us/careers" target="">
+                                                        Careers
+                                                    </a>
+                                                    <p></p>
+                                                </li>
+                                                  <li class="imageLink link-2">
+                                                    <a href="/about-us/news-and-views" target="">
+                                                        News &amp; Views
+                                                    </a>
+                                                    <p>Keep up-to-date with all the latest news from Scottish Water</p>
+                                                </li>
+                                    </ul>
+                                    <div class="dropdownCTAWrap">
+                                                <div class="dropdownCTA">
+                                                    <a href="/about-us/careers" target="">
+<img src="/-/media/scottishwater/images/careers/250319graduatesinmeeting285x285.jpg" alt="Graduates in meeting" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            Careers
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                                <div class="dropdownCTA">
+                                                    <a href="/about-us/news-and-views" target="">
+<img src="/-/media/scottishwater/images/news/news-archive/2018-news-images/07-july/240718filming285x285.jpg" alt="Filming" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            News &amp; Views
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                    </div> <!-- .dropdownCTAWrap -->
+                            </div> <!-- .innerWrap -->
+                        </div> <!-- .dropdown -->
+                    </li>
+                    <li class="hasChildren" aria-keyshortcuts="Press Escape to toggle the &#39;Help &amp; Resources&#39; menu" >
+
+
+                        <a href="/help-and-resources" target="" tabindex="3">
+                            Help &amp; Resources<span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown js_dropdown">
+                            <div class="innerWrap">
+                                <h4>
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    <a href="/help-and-resources">
+                                        Help &amp; Resources
+                                    </a>
+                                </h4>
+
+                                    <ul>
+                                                <li>
+                                                    <a href="/help-and-resources/access-to-information" target="">
+                                                        Access to Information
+                                                    </a>
+                                                    <p>Access our publication scheme or request information</p>
+                                                </li>
+                                                <li>
+                                                    <a href="" target="">
+                                                        Coronavirus Information
+                                                    </a>
+                                                    <p>Coronavirus Information</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/in-your-area/latest-in-your-area" target="">
+                                                        Current Service Updates
+                                                    </a>
+                                                    <p>Find out about maintenance work which may affect your supply</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/help-and-resources/document-hub" target="">
+                                                        Document Hub
+                                                    </a>
+                                                    <p>Key information about our work, our performance and public sector policies</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/help-and-resources/faqs" target="">
+                                                        FAQs
+                                                    </a>
+                                                    <p>Check our Our Frequently Asked Questions for any issues first</p>
+                                                </li>
+                                                <li>
+                                                    <a href="/help-and-resources/video-library" target="">
+                                                        Video Library
+                                                    </a>
+                                                    <p>Watch our latest videos</p>
+                                                </li>
+                                                  <li class="imageLink link-1">
+                                                    <a href="/help-and-resources/contact-us" target="">
+                                                        Contact Us
+                                                    </a>
+                                                    <p></p>
+                                                </li>
+                                                  <li class="imageLink link-2">
+                                                    <a href="/help-and-resources/education" target="">
+                                                        Education
+                                                    </a>
+                                                    <p>We offer a great range of educational resources to support Scotland&#39;s school curriculum</p>
+                                                </li>
+                                    </ul>
+                                    <div class="dropdownCTAWrap">
+                                                <div class="dropdownCTA">
+                                                    <a href="/help-and-resources/contact-us" target="">
+<img src="/-/media/scottishwater/images/our-people/250718contactcentreadvisor285x285.jpg" alt="Contact Centre Advisor" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            Contact Us
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                                <div class="dropdownCTA">
+                                                    <a href="/help-and-resources/education" target="">
+<img src="/-/media/scottishwater/images/volunteering/250718volunteeringatschool285x285.jpg" alt="Volunteering at school" style=max-width:none;/>
+
+
+                                                        <h4 class="ctaTitle">
+                                                            Education
+                                                        </h4>
+                                                    </a>
+                                                </div> <!-- .dropdownCTA -->
+                                    </div> <!-- .dropdownCTAWrap -->
+                            </div> <!-- .innerWrap -->
+                        </div> <!-- .dropdown -->
+                    </li>
+            </ul>
+    </nav>
+</div> <!-- .mainMenuWrap -->
+
+    
+
+</div> <!-- .flyoutWrap -->
+
+
+
+<div class="mobileSecondMenuWrap js_mobileSecondMenuWrap">
+    <nav>
+    <script>
+        $(document).ready(function () {
+            $(".navlink").each(function () {
+                if ($(this).parents('.mobileSecondMenuWrap').length) {
+                    $(this).prop('tabindex', '4');
+                }
+                else {
+                    $(this).prop('tabindex', '3');
+                }
+            });
+
+           
+        });
+    </script>
+    <ul>
+                <li class="" id="navli">
+                <a href="/help-and-resources/contact-us/contacting-us" target="" class="navlink">
+                    Notify us about an issue
+                </a>
+                </li>
+                <li class="" id="navli">
+                <a href="/help-and-resources/document-hub/factsheets-and-leaflets" target="" class="navlink">
+                    Factsheets &amp; leaflets
+                </a>
+                </li>
+                <li class="" id="navli">
+                <a href="/about-us/careers" target="" class="navlink">
+                    Careers
+                </a>
+                </li>
+                <li class="" id="navli">
+                <a href="/in-your-area/latest-in-your-area" target="" class="navlink">
+                    Current Service Updates
+                </a>
+                </li>
+                <li class="" id="navli">
+                <a href="/help-and-resources/contact-us/contacting-us" target="" class="navlink">
+                    Contact Us
+                </a>
+                </li>
+        <li>
+
+            <a id="reciteMe6F603775" class="reciteMestyle navlink" href=""  tabindex="3"  data-id="navlink"><i class="fa-solid fa-universal-access"></i> Accessibility Toolbar</a>
+        </li>
+    </ul>
+</nav>
+</div><!-- .mobileSecondMenuWrap -->
+    </div> <!-- .wrapper -->    
+</div> <!-- #header -->
+
+    
+
+
+    <div class="siteInnerWrapper">
+        <div id="content" role="main">
+            <div class="titleWrap">
+    <div class="innerWrap">    
+    <div class="breadcrumbWrap">
+    <nav>
+        <ul class="breadcrumbs">
+                <li class="">
+                    <a href="/">Homepage</a>
+                </li>
+                <li class="">
+                    <a href="/your-home">Your Home</a>
+                </li>
+                <li class="">
+                    <a href="/your-home/your-water">Your Water</a>
+                </li>
+                <li class="">
+                    <a href="/your-home/your-water/managing-water-resources">Managing Water Resources</a>
+                </li>
+                <li class="active">
+                    <a href="/your-home/your-water/managing-water-resources/scotlands-water-resource-levels">Scotland&#39;s Water Resource Levels</a>
+                </li>
+        </ul>
+    </nav>
+</div>
+
+    
+
+  <h1>
+    Scotland&#39;s Water Resource Levels
+  </h1>
+
+
+    
+
+
+    <div class="shareWrap">
+        <a class="sharePage js_sharePage st-custom-button js_killClick"
+           data-network="sharethis"
+           data-title="Scotland&#39;s Water Resource Levels"
+           data-description=""
+           data-image="https://app-sw-sitecore-prod-cd.azurewebsites.net/-/media/scottishwater/images/reservoirs/reservoir-images-april-2022/260422gladhouseimgsmall315x177.png?h=177&w=315"
+           href="#">
+           <i class="fa fa-share-alt" aria-hidden="true"></i>
+           <span>Share page</span>
+        </a>
+    </div>
+
+</div>
+</div>
+<div class="fullWidthWrap">
+    
+</div> <!-- .inYourAreaWrap -->
+<div class="contentPageWrap">
+    
+
+<div class="contentSidebar js_contentSidebar sidebarAtMobile js_sidebarAtMobile">
+    <div class="fixedSidebar">
+        <div class="sidebarWrap">
+            <h3>
+                Your Home
+            </h3>
+            <nav>
+
+
+<ul>
+    <li class="active open">
+      <a href="/your-home/your-water" target="">
+        Your Water
+      </a>
+
+
+<ul>
+    <li class="">
+      <a href="/your-home/your-water/connecting-your-home" target="">
+        Connecting Your Home
+      </a>
+    </li>
+    <li class="">
+      <a href="/your-home/your-water/leakage" target="">
+        Leaks and Leakage
+      </a>
+    </li>
+    <li class="active open">
+      <a href="/your-home/your-water/managing-water-resources" target="">
+        Managing Water Resources
+      </a>
+
+
+<ul>
+    <li class="active">
+      <a href="/your-home/your-water/managing-water-resources/scotlands-water-resource-levels" target="">
+        Scotland&#39;s Water Resource Levels
+      </a>
+    </li>
+</ul>    </li>
+    <li class="">
+      <a href="/your-home/your-water/pipework-responsibilities" target="">
+        Pipework Responsibilities
+      </a>
+    </li>
+    <li class="">
+      <a href="/your-home/your-water/private-water-supplies" target="">
+        Private Water Supplies
+      </a>
+    </li>
+    <li class="">
+      <a href="/your-home/your-water/water-pressure" target="">
+        Water pressure
+      </a>
+    </li>
+    <li class="">
+      <a href="/your-home/your-water/water-quality" target="">
+        Water Quality
+      </a>
+    </li>
+    <li class="">
+      <a href="/your-home/your-water/lead-and-your-water" target="">
+        Lead Water Pipes
+      </a>
+    </li>
+</ul>    </li>
+    <li class="">
+      <a href="/your-home/campaigns" target="">
+        Campaigns
+      </a>
+    </li>
+    <li class="">
+      <a href="/your-home/your-waste-water" target="">
+        Your Waste Water
+      </a>
+    </li>
+    <li class="">
+      <a href="/your-home/your-charges" target="">
+        Your Charges
+      </a>
+    </li>
+    <li class="">
+      <a href="/your-home/save-water" target="">
+        Water is Always Worth Saving
+      </a>
+    </li>
+</ul>            </nav>
+        </div>
+    </div>
+</div>
+
+    <div class="contentWrap">
+        
+
+
+<div class="videoAndCtaWrap">
+
+    <div class="imageWrap">
+
+<img src="/-/media/scottishwater/images/reservoirs/reservoir-images-april-2022/260422carronvalleyimg1775x410.png?bc=Black&amp;as=0&amp;h=410&amp;iar=0&amp;w=775&amp;hash=776BDCD3664A22A24D1C194A15F2F262" alt="Carron Valley" DisableWebEdit="False" />
+    </div> <!-- .imageWrap -->
+
+    <div class="ctaContent">
+        <h4>Scotland&#39;s Water Resources</h4>
+        <p>Scottish Water reports the raw water available in storage across the country on a weekly basis, throughout the year, whatever the weather.</p>
+    </div> <!-- .ctaContent -->
+
+</div> <!-- .videoAndCtaWrap -->
+
+<div class="pageContent">
+    
+    <h2>Average levels Scotland-wide</h2>
+<table class="telerik-reTable-4">
+    <tbody>
+        <tr class="telerik-reTableHeaderRow-4">
+            <td style="text-align: center;" class="telerik-reTableHeaderFirstCol-4"><span style="font-family: arial;">5 October 2026</span></td>
+            <td style="text-align: center;" class="telerik-reTableHeaderOddCol-4"><span style="font-family: arial;"> Current</span></td>
+            <td style="text-align: center;" class="telerik-reTableHeaderEvenCol-4"><span style="font-family: arial;">Change from last week </span></td>
+            <td style="text-align: center;" class="telerik-reTableHeaderLastCol-4"><span style="font-family: arial;">Difference from average </span></td>
+        </tr>
+        <tr class="telerik-reTableFooterRow-4">
+            <td style="text-align: center;" class="telerik-reTableFooterFirstCol-4"><span style="font-family: arial;"> Total</span></td>
+            <td style="text-align: center;" class="telerik-reTableFooterOddCol-4"><span style="font-family: arial;"> 79%</span></td>
+            <td style="text-align: center;" class="telerik-reTableFooterEvenCol-4"><span style="font-family: arial;">2%</span></td>
+            <td style="text-align: center;" class="telerik-reTableFooterLastCol-4"><span style="font-family: arial;"> -4%</span></td>
+        </tr>
+    </tbody>
+</table>
+</div> <!-- .pageContent -->
+
+
+<div class="contentAndCtaWrap ">
+    
+
+<div class="pageContent">
+    
+    <h2>Average levels across regional areas</h2>
+<table style="width: 372.444px; height: 154.222px;" class="telerik-reTable-4">
+    <tbody>
+        <tr class="telerik-reTableHeaderRow-4">
+            <td class="telerik-reTableHeaderFirstCol-4"><span style="font-family: arial; font-size: 16px;">Area</span></td>
+            <td style="text-align: center;" class="telerik-reTableHeaderOddCol-4"><span style="font-family: arial; font-size: 16px;"> Current</span></td>
+            <td style="text-align: center;" class="telerik-reTableHeaderEvenCol-4"><span style="font-family: arial; font-size: 16px;"> Change from last<br />
+            week</span></td>
+            <td style="text-align: center;" class="telerik-reTableHeaderLastCol-4">
+            <p><span style="font-family: arial; font-size: 16px;"> Difference from<br />
+            </span><span style="font-size: medium; font-family: arial;">average</span></p>
+            </td>
+        </tr>
+        <tr class="telerik-reTableOddRow-4">
+            <td style="text-align: center;" class="telerik-reTableFirstCol-4"><span style="font-family: arial; font-size: 16px;"> South</span></td>
+            <td style="text-align: center;" class="telerik-reTableOddCol-4"><span style="font-family: arial; font-size: 16px;">75%</span></td>
+            <td style="text-align: center;" class="telerik-reTableEvenCol-4"><span style="font-family: arial; font-size: 16px;">3%</span></td>
+            <td style="text-align: center;" class="telerik-reTableLastCol-4"><span style="font-family: arial; font-size: 16px;">-7%</span></td>
+        </tr>
+        <tr class="telerik-reTableEvenRow-4">
+            <td style="text-align: center;" class="telerik-reTableFirstCol-4"><span style="font-family: arial; font-size: 16px;"> West</span></td>
+            <td style="text-align: center;" class="telerik-reTableOddCol-4"><span style="font-family: arial; font-size: 16px;">83%</span></td>
+            <td style="text-align: center;" class="telerik-reTableEvenCol-4"><span style="font-family: arial; font-size: 16px;">3%</span></td>
+            <td style="text-align: center;" class="telerik-reTableLastCol-4"><span style="font-family: arial; font-size: 16px;"> -1%</span></td>
+        </tr>
+        <tr class="telerik-reTableOddRow-4">
+            <td style="text-align: center;" class="telerik-reTableFirstCol-4"><span style="font-family: arial; font-size: 16px;"> East</span></td>
+            <td style="text-align: center;" class="telerik-reTableOddCol-4"><span style="font-family: arial; font-size: 16px;"> 71%</span></td>
+            <td style="text-align: center;" class="telerik-reTableEvenCol-4"><span style="font-family: arial; font-size: 16px;">0%</span></td>
+            <td style="text-align: center;" class="telerik-reTableLastCol-4"><span style="font-family: arial; font-size: 16px;"> -9% </span></td>
+        </tr>
+        <tr class="telerik-reTableFooterRow-4">
+            <td style="text-align: center;" class="telerik-reTableFooterFirstCol-4"><span style="text-align: center; font-family: arial; font-size: 16px; color: #666666;"> North</span></td>
+            <td style="text-align: center;" class="telerik-reTableFooterOddCol-4">
+            <p style="text-align: center;"><span style="text-align: center; font-family: arial; font-size: 16px; color: #666666;"> 84%</span></p>
+            </td>
+            <td style="text-align: center;" class="telerik-reTableFooterEvenCol-4"><span style="text-align: center; font-family: arial; font-size: 16px; color: #666666;">0%</span><span style="font-family: arial; font-size: 16px;"><br />
+            </span></td>
+            <td style="text-align: center;" class="telerik-reTableFooterLastCol-4"><span style="text-align: center; font-family: arial; font-size: 16px; color: #666666;">-1% </span></td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-family: arial;">
+<style type="text/css" id="telerik-reTable-4">
+    .telerik-reTable-4 {
+    border-collapse: collapse;
+    border: solid 0px;
+    font-family: Tahoma;
+    }
+    .telerik-reTable-4 tr.telerik-reTableHeaderRow-4 {
+    border-width: 1.0pt 1.0pt 3.0pt 1.0pt;
+    margin-top: 0in;
+    margin-right: 0in;
+    margin-bottom: 10.0pt;
+    margin-left: 0in;
+    line-height: 115%;
+    font-size: 11.0pt;
+    font-family: "Calibri", "sans-serif";
+    width: 119.7pt;
+    background: #4F81BD;
+    padding: 0in 5.4pt 0in 5.4pt;
+    color: #FFFFFF;
+    }
+    .telerik-reTable-4 td.telerik-reTableHeaderFirstCol-4 {
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 td.telerik-reTableHeaderLastCol-4 {
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 td.telerik-reTableHeaderOddCol-4 {
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 td.telerik-reTableHeaderEvenCol-4 {
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 tr.telerik-reTableOddRow-4 {
+    border-width: 1pt;
+    color: #666666;
+    font-size: 10pt;
+    vertical-align: top;
+    border-bottom-style: solid;
+    border-bottom-color: #4F81BD;
+    }
+    .telerik-reTable-4 tr.telerik-reTableEvenRow-4 {
+    color: #666666;
+    font-size: 10pt;
+    vertical-align: top;
+    }
+    .telerik-reTable-4 td.telerik-reTableFirstCol-4 {
+    border-width: 1pt;
+    border-color: #4F81BD;
+    padding: 0in 5.4pt 0in 5.4pt;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    }
+    .telerik-reTable-4 td.telerik-reTableLastCol-4 {
+    border-width: 1pt;
+    border-color: #4F81BD;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 td.telerik-reTableOddCol-4 {
+    border-width: 1pt;
+    border-color: #4F81BD;
+    padding: 0in 5.4pt 0in 5.4pt;
+    border-bottom-style: solid;
+    }
+    .telerik-reTable-4 td.telerik-reTableEvenCol-4 {
+    border-width: 1pt;
+    border-color: #4F81BD;
+    padding: 0in 5.4pt 0in 5.4pt;
+    border-bottom-style: solid;
+    }
+    .telerik-reTable-4 tr.telerik-reTableFooterRow-4 {
+    color: #355C8C;
+    background-color: #FFFFFF;
+    font-size: 10pt;
+    vertical-align: top;
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 td.telerik-reTableFooterFirstCol-4 {
+    border-width: 1pt;
+    border-color: #4F81BD;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 td.telerik-reTableFooterLastCol-4 {
+    border-width: 1pt;
+    border-color: #4F81BD;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 td.telerik-reTableFooterOddCol-4 {
+    border-width: 1pt;
+    border-color: #4F81BD;
+    border-bottom-style: solid;
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+    .telerik-reTable-4 td.telerik-reTableFooterEvenCol-4 {
+    border-width: 1pt;
+    border-color: #4F81BD;
+    border-bottom-style: solid;
+    padding: 0in 5.4pt 0in 5.4pt;
+    }
+</style>
+</span>
+</div> <!-- .pageContent -->
+    
+
+    <div class="ctaWrap">
+        <h3>Regional Areas Map</h3>
+        <p><p>Use this map to view the four regional areas</p></p>
+        <a class="button hasIcon" target="_blank" rel="noopener noreferrer" href="/-/media/scottishwater/document-hub/your-home/water-efficiency/290722reservoirlevelsmap.pdf">Download here
+        <i class="fa fa-download" aria-hidden="true"></i>
+        </a>
+    </div> <!-- .ctaWrap -->
+
+</div> <!-- .contentAndCtaWrap -->
+
+<div class="pageContent">
+    
+    <p>We abstract water from 385 different water resources across the country ranging from very large reservoirs to very small river intakes so it is important we know how much raw water is stored in any source at any time of the year. <br />
+<br />
+The levels described on this page represent the average level in storage for the whole of Scotland, and the average level for the 4 regional areas represented on the map. The figures provided are valid for the date shown. The information describes the current average storage level, the change from the previous week and the difference from the average for the time of year.  <br />
+<br />
+The nature of the weather we experience in Scotland brings different conditions, in different parts of the country, at different times of the year. Very often the general volume of water available will be different between regions, so the information provided in the tables gives a more local position to where you live. That being said, individual sources in your area or across Scotland may be high or low for many different reasons.<br />
+<br />
+Water is a precious natural resource, and while we plan to provide a resilient supply both now and in the future we encourage all our customers to only use what they need and use water efficiently within their homes and businesses. For more information, please visit the links below.</p>
+</div> <!-- .pageContent -->
+<div class="discoverMoreWrap">
+    <h3>Discover More</h3>
+
+    <div class="pageCols">
+        <div class="colGroup">
+            
+
+<div class="pageCol js_pageCol desktopCol_4 tabletCol_4 tabletSmallCol_6 mobileCol_12">
+    
+    
+
+
+
+<div class="innerWrap">
+    <div class="imageWrap">
+            <a href="/your-home/your-water/managing-water-resources" class="imgLink" target="_self">
+                <img src="/-/media/scottishwater/images/reservoirs/managing-water-resource/041019castlehillreservoir315x177.png?bc=Black&amp;as=0&amp;h=177&amp;iar=0&amp;w=315&amp;hash=90EE85E48D875DF237F6B9AB93D061CC" alt="Managing Water Resouces Castlehill" title="Managing Water Resouces Castlehill" DisableWebEdit="False" />
+            </a>
+    </div> <!-- .imageWrap -->
+    <div class="pageColContent">
+        <a href="/your-home/your-water/managing-water-resources" target="_self">
+            <h3>Managing Water Resources</h3>
+            <div class="pageColContentInnerWrap">
+                Find out how our teams manage water resources around the country
+            </div> <!-- .pageColContentInnerWrap -->
+        </a>
+    </div> <!-- .pageColContent -->
+</div> <!-- .innerWrap -->
+
+
+</div> <!-- .pageCol -->
+
+<div class="pageCol js_pageCol desktopCol_4 tabletCol_4 tabletSmallCol_6 mobileCol_12">
+    
+    
+
+
+
+<div class="innerWrap">
+    <div class="imageWrap">
+            <a href="/your-home/save-water" class="imgLink" target="_self">
+                <img src="/-/media/scottishwater/images/customers/280818waterefficiencyingarden315x177.png?bc=Black&amp;as=0&amp;h=177&amp;iar=0&amp;w=315&amp;hash=3E54995DCFDB42A1CF3A045BB8C7BE63" alt="Watering the garden" DisableWebEdit="False" />
+            </a>
+    </div> <!-- .imageWrap -->
+    <div class="pageColContent">
+        <a href="/your-home/save-water" target="_self">
+            <h3>Water is Always Worth Saving</h3>
+            <div class="pageColContentInnerWrap">
+                Help protect a precious resource and make small changes to save water and energy – good for pocket &amp; planet
+            </div> <!-- .pageColContentInnerWrap -->
+        </a>
+    </div> <!-- .pageColContent -->
+</div> <!-- .innerWrap -->
+
+
+</div> <!-- .pageCol -->
+        </div> <!-- .colGroup -->
+    </div> <!-- .pageCols -->
+</div> <!-- .discoverMoreWrap -->
+
+    </div>
+</div> <!-- .contentPageWrap -->
+
+        </div>
+    </div>
+    
+<div class="footerWrap js_footerWrap">
+    <div class="footer" role="contentinfo">
+
+        <div class="footerMenuWrap">
+    <nav>
+        <ul>
+                    <li>
+                        <a href="/your-home" target="">
+                            Your Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/in-your-area" target="">
+                            In Your Area
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/business-and-developers" target="">
+                            Business &amp; Developers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about-us" target="">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/help-and-resources" target="">
+                            Help &amp; Resources
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about-us/careers" target="">
+                            Careers
+                        </a>
+                    </li>
+        </ul>
+    </nav>
+</div> <!-- .footerMenuWrap -->
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+    <script>
+        let latestSuggestedActions = null;
+    let webChatInstance = null;
+
+    // Queue of {id, hasFeedback, topic, suggestedActions} for bot messages,
+    // consumed in order as their DOM bubbles appear, so we know which bubble
+    // to attach feedback buttons / inline suggested-action buttons to.
+    const pendingBotActivities = [];
+
+    // Counts genuine user-typed queries within the current DirectLine
+    // connection, for the "queries per conversation" GA event fired on end.
+    let currentQueryCount = 0;
+    let conversationEndLogged = false;
+
+    // DirectLine connection is deferred until the user shows intent to open
+    // the widget (hover/focus warm-up, or a click if warm-up never fired —
+    // e.g. touch devices, keyboard nav that skips focus, or a very fast tap).
+    // Stored as a promise (not a boolean) so a click during an in-flight
+    // warm-up awaits that same connection instead of starting a second one.
+    let chatInitPromise = null;
+
+    // Subscription to the current DirectLine connection's connectionStatus$
+    // observable (see monitorConnectionStatus). Torn down and re-created
+    // whenever a new DirectLine instance is created, so we never end up
+    // listening to a stale connection or attaching two listeners.
+    let connectionStatusSubscription = null;
+    // Guards against firing more than one silent token-refresh attempt per
+    // ExpiredToken event.
+    let reconnectAttempted = false;
+
+    // True when the current DirectLine connection is continuing a
+    // previously-saved conversation (see CHAT SESSION PERSISTENCE below)
+    // rather than starting a brand new one. Used to skip re-firing
+    // startConversation / resetting analytics counters on a resumed session.
+    let isResumingConversation = false;
+
+    const SPEECH_REGION = ('uksouth').trim();
+    const SPEECH_LANG   = 'en-GB';
+    const SPEECH_VOICE  = 'Microsoft Server Speech Text to Speech Voice (en-GB, SoniaNeural)';
+
+    let voiceEnabled      = false;
+    let webSpeechPonyfill = null;
+
+    const styleOptions = {
+        "accent": "#4C277E",
+        "autoScrollSnapOnPage": true,
+        "autoScrollSnapOnPageOffset": 0,
+        "avatarBorderRadius": "50%",
+        "avatarSize": 31,
+        "backgroundColor": "#e8e9eb",
+        "botAvatarBackgroundColor": "#ffffff00",
+        "botAvatarImage": "https://www.scottishwater.co.uk/sites/scottishwater/images/favicon.ico",
+        "botAvatarInitials": "N",
+        "bubbleAttachmentMaxWidth": 480,
+        "bubbleAttachmentMinWidth": 250,
+        "bubbleBackground": "#f0eded",
+        "bubbleBorderColor": "#e0e0e0",
+        "bubbleBorderRadius": 8,
+        "bubbleBorderStyle": "solid",
+        "bubbleBorderWidth": 1,
+        "bubbleFromUserBackground": "#ebefff",
+        "bubbleFromUserBorderColor": "#e0e0e0",
+        "bubbleFromUserBorderRadius": 8,
+        "bubbleFromUserBorderStyle": "solid",
+        "bubbleFromUserBorderWidth": 1,
+        "bubbleFromUserNubOffset": 0,
+        "bubbleFromUserNubSize": 0,
+        "bubbleFromUserTextColor": "#242424",
+        "bubbleImageHeight": 10,
+        "bubbleImageMaxHeight": 240,
+        "bubbleImageMinHeight": 240,
+        "bubbleMessageMaxWidth": 480,
+        "bubbleMessageMinWidth": 120,
+        "bubbleMinHeight": 50,
+        "bubbleNubOffset": 0,
+        "bubbleTextColor": "#242424",
+        "emojiSet": true,
+        "fontSizeSmall": "70%",
+        "hideUploadButton": true,
+        "messageActivityWordBreak": "break-word",
+        "monospaceFont": " AvenirSWNew",
+        "paddingRegular": 10,
+        "paddingWide": 10,
+        "primaryFont": null,
+        "sendBoxBackground": "#e8e9eb",
+        "sendBoxBorderTop": "solid 1px #e0e0e0",
+        "sendBoxButtonColor": "#0078d4",
+        "sendBoxButtonColorOnHover": "#006cbe",
+        "sendBoxButtonShadeBorderRadius": 4,
+        "sendBoxButtonShadeColorOnHover": "",
+        "sendBoxHeight": 60,
+        "sendBoxPlaceholderColor": "#171616",
+        "sendBoxTextColor": "#2e2d2d",
+        "showAvatarInGroup": "status",
+        "spinnerAnimationHeight": 16,
+        "spinnerAnimationPadding": 12,
+        "spinnerAnimationWidth": 16,
+        "subtleColor": "#000000FF",
+        "suggestedActionBackgroundColor": "#006FC4FF",
+        "suggestedActionBackgroundColorOnHover": "#0078D4",
+        "suggestedActionBorderColor": "",
+        "suggestedActionBorderRadius": 10,
+        "suggestedActionBorderWidth": 1,
+        "suggestedActionLayout": "flow",
+        "suggestedActionTextColor": "#FFFFFFFF",
+        "typingAnimationBackgroundImage": "none",
+        "typingAnimationDuration": 5000,
+        "typingAnimationHeight": 0,
+        "typingAnimationWidth": 0,
+        "userAvatarBackgroundColor": "#222222",
+        "userAvatarImage": "",
+        "userAvatarInitials": ""
+    };
+
+    const backgroundImage = "";
+
+    // ── NETWORK HELPERS ──────────────────────────────────────────────────────
+    // Wraps fetch with a hard timeout via AbortController, so a hung request
+    // (e.g. the DirectLine activities/token endpoints going quiet) fails fast
+    // with a clear error instead of leaving the UI waiting indefinitely.
+    async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            const res = await fetch(url, { ...options, signal: controller.signal });
+            if (!res.ok) {
+                throw new Error('Request to ' + url + ' failed with status ' + res.status);
+            }
+            return res;
+        } catch (err) {
+            if (err.name === 'AbortError') {
+                throw new Error('Request to ' + url + ' timed out after ' + timeoutMs + 'ms');
+            }
+            throw err;
+        } finally {
+            clearTimeout(timeoutId);
+        }
+    }
+
+    // Retries a failing async operation a small number of times with a
+    // short, doubling backoff — enough to ride out a single transient
+    // timeout without the user needing to click "try again" themselves.
+    async function withRetry(fn, retries = 1, delayMs = 800) {
+        try {
+            return await fn();
+        } catch (err) {
+            if (retries <= 0) throw err;
+            await new Promise(resolve => setTimeout(resolve, delayMs));
+            return withRetry(fn, retries - 1, delayMs * 2);
+        }
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── SPEECH TOKEN ──────────────────────────────────────────────────────────
+    // Fetches a short-lived Azure Speech token from the server-side proxy.
+    // The actual subscription key never appears in client-side code.
+    async function getSpeechToken() {
+        const res = await fetchWithTimeout('/chat/getspeechtoken', {}, 8000);
+        return (await res.text()).trim();
+        }
+
+        async function checkDL() {
+            const res = await fetchWithTimeout('/chat/checkdl', {}, 8000);
+            return (await res.text()).trim();
+        }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── SPEECH PONYFILL ───────────────────────────────────────────────────────
+    async function getSpeechPonyfill() {
+        if (webSpeechPonyfill) return webSpeechPonyfill;
+        const { createCognitiveServicesSpeechServicesPonyfillFactory } = window.WebChat;
+
+        if (!createCognitiveServicesSpeechServicesPonyfillFactory) {
+            console.error('[Speech] createCognitiveServicesSpeechServicesPonyfillFactory not found — the webchat.js bundle may not include speech support.');
+            return null;
+        }
+
+        webSpeechPonyfill = await createCognitiveServicesSpeechServicesPonyfillFactory({
+            credentials: async () => ({
+                authorizationToken: await getSpeechToken(),
+                region: SPEECH_REGION,
+            }),
+            speechRecognitionLanguage: SPEECH_LANG,
+            autoSubmit:       true,
+            continuous:       false,
+            silenceTimeoutMs: 1500,
+        });
+
+        return webSpeechPonyfill;
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── IOS AUDIO UNLOCK ──────────────────────────────────────────────────────
+    // iOS blocks programmatic audio that starts after an async operation unless
+    // an AudioContext has been created and resumed during a direct user gesture.
+    let audioContext = null;
+
+    function getAudioContext() {
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+        return audioContext;
+    }
+
+    // Unlock on first touchend so the AudioContext is ready before any TTS fires.
+    document.addEventListener('touchend', function unlockAudio() {
+        getAudioContext();
+        document.removeEventListener('touchend', unlockAudio);
+    }, { once: true });
+    // ─────────────────────────────────────────────────────────────────────────
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const root = document.documentElement;
+        root.style.setProperty('--primary-color', styleOptions.accent);
+        root.style.setProperty('--header-textColor', styleOptions.suggestedActionTextColor);
+
+        if (backgroundImage) {
+            const webchatElement = document.getElementById('webchat');
+            webchatElement.style.backgroundImage = 'url(' + backgroundImage + ')';
+            webchatElement.style.backgroundSize = 'cover';
+            webchatElement.style.backgroundPosition = 'center';
+            webchatElement.style.backgroundRepeat = 'no-repeat';
+            const overlay = document.createElement('div');
+            overlay.className = 'webchat-overlay';
+            webchatElement.appendChild(overlay);
+        }
+
+        // ── 10-SECOND PILL EXPAND ────────────────────────────────────────────
+        const EXPAND_DELAY_MS   = 3000;
+        const EXPAND_VISIBLE_MS = 10000;
+        const openBtn = document.getElementById('open-chat');
+        let collapseTimer = null;
+
+        function expandButton() {
+            if (document.getElementById('chatbot-popup').classList.contains('visible')) return;
+            openBtn.classList.add('expanded');
+            openBtn.setAttribute('aria-label', 'Need help? Open our AI Assistant');
+            collapseTimer = setTimeout(collapseButton, EXPAND_VISIBLE_MS);
+        }
+        function collapseButton() {
+           openBtn.classList.remove('expanded');
+            openBtn.setAttribute('aria-label', 'Open AI Assistant');
+            clearTimeout(collapseTimer);
+        }
+        setTimeout(expandButton, EXPAND_DELAY_MS);
+        window._collapseButton = collapseButton;
+        // ─────────────────────────────────────────────────────────────────────
+
+        // ── WARM UP DIRECTLINE ON INTENT SIGNALS ────────────────────────────
+        // Starts the connection before the click on desktop (hover, keyboard
+        // focus) so it's often already ready by the time showChat() runs.
+        // touchstart covers mobile/touch devices, which have no hover state —
+        // it fires slightly before the tap's click event completes, still
+        // giving a small head start. { once: true } means each only needs to
+        // fire a single time; warmUpChat() itself is also safe to call more
+        // than once regardless.
+        //['mouseenter', 'focus', 'touchstart'].forEach(evt => {
+        //    openBtn.addEventListener(evt, warmUpChat, { once: true, passive: true });
+        //});
+        // ─────────────────────────────────────────────────────────────────────
+
+        // ── VOICE TOGGLE ──────────────────────────────────────────────────────
+        const voiceBtn       = document.getElementById('voice-toggle-btn');
+        const voiceIndicator = document.getElementById('voice-indicator');
+
+        voiceBtn.addEventListener('click', async () => {
+            // Unlock AudioContext on this user gesture — critical for iOS
+            getAudioContext();
+            voiceEnabled = !voiceEnabled;
+            if (!voiceEnabled) webSpeechPonyfill = null;
+            updateVoiceUI();
+            try {
+                const freshDl = await getFreshDirectLine();
+                await renderWebChat(freshDl);
+            } catch (err) {
+                console.error("Failed to switch voice mode:", err);
+                voiceEnabled = !voiceEnabled;
+                updateVoiceUI();
+            }
+        });
+
+        function updateVoiceUI() {
+            if (voiceEnabled) {
+                voiceBtn.classList.add('active');
+                voiceBtn.setAttribute('aria-label', 'Disable voice (voice on)');
+                voiceBtn.setAttribute('aria-pressed', 'true');
+                voiceIndicator.classList.add('visible');
+            } else {
+                voiceBtn.classList.remove('active');
+                voiceBtn.setAttribute('aria-label', 'Enable voice');
+                voiceBtn.setAttribute('aria-pressed', 'false');
+                voiceIndicator.classList.remove('visible');
+            }
+        }
+        // ─────────────────────────────────────────────────────────────────────
+
+        // ── EXPAND TOGGLE (vertical only) ───────────────────────────────────
+        const expandBtn = document.getElementById('expand-toggle-btn');
+        let isExpanded = false;
+
+        expandBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            const popup = document.getElementById('chatbot-popup');
+            popup.classList.toggle('expanded-height', isExpanded);
+            expandBtn.classList.toggle('active', isExpanded);
+            expandBtn.setAttribute('aria-pressed', isExpanded ? 'true' : 'false');
+            expandBtn.setAttribute('aria-label', isExpanded ? 'Collapse chat window' : 'Expand chat window');
+        });
+        // ─────────────────────────────────────────────────────────────────────
+    });
+
+    function getCookie(name) {
+        const match = document.cookie
+            .split('; ')
+            .find(row => row.startsWith(name + '='));
+        return match ? decodeURIComponent(match.split('=')[1]) : null;
+    }
+
+    function getLocationFromCookie(cookieName) {
+        const raw = getCookie(cookieName);
+        if (!raw) return null;
+        try {
+            return JSON.parse(raw);
+        } catch (e) {
+            console.warn('Could not parse location cookie:', e);
+            return null;
+        }
+    }
+
+    // Starts the DirectLine connection if it hasn't already been started by
+    // an earlier warm-up trigger. Safe to call multiple times — returns the
+    // same in-flight/completed promise on subsequent calls.
+    function warmUpChat() {
+        if (!chatInitPromise) {
+            chatInitPromise = initializeChat();
+        }
+        return chatInitPromise;
+    }
+
+    async function showChat() {
+        const popup      = document.getElementById("chatbot-popup");
+        const openButton = document.getElementById("open-chat");
+        popup.classList.add("visible");
+        openButton.classList.add("hidden");
+        if (window._collapseButton) window._collapseButton();
+        // Unlock AudioContext when chat opens — covers tap on the open button
+        getAudioContext();
+
+        // If warm-up (hover/focus) already completed, this resolves near-
+        // instantly and the loader is barely visible. If warm-up never
+        // fired (e.g. fast tap on a touch device) or is still in flight,
+        // this starts/awaits the same connection with the loader showing.
+        showLoadingIndicator();
+        try {
+            await warmUpChat();
+        } finally {
+            // WebChat's own render typically replaces #webchat's content
+            // already, but this is a safety net for the failure path
+            // (initializeChat catches its own errors internally, so it
+            // never rejects — this always runs).
+            hideLoadingIndicator();
+        }
+    }
+
+    // Shown in the empty #webchat area during the first-open DirectLine
+    // connection, using the same wave-dot animation as the "agent is
+    // replying" typing indicator (see sw-wave keyframes) for visual
+    // consistency between the two loading states.
+    function showLoadingIndicator() {
+        const webchat = document.getElementById('webchat');
+        if (!webchat || document.getElementById('sw-loading-indicator')) return;
+        const loader = document.createElement('div');
+        loader.id = 'sw-loading-indicator';
+        loader.className = 'sw-loading-dots';
+        loader.setAttribute('role', 'status');
+        loader.setAttribute('aria-label', 'Loading chat');
+        loader.innerHTML = '<span></span><span></span><span></span>';
+        webchat.appendChild(loader);
+    }
+
+    function hideLoadingIndicator() {
+        const loader = document.getElementById('sw-loading-indicator');
+        if (loader) loader.remove();
+    }
+
+    function hideChat() {
+        const popup      = document.getElementById("chatbot-popup");
+        const openButton = document.getElementById("open-chat");
+        popup.classList.remove("visible");
+        openButton.classList.remove("hidden");
+    }
+
+    // ── CONNECTION ERROR BANNER ───────────────────────────────────────────────
+    // Shown over the transcript area when we can't connect at all, the
+    // DirectLine connection dies (e.g. the activities long-poll has been
+    // timing out and DirectLine has given up retrying), or the conversation
+    // has ended. Always paired with a "Try again" action so the user isn't
+    // stuck looking at a dead chat window.
+    function showConnectionError(message, onRetry) {
+        const webchat = document.getElementById('webchat');
+        if (!webchat) return;
+        hideLoadingIndicator();
+        clearConnectionError();
+
+        const banner = document.createElement('div');
+        banner.id = 'sw-connection-error';
+        banner.className = 'sw-connection-error';
+        banner.setAttribute('role', 'alert');
+
+        const text = document.createElement('p');
+        text.textContent = message;
+        banner.appendChild(text);
+
+        if (typeof onRetry === 'function') {
+            const retryBtn = document.createElement('button');
+            retryBtn.type = 'button';
+            retryBtn.className = 'sw-connection-error__retry';
+            retryBtn.textContent = 'Try again';
+            retryBtn.addEventListener('click', () => {
+                clearConnectionError();
+                showLoadingIndicator();
+                onRetry();
+            });
+            banner.appendChild(retryBtn);
+        }
+
+        webchat.appendChild(banner);
+    }
+
+    function clearConnectionError() {
+        const existing = document.getElementById('sw-connection-error');
+        if (existing) existing.remove();
+    }
+
+    // Subscribes to a DirectLine instance's connectionStatus$ observable so
+    // we notice when the connection dies rather than leaving the user
+    // looking at a chat window that's silently stopped responding. This is
+    // what surfaces the "timeouts on the activities endpoint" case: the
+    // DirectLine client retries the underlying long-poll internally with
+    // backoff, and once it exhausts those retries it moves to
+    // FailedToConnect — that's the point we show the banner.
+    //
+    // DirectLine ConnectionStatus values:
+    //   0 Uninitialized, 1 Connecting, 2 Online,
+    //   3 ExpiredToken, 4 FailedToConnect, 5 Ended
+    function monitorConnectionStatus(directLine) {
+        if (connectionStatusSubscription) {
+            connectionStatusSubscription.unsubscribe();
+            connectionStatusSubscription = null;
+        }
+        reconnectAttempted = false;
+        connectionStatusSubscription = directLine.connectionStatus$.subscribe({
+            next: (status) => {
+                switch (status) {
+                    case 2: // Online
+                        reconnectAttempted = false;
+                        clearConnectionError();
+                        // Save (or refresh) the session now that we know this
+                        // connection is genuinely live, so the next page load
+                        // can resume it.
+                        persistChatSession(directLine);
+                        break;
+
+                    case 3: // ExpiredToken — try one silent refresh before
+                            // bothering the user with anything.
+                        if (!reconnectAttempted) {
+                            reconnectAttempted = true;
+                            getFreshDirectLine()
+                                .then(renderWebChat)
+                                .catch(err => {
+                                    console.error('[DirectLine] Failed to refresh expired token:', err);
+                                    showConnectionError(
+                                        "Your session timed out. Please try again.",
+                                        () => restartConversation()
+                                    );
+                                });
+                        }
+                        break;
+
+                    case 4: // FailedToConnect
+                        if (isResumingConversation) {
+                            // Most likely the saved conversation from a
+                            // previous page simply expired (Direct Line
+                            // conversations time out after ~30 minutes idle
+                            // — a platform limit, not something we control).
+                            // That's expected, not an error — fall back to a
+                            // fresh conversation silently instead of showing
+                            // the user a scary banner for it.
+                            console.warn('[DirectLine] Could not resume the saved conversation (likely expired) — starting a new one.');
+                            clearStoredChatSession();
+                            isResumingConversation = false;
+                            getFreshDirectLine()
+                                .then(renderWebChat)
+                                .catch(err => {
+                                    console.error('[DirectLine] Failed to start a new conversation after failed resume:', err);
+                                    showConnectionError(
+                                        "We're having trouble connecting right now. Please try again.",
+                                        () => restartConversation()
+                                    );
+                                });
+                            break;
+                        }
+                        // Otherwise this is a genuine live-connection failure
+                        // — the state DirectLine ends up in once the
+                        // activities endpoint has been timing out and its
+                        // own internal retries are exhausted.
+                        console.error('[DirectLine] Connection failed — the activities endpoint may be unreachable or timing out.');
+                        //send to backend to see if it is a user issue or a DL issue
+                        showConnectionError(
+                            "We've lost connection to the assistant. This can happen if the connection times out.",
+                            () => restartConversation()
+                        );
+                        break;
+
+                    case 5: // Ended
+                        // The conversation is genuinely over — don't try to
+                        // resume it again on the next page load.
+                        clearStoredChatSession();
+                        showConnectionError(
+                            "This conversation has ended.",
+                            () => restartConversation()
+                        );
+                        break;
+
+                    default:
+                        break;
+                }
+            },
+            error: (err) => {
+                console.error('[DirectLine] connectionStatus$ error:', err);
+                showConnectionError(
+                    "We've lost connection to the assistant.",
+                    () => restartConversation()
+                );
+            }
+        });
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── STRIP MARKDOWN FOR TTS ────────────────────────────────────────────────
+    function stripMarkdown(text) {
+        if (!text) return '';
+        return text
+            .replace(/```[\s\S]*?```/g, '')
+            .replace(/`[^`]+`/g, '')
+            .replace(/!\[.*?\]\(.*?\)/g, '')
+            .replace(/\[([^\]]+)\]\(.*?\)/g, '$1')
+            .replace(/#{1,6}\s+/g, '')
+            .replace(/(\*\*|__)(.*?)\1/g, '$2')
+            .replace(/(\*|_)(.*?)\1/g, '$2')
+            .replace(/~~(.*?)~~/g, '$1')
+            .replace(/^\s*[-*+]\s+/gm, '')
+            .replace(/^\s*\d+\.\s+/gm, '')
+            .replace(/^\s*>\s+/gm, '')
+            .replace(/[-]{3,}/g, '')
+            .replace(/\|.*?\|/g, '')
+            .replace(/\n{2,}/g, '. ')
+            .replace(/\n/g, ' ')
+            .replace(/\s{2,}/g, ' ')
+            .trim();
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── TTS HELPER ────────────────────────────────────────────────────────────
+    function speakText(text) {
+        if (!text || !voiceEnabled) return;
+
+        // Cancel any currently playing audio
+        if (window._currentAudio) {
+            try { window._currentAudio.stop(); } catch (e) {}
+            window._currentAudio = null;
+        }
+
+        const escaped = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;');
+
+        const ssml = '<speak version="1.0" xml:lang="' + SPEECH_LANG + '">'
+                   + '<voice name="' + SPEECH_VOICE + '">'
+                   + '<prosody rate="0%">' + escaped + '</prosody>'
+                   + '</voice>'
+                   + '</speak>';
+
+        const ttsUrl = 'https://' + SPEECH_REGION + '.tts.speech.microsoft.com/cognitiveservices/v1';
+
+        getSpeechToken().then(token => {
+            if (!voiceEnabled) return;
+            return fetchWithTimeout(ttsUrl, {
+                method: 'POST',
+                headers: {
+                    'Authorization':            'Bearer ' + token,
+                    'Content-Type':             'application/ssml+xml',
+                    'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
+                },
+                body: ssml
+            }, 10000);
+        })
+        .then(res => res && res.arrayBuffer())
+        .then(arrayBuffer => {
+            if (!arrayBuffer || !voiceEnabled) return;
+            const ctx = getAudioContext();
+            // iOS may auto-suspend the AudioContext between the user gesture
+            // and the async fetch completing — resume it explicitly here.
+            const playWhenReady = () => {
+                return ctx.decodeAudioData(arrayBuffer).then(audioBuffer => {
+                    if (!voiceEnabled) return;
+                    const source = ctx.createBufferSource();
+                    source.buffer = audioBuffer;
+                    source.connect(ctx.destination);
+                    source.start(0);
+                    window._currentAudio = source;
+                    source.onended = () => { window._currentAudio = null; };
+                });
+            };
+            if (ctx.state === 'suspended') {
+                return ctx.resume().then(playWhenReady);
+            }
+            return playWhenReady();
+        })
+        .catch(err => console.error('[Speech] TTS fetch error:', err));
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // Copilot Studio topics can author a separate "Text to speech" variant
+    // for a message, distinct from what's shown in the transcript — that
+    // lands on the activity's own `speak` field (SSML). We need to prefer
+    // that over the plain `text`, otherwise we always speak the on-screen
+    // wording and the authored speech variant never gets used.
+    function getSpeechText(activity) {
+        if (activity.speak) return activity.speak.replace(/<\/?speak[^>]*>/g, '');
+        if (activity.text) return activity.text;
+        const card = activity.attachments?.[0]?.content;
+        if (card?.speak) return card.speak.replace(/<\/?speak[^>]*>/g, '');
+        return null;
+    }
+
+    // Extracts the first citation's source name from a Copilot Studio generative
+    // answer's entities array — a structured, bot-controlled string (e.g.
+    // "Discoloured Water FAQs") safe to send to analytics as a topic proxy,
+    // unlike the raw question/answer text which may contain personal information.
+    function getCitationTopic(activity) {
+        const messageEntity = activity.entities?.find(e => e['@type'] === 'Message' && Array.isArray(e.citation));
+        const firstCitation = messageEntity?.citation?.[0];
+        return firstCitation?.appearance?.name || firstCitation?.appearance?.abstract || null;
+    }
+
+        // Turns ".../document-hub/.../280726operationalcodev38clean.pdf" into
+        // "280726operationalcodev38clean.pdf". Returns null if no usable filename.
+        function getFileNameFromUrl(url) {
+            if (!url) return null;
+            try {
+                const last = new URL(url, window.location.origin).pathname
+                    .split('/').filter(Boolean).pop();
+                if (!last) return null;
+                const name = decodeURIComponent(last);
+                // Uncomment to drop the extension (.pdf, .docx etc.):
+                // return name.replace(/\.[A-Za-z0-9]{2,5}$/, '');
+                return name;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Names that mean "no real title". The hostname of the citation's own URL
+        // is also treated as a placeholder automatically (see isPlaceholderName).
+        const PLACEHOLDER_NAMES = ['www.scottishwater.co.uk', 'scottishwater.co.uk'];
+
+        function isPlaceholderName(name, url) {
+            const n = (name || '').trim().toLowerCase();
+            if (!n) return true;
+            if (PLACEHOLDER_NAMES.includes(n)) return true;
+            try {
+                const host = new URL(url, window.location.origin).hostname.toLowerCase();
+                const bare = host.replace(/^www\./, '');
+                if (n === host || n === bare || n === 'www.' + bare) return true;
+            } catch (e) { /* ignore */ }
+            return false;
+        }
+
+        function fixCitationNames(activity) {
+            let changed = false;
+            let fixed = activity;
+
+            if (Array.isArray(activity.entities)) {
+                const entities = activity.entities.map(e => {
+                    if (!e || e['@type'] !== 'Message' || !Array.isArray(e.citation)) return e;
+                    const citation = e.citation.map(c => {
+                        const ap = c && c.appearance;
+                        if (!ap || !isPlaceholderName(ap.name, ap.url)) return c;
+                        const fileName = getFileNameFromUrl(ap.url);
+                        if (!fileName) return c;
+                        changed = true;
+                        return { ...c, appearance: { ...ap, name: fileName } };
+                    });
+                    return { ...e, citation };
+                });
+                if (changed) fixed = { ...fixed, entities };
+            }
+
+            if (typeof activity.text === 'string') {
+                // Reference lines such as:
+                //   [1]: https://example.com/file.pdf "www.scottishwater.co.uk"
+                //   [1]: https://example.com/file.pdf
+                const text = activity.text.replace(
+                    /^(\[\d+\]:[ \t]*)(\S+)(?:[ \t]+"([^"]*)")?[ \t]*$/gm,
+                    (match, prefix, url, title) => {
+                        if (title !== undefined && !isPlaceholderName(title, url)) return match;
+                        const fileName = getFileNameFromUrl(url);
+                        if (!fileName) return match;
+                        return prefix + url + ' "' + fileName.replace(/"/g, '') + '"';
+                    }
+                );
+                if (text !== activity.text) {
+                    changed = true;
+                    fixed = { ...fixed, text };
+                }
+            }
+
+            return changed ? fixed : activity;
+        }
+
+    function createCustomStore() {
+        const location = getLocationFromCookie("HTML5GeoLocation");
+        const postcode = location?.PostalCode;
+
+        return window.WebChat.createStore(
+            {},
+            ({ dispatch }) =>
+                (next) =>
+                    (action) => {
+                        //log out all activity
+                        //if (action.type === "DIRECT_LINE/INCOMING_ACTIVITY") {
+                        //    const a = action.payload.activity;
+                        //    console.log('[WC]', a.type, '| role:', a.from?.role,
+                        //        '| text:', (a.text || '').slice(0, 40),
+                        //        '| actions:', a.suggestedActions?.actions?.map(x => x.title),
+                        //        '| attachments:', a.attachments?.map(x => x.contentType));
+                        //}
+                        if (action.type === "DIRECT_LINE/INCOMING_ACTIVITY" &&
+                            action.payload?.activity?.type === "message" &&
+                            action.payload?.activity?.from?.role === "bot") {
+                            action = {
+                                ...action,
+                                payload: { ...action.payload, activity: fixCitationNames(action.payload.activity) }
+                            };
+                        }
+
+                        if (action.type === "DIRECT_LINE/INCOMING_ACTIVITY" &&
+                            action.payload?.activity?.type === "message" &&
+                            action.payload?.activity?.from?.role === "bot") {
+                            const a = action.payload.activity;
+                            const sa = a.suggestedActions?.actions;
+                            if (sa && sa.length) {
+                                latestSuggestedActions = {
+                                    actions: sa,
+                                    textPrefix: stripMarkdown(a.text || '').slice(0, 20)
+                                };
+                                document.getElementById('webchat')?.classList.remove('sw-inline-actions-ok');
+                            }
+                        }
+
+                        if (action.type === "DIRECT_LINE/POST_ACTIVITY" &&
+                            action.payload?.activity?.type === "message") {
+                            latestSuggestedActions = null;
+                        }
+                        // ── Send startConversation on connect ─────────────────────
+                        // Skipped when resuming a session saved by an earlier
+                        // page load (see CHAT SESSION PERSISTENCE) — it's the
+                        // same conversation continuing, not a new one, so we
+                        // don't want to re-trigger a greeting/prompt topic or
+                        // reset the analytics counters below.
+                        if (action.type === "DIRECT_LINE/CONNECT_FULFILLED" && !isResumingConversation) {
+                            dispatch({
+                                type: "DIRECT_LINE/POST_ACTIVITY",
+                                meta: { method: "keyboard" },
+                                payload: {
+                                    activity: {
+                                        channelData: { postBack: true },
+                                        name: "startConversation",
+                                        type: "event",
+                                        value: { userlocationcookie: postcode }
+                                    },
+                                },
+                            });
+
+                            // NOTE: toggling voice mode recreates the DirectLine
+                            // connection (see getFreshDirectLine), so this also
+                            // fires again mid-conversation in that case — the
+                            // query count resets and a second "start" event is
+                            // logged, even though it's the same customer session.
+                            currentQueryCount = 0;
+                            conversationEndLogged = false;
+                            trackConversationStart();
+                        }
+
+                        // ── Count genuine user-typed queries ───────────────────────
+                        // Only real chat messages, not our own hidden event
+                        // postbacks (startConversation, userFeedback), which use
+                        // activity.type "event" rather than "message".
+                        if (
+                            action.type === "DIRECT_LINE/POST_ACTIVITY" &&
+                            action.payload?.activity?.type === "message"
+                        ) {
+                            currentQueryCount++;
+                        }
+
+                        // ── Speak all incoming bot messages via Azure TTS ──────────
+                        // speakText() is a regular function (no await needed here)
+                        // so this middleware stays synchronous as Redux requires.
+                        if (
+                            voiceEnabled &&
+                            action.type === "DIRECT_LINE/INCOMING_ACTIVITY" &&
+                            action.payload?.activity?.type === "message" &&
+                            action.payload?.activity?.from?.role === "bot"
+                        ) {
+                            const raw  = getSpeechText(action.payload.activity);
+                            const text = stripMarkdown(raw);
+                            speakText(text);
+                        }
+
+                        // ── Track bot activities that carry feedback / suggested
+                        // actions ────────────────────────────────────────────────
+                        // Copilot Studio sends channelData.feedbackLoop on generative
+                        // answers, but WebChat's own CDN bundle doesn't render anything
+                        // for it, so we render our own thumbs up/down buttons. We also
+                        // stash any suggestedActions here so they can be rendered
+                        // inline inside the bubble instead of Web Chat's default
+                        // docked bar above the send box (see injectFeedbackButtons /
+                        // createSuggestedActionButtons).
+                        if (
+                            action.type === "DIRECT_LINE/INCOMING_ACTIVITY" &&
+                            action.payload?.activity?.type === "message" &&
+                            action.payload?.activity?.from?.role === "bot"
+                        ) {
+                            pendingBotActivities.push({
+                                id: action.payload.activity.id,
+                                hasFeedback: !!action.payload.activity.channelData?.feedbackLoop,
+                                // Citation source name (e.g. "Discoloured Water FAQs") used
+                                // as a safe, bot-controlled proxy for "topic" in analytics —
+                                // never send the raw user question or bot answer text, since
+                                // free text can contain personal information (account
+                                // numbers, addresses) that must not reach GA4.
+                                topic: getCitationTopic(action.payload.activity),
+                                suggestedActions: action.payload.activity.suggestedActions?.actions || []
+                            });
+                        }
+
+                        // ── Auto-submit when speech recognition finalises ──────────
+                        if (
+                            voiceEnabled &&
+                            action.type === "WEB_SPEECH/DICTATE_INTERIMS_FULFILLED" &&
+                            action.payload?.transcript
+                        ) {
+                            setTimeout(() => {
+                                dispatch({ type: "WEB_CHAT/SUBMIT_SEND_BOX" });
+                            }, 100);
+                        }
+
+                        return next(action);
+                    }
+        );
+        }
+
+        function injectSuggestedActions() {
+            const webchat = document.getElementById('webchat');
+            if (!webchat) return;
+
+            new MutationObserver(() => {
+                if (!latestSuggestedActions) return;
+
+                const bubbles = webchat.querySelectorAll(
+                    '.webchat__bubble:not(.webchat__bubble--from-user):not(.webchat__bubble--typing)');
+                const last = bubbles[bubbles.length - 1];
+                if (!last) return;
+
+                const target = last.querySelector('.webchat__bubble__content') || last;
+                const text = (target.textContent || '').trim();
+
+                // Wait until this bubble is the one for our activity
+                if (!text) return;
+                if (latestSuggestedActions.textPrefix &&
+                    !text.includes(latestSuggestedActions.textPrefix)) return;
+                if (target.querySelector('.sw-suggested-actions')) return;
+
+                target.appendChild(createSuggestedActionButtons(latestSuggestedActions.actions));
+                latestSuggestedActions = null;
+                webchat.classList.add('sw-inline-actions-ok');
+            }).observe(webchat, { childList: true, subtree: true });
+        }
+        document.addEventListener('DOMContentLoaded', injectSuggestedActions);
+
+
+    // ── RENDER WEB CHAT ───────────────────────────────────────────────────────
+    async function renderWebChat(directLine) {
+        if (!directLine) return;
+        const webchatElement = document.getElementById("webchat");
+
+        // Fresh render means a fresh transcript DOM, so any queued feedback
+        // tracking from a previous render no longer lines up with real bubbles.
+        pendingBotActivities.length = 0;
+        latestSuggestedActions = null;
+        clearConnectionError();
+
+        if (voiceEnabled) {
+            const ponyfillFactory = await getSpeechPonyfill();
+            if (ponyfillFactory) {
+                // Reuse the unlocked AudioContext for the ponyfill so iOS
+                // speech recognition also benefits from the gesture unlock.
+                const ponyfill = ponyfillFactory({ audioContext: getAudioContext() });
+                window._currentPonyfill = ponyfill;
+            }
+        } else {
+            if (window._currentAudio) {
+                try { window._currentAudio.stop(); } catch (e) {}
+                window._currentAudio = null;
+            }
+            window._currentPonyfill = null;
+        }
+
+        const renderOptions = {
+            directLine,
+            styleOptions,
+            store: createCustomStore(),
+        };
+
+        if (window._currentPonyfill) {
+            // Ponyfill for speech recognition (mic input) only.
+            // TTS handled via speakText() so we stub out speechSynthesis
+            // to prevent Web Chat speaking responses a second time.
+            renderOptions.webSpeechPonyfillFactory = () => ({
+                SpeechGrammarList:        window._currentPonyfill.SpeechGrammarList,
+                SpeechRecognition:        window._currentPonyfill.SpeechRecognition,
+                speechSynthesis:          { speak: () => {}, cancel: () => {}, getVoices: () => [], addEventListener: () => {}, removeEventListener: () => {} },
+                SpeechSynthesisUtterance: window._currentPonyfill.SpeechSynthesisUtterance,
+            });
+        }
+
+        webChatInstance = window.WebChat.renderWebChat(renderOptions, webchatElement);
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── CHAT SESSION PERSISTENCE ─────────────────────────────────────────────
+    // Lets the same conversation survive page navigation within one browser
+    // tab (e.g. the user follows a link out of the chat, then reopens the
+    // widget on the next page). sessionStorage is deliberately used instead
+    // of localStorage: it's scoped to the tab and clears itself when the tab
+    // closes, matching "the same user session".
+    //
+    // IMPORTANT PLATFORM LIMIT: a Direct Line conversation expires after
+    // roughly 30 minutes of inactivity regardless of what we do client-side.
+    // A saved session older than that will simply fail to resume — handled
+    // below by falling back to a brand new conversation rather than erroring.
+    const CHAT_SESSION_STORAGE_KEY = 'sw-chat-session';
+
+    // Direct Line tokens are JWTs with the conversationId embedded as a
+    // claim. Decoding it ourselves is more reliable than reading
+    // `directLine.conversationId` off the client instance, which isn't a
+    // documented/guaranteed public property across bundle versions.
+    function decodeJwtPayload(token) {
+        try {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const json = decodeURIComponent(
+                atob(base64)
+                    .split('')
+                    .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                    .join('')
+            );
+            return JSON.parse(json);
+        } catch (err) {
+            console.warn('[Session] Could not decode DirectLine token:', err);
+            return null;
+        }
+    }
+
+    function getConversationId(directLine) {
+        if (directLine?.conversationId) return directLine.conversationId;
+        const claims = decodeJwtPayload(directLine?.token);
+        return claims?.conversationId || claims?.conversationid || null;
+    }
+
+    function persistChatSession(directLine) {
+        try {
+            const conversationId = getConversationId(directLine);
+            if (!directLine?.token || !conversationId || !window._currentDirectLineUrl) return;
+            sessionStorage.setItem(CHAT_SESSION_STORAGE_KEY, JSON.stringify({
+                token: directLine.token,
+                conversationId,
+                directLineUrl: window._currentDirectLineUrl
+            }));
+        } catch (err) {
+            console.warn('[Session] Could not persist chat session:', err);
+        }
+    }
+
+    function getStoredChatSession() {
+        try {
+            const raw = sessionStorage.getItem(CHAT_SESSION_STORAGE_KEY);
+            return raw ? JSON.parse(raw) : null;
+        } catch (err) {
+            return null;
+        }
+    }
+
+    function clearStoredChatSession() {
+        try {
+            sessionStorage.removeItem(CHAT_SESSION_STORAGE_KEY);
+        } catch (err) {
+            // ignore
+        }
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── DIRECT LINE HELPERS ───────────────────────────────────────────────────
+    // Fetches a fresh DirectLine token from our own backend proxy. Wrapped
+    // with a timeout (so a hung request fails fast) and one retry (so a
+    // single transient blip doesn't immediately surface as an error).
+    async function fetchDirectLineToken() {
+        const res  = await fetchWithTimeout('/chat/getdl', {}, 10000);
+        const data = await res.json();
+        if (!data.token) throw new Error("Failed to get conversation token");
+        return data;
+    }
+
+    // Creates a DirectLine connection and starts monitoring its
+    // connectionStatus$ so we notice if it later dies (see
+    // monitorConnectionStatus).
+    //
+    // Pass { resume: true } to try continuing a conversation saved by an
+    // earlier page load (see CHAT SESSION PERSISTENCE) instead of always
+    // starting a brand new one. If there's nothing saved, or resuming fails,
+    // this transparently falls back to fetching a new token as normal.
+    async function getFreshDirectLine({ resume = false } = {}) {
+        if (resume) {
+            const stored = getStoredChatSession();
+            if (stored?.token && stored?.conversationId && stored?.directLineUrl) {
+                const dl = window.WebChat.createDirectLine({
+                    domain: stored.directLineUrl + 'v3/directline',
+                    token: stored.token,
+                    conversationId: stored.conversationId,
+                    watermark: '0',
+                });
+                window._currentDirectLine    = dl;
+                window._currentDirectLineUrl = stored.directLineUrl;
+                isResumingConversation = true;
+                monitorConnectionStatus(dl);
+                return dl;
+            }
+        }
+
+        const data = await withRetry(() => fetchDirectLineToken(), 1, 1000);
+        const dl = window.WebChat.createDirectLine({
+            domain: data.directLineUrl + 'v3/directline',
+            token:  data.token,
+        });
+        window._currentDirectLine    = dl;
+        window._currentDirectLineUrl = data.directLineUrl;
+        isResumingConversation = false;
+        monitorConnectionStatus(dl);
+        return dl;
+    }
+
+    async function restartConversation() {
+        try {
+            // The old conversation is about to be discarded — log its query
+            // count before currentQueryCount resets on the new CONNECT_FULFILLED.
+            endConversationTracking();
+            clearConnectionError();
+            // Restart always means a genuinely new conversation, never a
+            // resumed one, regardless of what's saved from an earlier page.
+            clearStoredChatSession();
+            const freshDl = await getFreshDirectLine();
+            await renderWebChat(freshDl);
+        } catch (err) {
+            console.error("Failed to restart conversation:", err);
+            showConnectionError(
+                "We couldn't restart the conversation. Please try again.",
+                () => restartConversation()
+            );
+        }
+    }
+
+    async function initializeChat() {
+        try {
+            clearConnectionError();
+            // Try to pick up where a previous page left off first; if
+            // nothing's saved (or it's expired), this falls back to a new
+            // conversation automatically.
+            const directLine = await getFreshDirectLine({ resume: true });
+            await renderWebChat(directLine);
+        } catch (err) {
+            console.error("Failed to initialize chat:", err);
+            showConnectionError(
+                "We're having trouble connecting right now. Please check your connection and try again.",
+                () => {
+                    // Force warmUpChat() to actually retry instead of handing
+                    // back the same failed/rejected-internally promise.
+                    chatInitPromise = null;
+                    warmUpChat();
+                }
+            );
+        }
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+        // ── ADAPTIVE CARD STAR RATING ─────────────────────────────────────────────
+        function starDataUri(color) {
+            const svg =
+                '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="56" viewBox="0 0 36 56">' +
+                '<path transform="translate(1.2 11.2) scale(1.4)" fill="' + color + '" ' +
+                'd="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>' +
+                '</svg>';
+            return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+        }
+
+        function enhanceStarRatings() {
+            const webchat = document.getElementById('webchat');
+            if (!webchat) return;
+
+            const EMPTY = '#d9cfe6'; // light tint of the purple
+
+            const enhance = () => {
+                webchat.querySelectorAll('.ac-columnSet:not([data-stars-enhanced])').forEach(row => {
+                    const stars = Array.from(row.querySelectorAll('img.ac-selectable[aria-label^="Rate "]'));
+                    if (stars.length < 3) return;
+                    row.setAttribute('data-stars-enhanced', '1');
+
+                    const primary = getComputedStyle(document.documentElement)
+                        .getPropertyValue('--primary-color').trim() || '#4C277E';
+                    const filledSrc = starDataUri(primary);
+                    const emptySrc = starDataUri(EMPTY);
+
+                    let locked = false;
+                    let selected = 0;
+
+                    const paint = (count) =>
+                        stars.forEach((img, i) => { img.src = i < count ? filledSrc : emptySrc; });
+
+                    paint(0);
+
+                    stars.forEach((img, i) => {
+                        img.style.cursor = 'pointer';
+                        img.style.transition = 'transform 0.12s ease';
+
+                        const preview = () => { if (!locked) paint(i + 1); };
+                        img.addEventListener('mouseenter', preview);
+                        img.addEventListener('focus', preview);
+
+                        img.addEventListener('click', () => {
+                            if (locked) return;
+                            locked = true;
+                            selected = i + 1;
+                            paint(selected);
+                            stars.forEach(s => { s.style.pointerEvents = 'none'; });
+                        });
+                    });
+
+                    row.addEventListener('mouseleave', () => { if (!locked) paint(0); });
+                    row.addEventListener('focusout', () => { if (!locked) paint(0); });
+                });
+            };
+
+            new MutationObserver(enhance).observe(webchat, { childList: true, subtree: true });
+            enhance();
+        }
+        document.addEventListener('DOMContentLoaded', enhanceStarRatings);
+        // ─────────────────────────────────────────────────────────────────────────
+
+    // ── TYPING INDICATOR WAVE DOTS ────────────────────────────────────────────
+    // CSS ::before and ::after give us 2 pseudo-elements. For 3 wave dots we
+    // inject a <span> as the middle dot via a MutationObserver.
+    function injectTypingDots() {
+        const observer = new MutationObserver(() => {
+            document.querySelectorAll('#webchat .webchat__typing-indicator:not([data-dots])').forEach(el => {
+                el.setAttribute('data-dots', '1');
+                const span = document.createElement('span');
+                el.appendChild(span);
+            });
+        });
+        const webchat = document.getElementById('webchat');
+        if (webchat) {
+            observer.observe(webchat, { childList: true, subtree: true });
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        injectTypingDots();
+    });
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── CUSTOM FEEDBACK BUTTONS ────────────────────────────────────────────────
+    // WebChat's CDN bundle doesn't render anything for Copilot Studio's
+    // channelData.feedbackLoop flag, so we inject our own thumbs up/down UI
+    // into each bot bubble that carries the flag, and post the result back
+    // over DirectLine as a custom event a Copilot Studio topic can listen for.
+    const THUMB_UP_PATH   = 'M2 21h2a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H2v10zM22.72 11.29A1 1 0 0 0 22 11h-6.31l.95-4.57.03-.32a1.5 1.5 0 0 0-.44-1.06L15.17 4 8.59 10.59A2 2 0 0 0 8 12v7a2 2 0 0 0 2 2h8a2 2 0 0 0 1.83-1.19l3.06-7.14A1 1 0 0 0 23 12v-.09a1 1 0 0 0-.28-.62z';
+    const THUMB_DOWN_PATH = 'M22 3h-2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2V3zM1.28 12.71A1 1 0 0 0 2 13h6.31l-.95 4.57-.03.32a1.5 1.5 0 0 0 .44 1.06L9.83 20 16.41 13.41A2 2 0 0 0 17 12V5a2 2 0 0 0-2-2H7a2 2 0 0 0-1.83 1.19L2.11 11.33A1 1 0 0 0 1 12v.09a1 1 0 0 0 .28.62z';
+
+    function createFeedbackButtons(activityId, topic) {
+        const container = document.createElement('div');
+        container.className = 'sw-feedback-buttons';
+        container.innerHTML =
+            '<button type="button" class="sw-feedback-btn" data-rating="like" aria-label="This response was helpful" title="Helpful">' +
+                '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="' + THUMB_UP_PATH + '"></path></svg>' +
+            '</button>' +
+            '<button type="button" class="sw-feedback-btn" data-rating="dislike" aria-label="This response was not helpful" title="Not helpful">' +
+                '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="' + THUMB_DOWN_PATH + '"></path></svg>' +
+            '</button>';
+
+        container.querySelectorAll('.sw-feedback-btn').forEach(btn => {
+            btn.addEventListener('click', () => handleFeedbackClick(activityId, btn.dataset.rating, container, topic));
+        });
+
+        return container;
+    }
+
+    function handleFeedbackClick(activityId, rating, container, topic) {
+        if (container.dataset.submitted) return;
+        container.dataset.submitted = '1';
+
+        container.querySelectorAll('.sw-feedback-btn').forEach(btn => {
+            btn.disabled = true;
+            btn.classList.toggle('sw-feedback-btn--selected', btn.dataset.rating === rating);
+        });
+
+        trackFeedbackEvent(rating, activityId, topic);
+
+        if (!window._currentDirectLine) {
+            console.error('[Feedback] No active DirectLine connection to submit feedback on.');
+            return;
+        }
+
+        // Sent as a custom event so a Copilot Studio topic can trigger on
+        // the "userFeedback" event name to log or route the rating.
+        window._currentDirectLine.postActivity({
+            type: 'event',
+            name: 'userFeedback',
+            value: { rating, activityId, topic },
+            channelData: { postBack: true }
+        }).subscribe(
+            () => {},
+            err => console.error('[Feedback] Failed to submit feedback:', err)
+        );
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+
+    // ── INLINE SUGGESTED ACTIONS ───────────────────────────────────────────────
+    // Web Chat docks suggested-action buttons in a bar pinned above the send
+    // box by design (see styleOptions.suggestedAction* above), detached from
+    // the bot message that produced them. That bar is hidden via CSS
+    // (.webchat__suggested-actions { display: none }) and we render our own
+    // copy of the buttons inside the bot's bubble instead, so they scroll
+    // with the conversation like any other message content.
+    //
+    // Clicking a button posts the equivalent DirectLine activity ourselves,
+    // covering the action types Copilot Studio commonly sends (imBack,
+    // postBack, messageBack, openUrl). If a bot uses other card action
+    // types, they'll fall back to the imBack-style behaviour below.
+        function createSuggestedActionButtons(actions) {
+
+        const container = document.createElement('div');
+        container.className = 'sw-suggested-actions';
+
+        actions.forEach(action => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'sw-suggested-action-btn';
+            btn.textContent = action.title || action.value || '';
+            btn.addEventListener('click', () => handleSuggestedActionClick(action, container));
+            container.appendChild(btn);
+        });
+
+        return container;
+    }
+
+    function handleSuggestedActionClick(action, container) {
+        if (container.dataset.submitted) return;
+        container.dataset.submitted = '1';
+        container.querySelectorAll('.sw-suggested-action-btn').forEach(btn => {
+            btn.disabled = true;
+        });
+
+        if (action.type === 'openUrl') {
+            window.open(action.value, '_blank', 'noopener,noreferrer');
+            return;
+        }
+
+        if (!window._currentDirectLine) {
+            console.error('[SuggestedActions] No active DirectLine connection to post activity on.');
+            return;
+        }
+
+        const activity = { type: 'message' };
+        if (action.type === 'messageBack') {
+            activity.text  = action.displayText || action.title;
+            activity.value = action.value;
+        } else if (action.type === 'postBack') {
+            activity.text          = action.title;
+            activity.value         = action.value;
+            activity.channelData   = { postBack: true };
+        } else {
+            // imBack, and anything else we don't specifically recognise.
+            activity.text = action.value || action.title;
+        }
+
+        window._currentDirectLine.postActivity(activity).subscribe(
+            () => {},
+            err => console.error('[SuggestedActions] Failed to post activity:', err)
+        );
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // ── GOOGLE ANALYTICS TRACKING ────────────────────────────────────────────
+    // Fires via both paths since the page loads GTM (GTM-KXX9L5K) and a direct
+    // GA4 tag (G-1Q5DWR09VV). Pushing to dataLayer alone does nothing in GA4
+    // until a matching Trigger + GA4 Event tag exists in GTM for the
+    // "chatbot_feedback" event name — see notes below the code.
+    //
+    // Deliberately never sends raw question/answer text: free-text customer
+    // input can contain personal information (account numbers, addresses),
+    // which GA4's terms of service prohibit. `topic` is a bot-generated
+    // citation source name instead — see getCitationTopic().
+    function trackFeedbackEvent(rating, activityId, topic) {
+        try {
+            if (Array.isArray(window.dataLayer)) {
+                window.dataLayer.push({
+                    event: 'chatbot_feedback',
+                    feedback_rating: rating,
+                    feedback_activity_id: activityId,
+                    feedback_topic: topic || '(not set)'
+                });
+            }
+        } catch (e) {
+            console.error('[Feedback] dataLayer push failed:', e);
+        }
+
+        try {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'chatbot_feedback', {
+                    rating: rating,
+                    activity_id: activityId,
+                    topic: topic || '(not set)'
+                });
+            }
+        } catch (e) {
+            console.error('[Feedback] gtag call failed:', e);
+        }
+    }
+
+    function trackConversationStart() {
+        try {
+            if (Array.isArray(window.dataLayer)) {
+                window.dataLayer.push({ event: 'chatbot_conversation_started' });
+            }
+        } catch (e) {
+            console.error('[Analytics] dataLayer push failed:', e);
+        }
+        try {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'chatbot_conversation_started');
+            }
+        } catch (e) {
+            console.error('[Analytics] gtag call failed:', e);
+        }
+    }
+
+    function trackConversationEnd(queryCount) {
+        try {
+            if (Array.isArray(window.dataLayer)) {
+                window.dataLayer.push({
+                    event: 'chatbot_conversation_ended',
+                    conversation_query_count: queryCount
+                });
+            }
+        } catch (e) {
+            console.error('[Analytics] dataLayer push failed:', e);
+        }
+        try {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'chatbot_conversation_ended', {
+                    query_count: queryCount
+                });
+            }
+        } catch (e) {
+            console.error('[Analytics] gtag call failed:', e);
+        }
+    }
+
+    // Fires at most once per conversation. Called from beforeunload/pagehide
+    // (browser/tab close or navigation away) and directly from
+    // restartConversation(). Guarded by conversationEndLogged since some
+    // browsers fire both beforeunload and pagehide for the same unload.
+    function endConversationTracking() {
+        if (conversationEndLogged) return;
+        conversationEndLogged = true;
+        if (currentQueryCount > 0) {
+            trackConversationEnd(currentQueryCount);
+        }
+    }
+    window.addEventListener('beforeunload', endConversationTracking);
+    window.addEventListener('pagehide', endConversationTracking);
+
+    // Fires when a customer clicks a reference/citation link the bot included
+    // in a generative answer (e.g. the [1] Discoloured Water FAQs link).
+    // Safe to send the URL/link text as-is since these are bot-authored
+    // Scottish Water links, never customer-typed free text.
+    function trackReferenceLinkClick(url, linkText) {
+        try {
+            if (Array.isArray(window.dataLayer)) {
+                window.dataLayer.push({
+                    event: 'chatbot_reference_click',
+                    link_url: url,
+                    link_text: linkText
+                });
+            }
+        } catch (e) {
+            console.error('[Analytics] dataLayer push failed:', e);
+        }
+        try {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'chatbot_reference_click', {
+                    link_url: url,
+                    link_text: linkText
+                });
+            }
+        } catch (e) {
+            console.error('[Analytics] gtag call failed:', e);
+        }
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    function injectFeedbackButtons() {
+        const observer = new MutationObserver(() => {
+            document
+                .querySelectorAll('#webchat .webchat__bubble:not(.webchat__bubble--from-user):not(.webchat__bubble--typing):not([data-feedback-checked])')
+                .forEach(bubble => {
+                    bubble.setAttribute('data-feedback-checked', '1');
+
+                    const next = pendingBotActivities.shift();
+                    if (!next) return;
+
+                    const target = bubble.querySelector('.webchat__bubble__content') || bubble;
+
+                    if (next.suggestedActions.length === 0 && !next.id.includes('0000001') && next.topic !== null) {
+                        target.appendChild(createFeedbackButtons(next.id, next.topic));
+                    }
+
+
+                    // Rendered inline in place of Web Chat's default docked
+                    // suggested-actions bar — see the "INLINE SUGGESTED
+                    // ACTIONS" section above.
+                   
+                    //if (next.suggestedActions && next.suggestedActions.length) {
+                    //    target.appendChild(createSuggestedActionButtons(next.suggestedActions));
+                    //}
+                });
+        });
+        const webchat = document.getElementById('webchat');
+        if (webchat) {
+            observer.observe(webchat, { childList: true, subtree: true });
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        injectFeedbackButtons();
+    });
+
+    // ── REFERENCE LINK CLICK TRACKING ───────────────────────────────────────────
+    // Delegated listener since links are inside bot messages rendered after
+    // page load — a direct listener on each <a> wouldn't exist yet at load time.
+    document.addEventListener('DOMContentLoaded', () => {
+        const webchat = document.getElementById('webchat');
+        if (!webchat) return;
+        webchat.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href]');
+            if (link) {
+                trackReferenceLinkClick(link.href, link.textContent.trim());
+            }
+        });
+    });
+    // ─────────────────────────────────────────────────────────────────────────
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // Chat connects lazily on first open — see showChat() / warmUpChat().
+    </script>
+    <style>
+        :root {
+            --primary-gradient: var(--primary-color);
+            --chat-width: 600px;
+            --chat-height: 680px;
+            --header-height: 56px;
+            --disclaimer-height: 24px;
+            --border-radius: 12px;
+            --transition-speed: 0.3s;
+            /* Fluent 2 "decelerate" motion curve */
+            --fluent-easing: cubic-bezier(0.33, 0, 0.1, 1);
+        }
+
+     /*   * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: AvenirSWNew, sans-serif;
+        }*/
+
+       /* body {
+            min-height: 100vh;
+            background-color: #f3f4f6;
+        }*/
+
+        #chatbot-popup {
+            display: none;
+            position: fixed;
+            bottom: 7px;
+            right: 10px;
+            width: var(--chat-width);
+            height: var(--chat-height);
+            background: white;
+            border-radius: var(--border-radius);
+            /* Fluent 2 elevation "64" shadow: soft ambient layer + tighter key light layer */
+            box-shadow: 0 25.6px 57.6px rgba(0, 0, 0, 0.22), 0 4.8px 14.4px rgba(0, 0, 0, 0.18);
+            overflow: hidden;
+            opacity: 0;
+            transform-origin: bottom right;
+            transform: scale(0.95);
+            transition: all var(--transition-speed) var(--fluent-easing);
+            z-index: 5001;
+            display: none;
+            flex-direction: column;
+        }
+
+            #chatbot-popup.visible {
+                display: flex;
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            /* ── VERTICAL-ONLY EXPAND ─────────────────────────────────────────────────── */
+            #chatbot-popup.expanded-height {
+                height: 98vh;
+            }
+
+        #expand-toggle-btn svg {
+            transition: transform 0.3s ease;
+        }
+
+        #expand-toggle-btn.active svg {
+            transform: rotate(180deg);
+        }
+
+
+        /* ── STAR RATING ─────────────────────────────────────────────────────────── */
+        .sw-suggested-actions.sw-star-rating {
+            flex-wrap: nowrap;
+            gap: 2px;
+            border-top: none;
+            margin-top: 4px;
+            padding-top: 0;
+        }
+
+        .sw-star-btn {
+            background: none;
+            border: none;
+            padding: 2px;
+            cursor: pointer;
+            color: #d9cfe6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.12s ease, transform 0.12s ease;
+        }
+
+            .sw-star-btn:hover {
+                transform: scale(1.12);
+            }
+
+        /* hover preview and selected state both fill the stars up to that point */
+        .sw-star-btn--hover,
+        .sw-star-btn--selected {
+            color: var(--primary-color);
+        }
+
+        .sw-star-btn:focus-visible {
+            outline: 2px solid var(--primary-color, #4C277E);
+            outline-offset: 1px;
+            border-radius: 4px;
+        }
+
+        /* once submitted, lock the stars but keep the chosen ones lit */
+        .sw-star-rating[data-submitted] .sw-star-btn {
+            cursor: default;
+            pointer-events: none;
+            transform: none;
+        }
+
+
+        @media (max-width: 768px), (max-height: 700px) {
+            /* mobile popup is already fullscreen, nothing to expand */
+            #chatbot-popup.expanded-height {
+                height: 100%;
+            }
+        }
+        /* ────────────────────────────────────────────────────────────────────────── */
+
+        #chatbot-header {
+            background: var(--primary-color);
+            padding: 16px 20px;
+            height: var(--header-height);
+            flex: 0 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--header-textColor);
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            color: var(--header-textColor);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+            .icon-button:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .icon-button:focus {
+                outline: 2px solid rgba(255, 255, 255, 0.5);
+                outline-offset: 2px;
+            }
+
+        /* ── VOICE TOGGLE BUTTON ─────────────────────────────────────────────────── */
+        #voice-toggle-btn.active {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+            #voice-toggle-btn.active svg {
+                filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+            }
+
+            #voice-toggle-btn.active::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: 8px;
+                border: 2px solid rgba(255, 255, 255, 0.5);
+                animation: voice-pulse 1.4s ease-out infinite;
+            }
+
+        @keyframes voice-pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* ── VOICE INDICATOR BAR ─────────────────────────────────────────────────── */
+        #voice-indicator {
+            background: rgba(0, 91, 187, 0.07);
+            border-bottom: 1px solid rgba(0, 91, 187, 0.15);
+            padding: 5px 16px;
+            font-size: 12px;
+            color: #006fba;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            flex: 0 0 auto;
+        }
+
+            #voice-indicator.visible {
+                display: flex;
+            }
+
+        .voice-dot {
+            width: 7px;
+            height: 7px;
+            background: #006fba;
+            border-radius: 50%;
+            animation: voice-dot-pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes voice-dot-pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.7);
+            }
+        }
+
+        #webchat {
+            flex: 1 1 auto;
+            min-height: 0;
+            background-color: #f9fafb;
+            position: relative;
+        }
+
+        .webchat-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ── AI DISCLAIMER (below the send box) ──────────────────────────────────── */
+        #chat-disclaimer {
+            flex: 0 0 auto;
+            height: var(--disclaimer-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(232, 233, 235);
+            border-top: 1px solid #e0e0e0;
+            font-size: 11px;
+            line-height: 1.2;
+            color: #6b6b6b;
+            text-align: center;
+            padding: 0 12px;
+        }
+        /* ────────────────────────────────────────────────────────────────────────── */
+
+        /* ── TYPING INDICATOR — CSS wave animation ───────────────────────────────── */
+        /* Hide the default gif/image based typing animation */
+        #webchat .webchat__typing-indicator {
+            background-image: none !important;
+            background: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 5px !important;
+            width: auto !important;
+            height: auto !important;
+            min-width: 44px !important;
+            padding: 4px 2px !important;
+        }
+
+            /* Three wave dots via ::before, injected span, ::after */
+            #webchat .webchat__typing-indicator::before,
+            #webchat .webchat__typing-indicator span,
+            #webchat .webchat__typing-indicator::after {
+                content: '';
+                display: block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #006fba;
+                flex-shrink: 0;
+                animation: sw-wave 1.2s ease-in-out infinite;
+            }
+
+            #webchat .webchat__typing-indicator::before {
+                animation-delay: 0s;
+            }
+
+            #webchat .webchat__typing-indicator span {
+                animation-delay: 0.2s;
+            }
+
+            #webchat .webchat__typing-indicator::after {
+                animation-delay: 0.4s;
+            }
+
+        @keyframes sw-wave {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+
+            30% {
+                transform: translateY(-8px);
+                opacity: 1;
+            }
+        }
+
+        /* ── FIRST-OPEN LOADING INDICATOR ────────────────────────────────────────── */
+        /* Reuses the same sw-wave animation/dot styling as the typing indicator
+               above, so the "connecting" state and "agent is replying" state look
+               like the same visual language. */
+        .sw-loading-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 5px;
+        }
+
+            .sw-loading-dots span {
+                display: block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #006fba;
+                flex-shrink: 0;
+                animation: sw-wave 1.2s ease-in-out infinite;
+            }
+
+                .sw-loading-dots span:nth-child(1) {
+                    animation-delay: 0s;
+                }
+
+                .sw-loading-dots span:nth-child(2) {
+                    animation-delay: 0.2s;
+                }
+
+                .sw-loading-dots span:nth-child(3) {
+                    animation-delay: 0.4s;
+                }
+        /* ────────────────────────────────────────────────────────────────────────── */
+
+        /* Typing bubble sizing */
+        #webchat .webchat__bubble--typing {
+            background: #f0eded !important;
+            border-radius: 41px !important;
+            padding: 12px 16px !important;
+            min-height: auto !important;
+        }
+        /* ────────────────────────────────────────────────────────────────────────── */
+
+        /* ── CONNECTION ERROR BANNER ─────────────────────────────────────────────── */
+        .sw-connection-error {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 24px;
+            text-align: center;
+            background: #f9fafb;
+        }
+
+            .sw-connection-error p {
+                color: #444;
+                font-size: 14px;
+                line-height: 1.4;
+                max-width: 320px;
+            }
+
+        .sw-connection-error__retry {
+            background: var(--primary-color, #4C277E);
+            color: #fff;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+
+            .sw-connection-error__retry:hover {
+                opacity: 0.9;
+            }
+        /* ────────────────────────────────────────────────────────────────────────── */
+
+        /* ── CUSTOM FEEDBACK BUTTONS ─────────────────────────────────────────────── */
+        .sw-feedback-buttons {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .sw-feedback-btn {
+            background: none;
+            border: none;
+            color: #757575;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+
+            .sw-feedback-btn:hover:not(:disabled) {
+                background: rgba(0, 0, 0, 0.06);
+                color: #242424;
+            }
+
+            .sw-feedback-btn:disabled {
+                cursor: default;
+                opacity: 0.4;
+            }
+
+        .sw-feedback-btn--selected {
+            color: var(--primary-color, #4C277E);
+            opacity: 1 !important;
+        }
+
+        .sw-feedback-btn:focus-visible {
+            outline: 2px solid var(--primary-color, #4C277E);
+            outline-offset: 1px;
+        }
+        /* ────────────────────────────────────────────────────────────────────────── */
+
+        /* ── INLINE SUGGESTED ACTIONS ────────────────────────────────────────────── */
+        /* Web Chat's own docked suggested-actions bar (pinned above the send
+           box, detached from the message that produced it) is hidden here —
+           we render our own copy inline inside the bubble instead, see
+           createSuggestedActionButtons() in the script above. If a future
+           Web Chat upgrade renames this class, inspect the docked bar's
+           element in devtools and update the selector below to match. */
+        #webchat.sw-inline-actions-ok .webchat__suggested-actions {
+            display: none !important;
+        }
+        .sw-suggested-actions {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .sw-suggested-action-btn {
+            background: #fff;
+            border: 1px solid var(--primary-color, #4C277E);
+            color: var(--primary-color, #4C277E);
+            border-radius: 16px;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+
+            .sw-suggested-action-btn:hover:not(:disabled) {
+                background: var(--primary-color, #4C277E);
+                color: #fff;
+            }
+
+            .sw-suggested-action-btn:disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+
+            .sw-suggested-action-btn:focus-visible {
+                outline: 2px solid var(--primary-color, #4C277E);
+                outline-offset: 1px;
+            }
+        /* ────────────────────────────────────────────────────────────────────────── */
+
+        #webchat .webchat__basic-transcript__content {
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
+        }
+
+        #webchat .webchat__bubble__content {
+            padding: 8px 12px !important;
+        }
+
+        #webchat .webchat__bubble {
+            max-width: 85% !important;
+            margin: 8px !important;
+            /* Fluent 2 elevation "2": subtle resting shadow on surfaces */
+            box-shadow: 0 0.6px 1.8px rgba(0, 0, 0, 0.11), 0 0.1px 0.4px rgba(0, 0, 0, 0.06) !important;
+        }
+
+        #webchat .webchat__basic-transcript__content ul,
+        #webchat .webchat__basic-transcript__content ol,
+        #webchat .webchat__bubble__content ul,
+        #webchat .webchat__bubble__content ol {
+            padding-left: 24px !important;
+            margin: 8px 0 !important;
+            list-style-position: outside !important;
+        }
+
+        #webchat .webchat__basic-transcript__content li,
+        #webchat .webchat__bubble__content li {
+            margin: 4px 0 !important;
+            padding-left: 4px !important;
+        }
+
+        /* ── OPEN BUTTON ─────────────────────────────────────────────────────────── */
+        #open-chat {
+            position: fixed;
+            bottom: 7px;
+            right: 10px;
+            height: 50px;
+            width: 50px;
+            border-radius: 25px;
+            background: var(--primary-gradient);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 6.4px 14.4px rgba(0, 0, 0, 0.18), 0 1.2px 3.6px rgba(0, 0, 0, 0.11);
+            transition: width 0.4s var(--fluent-easing), gap 0.4s var(--fluent-easing), padding 0.4s var(--fluent-easing), transform var(--transition-speed) var(--fluent-easing), box-shadow var(--transition-speed) var(--fluent-easing);
+            z-index: 998;
+            white-space: nowrap;
+        }
+
+            #open-chat.hidden {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+                pointer-events: none;
+            }
+
+            #open-chat:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12.8px 28.8px rgba(0, 0, 0, 0.2), 0 2.4px 7.2px rgba(0, 0, 0, 0.14);
+            }
+
+            #open-chat:focus {
+                outline: 3px solid rgba(79, 70, 229, 0.5);
+                outline-offset: 2px;
+            }
+
+        #open-chat-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            #open-chat-icon svg {
+                width: 26px;
+                height: 26px;
+                color: white;
+                transition: transform 0.2s ease;
+            }
+
+        #open-chat-label {
+            color: #fff;
+            font-family: AvenirSWNew, sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            padding-right: 18px;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease 0.15s;
+        }
+
+        #open-chat.expanded {
+            width: auto;
+        }
+
+            #open-chat.expanded #open-chat-label {
+                max-width: 325px;
+                opacity: 1;
+            }
+
+        @media (max-width: 768px), (max-height: 700px) {
+            #chatbot-popup {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+
+            #open-chat.expanded #open-chat-label {
+                font-size: 15px;
+            }
+        }
+    </style>
+    <!-- ── CHAT POPUP ─────────────────────────────────────────────────────────── -->
+    <div id="chatbot-popup" role="complementary" aria-label="Chat Assistant">
+        <div id="chatbot-header">
+            <div class="header-title">
+                <svg class="chat-icon" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Scottish Water AI Assistant</span>
+            </div>
+            <div class="header-buttons">
+
+                <!-- Voice toggle -->
+                <button class="icon-button"
+                        id="voice-toggle-btn"
+                        aria-label="Enable voice"
+                        aria-pressed="false"
+                        title="Toggle voice input and speech">
+                    <svg width="20" height="20" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </button>
+
+                <!-- Expand/collapse height -->
+                <button class="icon-button"
+                        id="expand-toggle-btn"
+                        aria-label="Expand chat window"
+                        aria-pressed="false"
+                        title="Expand chat height">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="20" height="20" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5.83L15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z" /></svg>
+
+                </button>
+
+                <!-- Restart -->
+                <button class="icon-button"
+                        id="restart-button"
+                        onclick="restartConversation()"
+                        aria-label="Restart Conversation">
+                    <svg width="20" height="20" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                    </svg>
+                </button>
+
+                <!-- Close -->
+                <button class="icon-button"
+                        id="close-button"
+                        onclick="hideChat()"
+                        aria-label="Close Chat">
+                    <svg width="20" height="20" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Voice active indicator bar -->
+        <div id="voice-indicator" role="status" aria-live="polite">
+            <span class="voice-dot" aria-hidden="true"></span>
+            Voice mode on &mdash; click the blue mic to speak your message or type below
+        </div>
+
+        <div id="webchat"></div>
+
+        <!-- AI accuracy disclaimer, shown below the send box -->
+        <div id="chat-disclaimer">AI-generated content may be incorrect</div>
+    </div>
+    <!-- ── OPEN BUTTON ────────────────────────────────────────────────────────── -->
+    <button id="open-chat" onclick="showChat()" aria-label="Open Chat Assistant">
+        <span id="open-chat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </span>
+        <span id="open-chat-label">Need help? Chat with our AI Assistant</span>
+    </button>
+
+
+        
+
+
+<div class="footerContactDetails">
+
+    <a href="tel:08000778778" class="footerTel">0800 0778 778</a>24 hours 7 days a week<a href="https://swcustomerportal.microsoftcrmportals.com/ReportAProblem/" class="footerEmail">Report a problem</a>
+
+    <div class="footerSocial">
+        <ul class="socialIcons followButtons">
+
+            <li class="followUsText">
+                Follow us
+            </li>
+
+                <li>
+                    <a href="https://www.twitter.com/scottish_water" target="_blank">
+                        <img src="/-/media/scottishwater/images/project-files/images/social/x.svg?bc=Black&amp;as=0&amp;iar=0&amp;hash=2CE5B0CB58FC8DD5C301F77AD9AD2DBB" alt="X formerly Twitter" DisableWebEdit="False" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/scottishwater" target="_blank">
+                        <img src="/-/media/scottishwater/images/project-files/images/social/facebook.svg?bc=Black&amp;as=0&amp;iar=0&amp;hash=D96D0280F8553A1F70FDF9E62F0CFD26" alt="Facebook" DisableWebEdit="False" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/scottishwater/?hl=en" target="_blank">
+                        <img src="/-/media/scottishwater/images/project-files/images/social/instagram.svg?bc=Black&amp;as=0&amp;iar=0&amp;hash=2A544974E64395235DABD6F4B84DA0ED" alt="Instagram" DisableWebEdit="False" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/company/scottish-water" target="_blank">
+                        <img src="/-/media/scottishwater/images/project-files/images/social/linkedin.svg?bc=Black&amp;as=0&amp;iar=0&amp;hash=2ADDC81E93E24D5EB4E0111D4D418694" alt="LinkedIn" DisableWebEdit="False" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/channel/UCEvWNHb7LBKSN7HkRjc-UgA" target="_blank">
+                        <img src="/-/media/scottishwater/images/project-files/images/social/youtube.svg?bc=Black&amp;as=0&amp;iar=0&amp;hash=C1FC74DA58AA0B38556CE9E2CDF3ACB6" alt="YouTube" DisableWebEdit="False" />
+                    </a>
+                </li>
+
+        </ul>
+
+
+    </div> <!-- .footerSocial -->
+</div> <!-- .footerContactDetails -->
+
+        <div class="footerBottomWrap">
+
+            <div class="footerQuickLinksWrap">
+    <nav>
+        <ul>
+                    <li>
+                        <a href="/about-us/what-we-do/legal/accessibility" target="_blank">
+                            Accessibility
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="/help-and-resources/contact-us/website-feedback" target="">
+                            Website Feedback
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="/make-a-payment" target="">
+                            Pay Invoice
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="https://swcustomerportal.powerappsportals.com/" target="">
+                            LP Portal
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="/help-and-resources/contact-us" target="">
+                            Contact Us
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="/about-us/what-we-do/legal" target="">
+                            Legal
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="/about-us/what-we-do/data-privacy" target="">
+                            Data Privacy
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="/help-and-resources/document-hub/key-publications/governance" target="">
+                            Modern Slavery
+                        </a>                        
+                    </li>
+        </ul>
+    </nav>
+</div> <!-- .footerQuickLinksWrap -->
+
+            <div class="credits">
+                <span class="copyright">
+
+&copy; Copyright 2026 Scottish Water. All rights reserved.                </span> <!-- .copyright -->
+                
+            </div> <!-- .credits -->
+        </div> <!-- .footerBottomWrap -->
+    </div> <!-- .footer -->
+</div> <!-- .footerWrap -->
+
+    <div class="scrollToTop">
+        <a href="#header">
+            <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            Scroll to top
+        </a>
+    </div> <!-- .scrollToTop -->
+
+
+</div>
+
+
+    <script>
+        window.addEventListener('CookieScriptLoaded', function () {
+            $('#cookiescript_badgesvg').prop('tabindex', '0');
+            $('#cookiescript_badge').prop('tabindex', '0');
+            });
+    </script>
+    <!--Start Cookie Script-->
+    <style>
+        #cookiescript_badge {
+            z-index: 5000 !important;
+        }
+    </style>
+    <script id="cookieScript" type="text/javascript" charset="UTF-8" src="//cookie-script.com/s/a5b06d5c4370b256e394c1d6d03399dd.js"></script>
+
+    <!--End Cookie Script-->
+
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5979ebec80bb1d0011ab6e5d&amp;product=custom-share-buttons"></script>
+    <script src="/scripts/search/search.js"></script>
+
+<!-- v10 -->
+</body>
+</html>
+
+
+

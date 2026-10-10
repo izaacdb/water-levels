@@ -37,3 +37,7 @@ export const countryName = (code: string) => COUNTRY_NAMES[code] ?? code
 
 /** "Source"/"Sources" label for one or several official sources (B2′). */
 export const sourceLabel = (sources: unknown[]) => (sources.length > 1 ? 'Sources' : 'Source')
+
+/** B25: what a published-total area is, wherever its figure appears. */
+export const TOTAL_ONLY_NOTE =
+  'Published as one total for all the operator’s reservoirs: there are no per-reservoir figures or capacity, and it isn’t added into the country total.'
