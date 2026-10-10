@@ -5,7 +5,8 @@ Usage: uv run python scripts/build_uk_registry.py <source_id> [<source_id> ...]
 Names come from each company's live publication. For Stream companies, coordinates
 come from their own datasets (the latest position published for each reservoir).
 For the others, coordinates and (for %-only companies) capacities are hand-set in
-registry/uk_overrides.csv, with the source of each value noted there; overrides win
+registry/uk_overrides.csv, with the source of each value noted there (reservoirs only
+in a company's history are listed in registry/uk_extra.csv); overrides win
 over generated values. The river basin district is the WFD district containing the
 reservoir (web/public/geo/rbd.geojson). Existing rows for other sources are kept;
 rows for the named sources are rebuilt.
@@ -37,6 +38,10 @@ PAGE_ADAPTERS = {
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "pipeline" / "registry" / "uk.csv"
 OVERRIDES = ROOT / "pipeline" / "registry" / "uk_overrides.csv"
+# Reservoirs that appear only in a company's history (e.g. Thornton, listed by Severn
+# Trent until mid-2023): kept so their history isn't dropped. publish.py retires them
+# from current views after a year without readings.
+EXTRA = ROOT / "pipeline" / "registry" / "uk_extra.csv"
 RBD = ROOT / "web" / "public" / "geo" / "rbd.geojson"
 FIELDS = [
     "id",
@@ -135,6 +140,13 @@ def main(source_ids: list[str]) -> None:
             ]
     for source_id in source_ids:
         rows += _rows(source_id, districts)
+    if EXTRA.exists():
+        with EXTRA.open() as fh:
+            rows += [
+                {f: r.get(f, "") for f in FIELDS}
+                for r in csv.DictReader(fh)
+                if r["source_id"] in source_ids
+            ]
     if OVERRIDES.exists():
         with OVERRIDES.open() as fh:
             for fix in csv.DictReader(fh):

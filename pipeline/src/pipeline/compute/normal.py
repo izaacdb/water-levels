@@ -6,6 +6,10 @@ import polars as pl
 
 WINDOW_YEARS = 10
 MIN_YEARS = 5
+# A past year only counts if the capacity reporting that week was within this ratio of
+# this week's: otherwise it describes a different set of reservoirs (e.g. a country
+# before most of its sources began publishing).
+COMPARABLE = 0.8
 
 
 def _keyed(df: pl.DataFrame) -> pl.DataFrame:
@@ -23,12 +27,20 @@ def with_normals(by_area: pl.DataFrame) -> pl.DataFrame:
     Normal for (area, week) is the mean % full for the same ISO week across the
     previous WINDOW_YEARS years (not including this one). A year without a value
     for that exact week uses its neighbouring week instead (fortnightly
-    historical sources). It needs MIN_YEARS of history; otherwise it's null and
-    the area reads "insufficient history".
+    historical sources). Years whose reporting capacity isn't comparable with this
+    week's (COMPARABLE) are left out. It needs MIN_YEARS of history; otherwise it's
+    null and the area reads "insufficient history".
     """
     keyed = _keyed(by_area)
+    weighted = "capacity_hm3" in keyed.columns
+    if not weighted:
+        keyed = keyed.with_columns(pl.lit(1.0).alias("capacity_hm3"))
     base = keyed.select(
-        "area_id", "_wk", pl.col("_year").alias("_ref_year"), pl.col("pct").alias("_ref")
+        "area_id",
+        "_wk",
+        pl.col("_year").alias("_ref_year"),
+        pl.col("pct").alias("_ref"),
+        pl.col("capacity_hm3").alias("_ref_cap"),
     )
     # Each reference year contributes its value for the same ISO week or, when that
     # week is missing (sources with fortnightly history), the neighbouring week.
@@ -41,11 +53,13 @@ def with_normals(by_area: pl.DataFrame) -> pl.DataFrame:
         ]
     )
     stats = (
-        keyed.select("area_id", "week", "_year", "_wk")
+        keyed.select("area_id", "week", "_year", "_wk", "capacity_hm3")
         .join(reference, on=["area_id", "_wk"])
         .filter(
             (pl.col("_ref_year") < pl.col("_year"))
             & (pl.col("_ref_year") >= pl.col("_year") - WINDOW_YEARS)
+            & (pl.col("_ref_cap") >= pl.col("capacity_hm3") * COMPARABLE)
+            & (pl.col("_ref_cap") <= pl.col("capacity_hm3") / COMPARABLE)
         )
         .sort("_dist")
         .group_by("area_id", "week", "_ref_year", maintain_order=True)
@@ -69,4 +83,5 @@ def with_normals(by_area: pl.DataFrame) -> pl.DataFrame:
         )
         .with_columns((pl.col("pct") - pl.col("normal_pct")).alias("anomaly_pts"))
         .drop("_year", "_wk", "_mean", "_p10", "_p90")
+        .drop([] if weighted else ["capacity_hm3"])
     )
