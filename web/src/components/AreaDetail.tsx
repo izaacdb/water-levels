@@ -19,9 +19,11 @@ interface Props {
   onSelect: (id: string) => void
   /** Absent when the area is already in the comparison or it's full. */
   onCompare?: () => void
+  /** Why this area's country is stale or withdrawn (E5/E6). */
+  countryNote?: string
 }
 
-export function AreaDetail({ area, entry, source, parent, onBack, onSelect, onCompare }: Props) {
+export function AreaDetail({ area, entry, source, parent, onBack, onSelect, onCompare, countryNote }: Props) {
   const series = useSeries(area.id)
   return (
     <section className="detail" aria-labelledby="detail-title">
@@ -59,6 +61,7 @@ export function AreaDetail({ area, entry, source, parent, onBack, onSelect, onCo
         {formatPct(entry.pct)} <span className="hero-label">full</span>
       </p>
       <p className="normal">{normalLine(entry)}</p>
+      {countryNote && <p className="status-note">{countryNote}</p>}
       {flagNotes(entry).map((note) => (
         <p key={note} className="notice">
           {note}. Shown as published; left out of basin and country totals.

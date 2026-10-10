@@ -15,7 +15,7 @@ from pipeline import health as health_store
 from pipeline import http, store
 from pipeline.adapters.base import SourceAdapter
 from pipeline.publish import build_outputs, write_outputs
-from pipeline.registry import attach_reservoir_ids, load_rbds, load_registry
+from pipeline.registry import attach_reservoir_ids, load_rbds, load_registry, load_withdrawn
 
 log = logging.getLogger(__name__)
 
@@ -88,7 +88,13 @@ def run(
     store.save(merged, store_path)
     health_store.save(health, health_file)
     outputs = build_outputs(
-        merged, registries, load_rbds(), [a.meta for a in adapters], now=now, health=health
+        merged,
+        registries,
+        load_rbds(),
+        [a.meta for a in adapters],
+        now=now,
+        health=health,
+        withdrawn=load_withdrawn(),
     )
     write_outputs(outputs, out_dir=out_dir)
     return report
