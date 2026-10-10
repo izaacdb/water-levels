@@ -1,4 +1,4 @@
-"""Deterministic two-country dataset for the web app's end-to-end tests.
+"""Deterministic three-country dataset for the web app's end-to-end tests.
 
 Built with the real publish code, so the fixture always matches the contract.
 Usage: uv run python scripts/make_e2e_fixtures.py ../web/e2e/fixtures
@@ -21,7 +21,12 @@ NOW = datetime(2026, 10, 10, 6, tzinfo=UTC)
 SOURCES = [
     SourceMeta("es-test", "ES", "Test source (Spain)", "https://example.org/es"),
     SourceMeta("pt-test", "PT", "Test source (Portugal)", "https://example.org/pt"),
+    # The UK has two sources, as each water company publishes its own reservoirs (B2′).
+    SourceMeta("uk-north-test", "UK", "Test water company (north)", "https://example.org/uk-n"),
+    SourceMeta("uk-south-test", "UK", "Test water company (south)", "https://example.org/uk-s"),
 ]
+UK_SOURCE = {"UK-zeta": "uk-north-test", "UK-eta": "uk-south-test"}
+COVERAGE = {"UK": "England only (test fixture)"}
 RESERVOIRS = [
     # id, name, rbd, lat, lon, capacity, phase
     ("ES-alpha", "Alpha", "ES030", 40.4, -3.7, 300.0, 0.0),
@@ -29,7 +34,13 @@ RESERVOIRS = [
     ("ES-gamma", "Gamma", "ES050", 37.9, -4.8, 500.0, 2.0),
     ("PT-delta", "Delta", "PTRH3", 41.1, -7.6, 200.0, 0.5),
     ("PT-epsilon", "Epsilon", "PTRH5A", 39.5, -8.0, 400.0, 1.5),
+    ("UK-zeta", "Zeta", "UK04", 53.5, -1.8, 50.0, 0.8),
+    ("UK-eta", "Eta", "UK07", 51.0, 0.4, 30.0, 2.5),
 ]
+
+
+def _source(rid: str) -> str:
+    return UK_SOURCE.get(rid) or ("es-test" if rid.startswith("ES") else "pt-test")
 
 
 def main(out: str) -> None:
@@ -46,7 +57,7 @@ def main(out: str) -> None:
                     "observed_on": day,
                     "volume_hm3": round(cap * min(season + trend, 0.98), 1),
                     "capacity_hm3": cap,
-                    "source_id": "es-test" if rid.startswith("ES") else "pt-test",
+                    "source_id": _source(rid),
                     "fetched_at": NOW,
                 }
             )
@@ -61,18 +72,28 @@ def main(out: str) -> None:
                 "rbd_code": [r[2] for r in RESERVOIRS if r[0].startswith(country)],
                 "lat": [str(r[3]) for r in RESERVOIRS if r[0].startswith(country)],
                 "lon": [str(r[4]) for r in RESERVOIRS if r[0].startswith(country)],
+                "source_id": [_source(r[0]) for r in RESERVOIRS if r[0].startswith(country)],
             }
         )
-        for country in ("ES", "PT")
+        for country in ("ES", "PT", "UK")
     }
     rbds = pl.DataFrame(
         {
-            "code": ["ES030", "ES050", "PTRH3", "PTRH5A"],
-            "country": ["ES", "ES", "PT", "PT"],
-            "name": ["Tajo", "Guadalquivir", "Douro", "Tejo e Ribeiras do Oeste"],
+            "code": ["ES030", "ES050", "PTRH3", "PTRH5A", "UK04", "UK07"],
+            "country": ["ES", "ES", "PT", "PT", "UK", "UK"],
+            "name": [
+                "Tajo",
+                "Guadalquivir",
+                "Douro",
+                "Tejo e Ribeiras do Oeste",
+                "Humber",
+                "South East",
+            ],
         }
     )
-    write_outputs(build_outputs(store, registries, rbds, SOURCES, now=NOW), Path(out))
+    write_outputs(
+        build_outputs(store, registries, rbds, SOURCES, now=NOW, coverage=COVERAGE), Path(out)
+    )
     print(f"wrote fixtures to {out}")
 
 
