@@ -1,0 +1,27 @@
+{
+  "bg-moew": {
+    "last_success": "2026-10-10T15:21:19.456594+00:00",
+    "last_error": null,
+    "consecutive_failures": 0
+  },
+  "cy-wdd": {
+    "last_success": "2026-10-10T15:21:19.456594+00:00",
+    "last_error": null,
+    "consecutive_failures": 0
+  },
+  "cz-povodi": {
+    "last_success": null,
+    "last_error": "RuntimeError: https://www.pla.cz/portal/nadrze/cz/Objemy.aspx still showing its wait page after 6 attempts",
+    "consecutive_failures": 1
+  },
+  "es-miteco": {
+    "last_success": "2026-10-10T15:21:19.456594+00:00",
+    "last_error": null,
+    "consecutive_failures": 0
+  },
+  "pt-apa": {
+    "last_success": "2026-10-10T15:21:19.456594+00:00",
+    "last_error": null,
+    "consecutive_failures": 0
+  }
+}
