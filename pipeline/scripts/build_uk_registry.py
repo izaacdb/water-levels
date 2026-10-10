@@ -23,6 +23,7 @@ from shapely.geometry import Point, shape
 from pipeline import http
 from pipeline.adapters.base import slugify
 from pipeline.adapters.uk_anglian import AnglianAdapter
+from pipeline.adapters.uk_scottish_water import ScottishWaterAdapter
 from pipeline.adapters.uk_severn_trent import HAFREN_DYFRDWY, SEVERN_TRENT, StoragePagesAdapter
 from pipeline.adapters.uk_stream import STREAM_COMPANIES, StreamAdapter, display_name
 
@@ -30,6 +31,7 @@ PAGE_ADAPTERS = {
     "uk-severn-trent": lambda: StoragePagesAdapter(SEVERN_TRENT),
     "uk-hafren-dyfrdwy": lambda: StoragePagesAdapter(HAFREN_DYFRDWY),
     "uk-anglian": AnglianAdapter,
+    "uk-scottish-water": ScottishWaterAdapter,
 }
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -46,6 +48,7 @@ FIELDS = [
     "lat",
     "lon",
     "capacity_hm3",
+    "kind",
 ]
 
 
@@ -73,6 +76,7 @@ def _page_rows(source_id: str) -> list[dict[str, str]]:
             "lat": "",
             "lon": "",
             "capacity_hm3": "",
+            "kind": "",
         }
         for key, name, group in sorted(set(obs.select("source_key", "name", "group").iter_rows()))
     ]
@@ -108,6 +112,7 @@ def _rows(source_id: str, districts: list[tuple[str, object]]) -> list[dict[str,
                 "lat": f"{lat:.4f}" if lat is not None else "",
                 "lon": f"{lon:.4f}" if lon is not None else "",
                 "capacity_hm3": "",
+                "kind": "",
             }
         )
     return out
@@ -123,7 +128,11 @@ def main(source_ids: list[str]) -> None:
     rows: list[dict[str, str]] = []
     if REGISTRY.exists():
         with REGISTRY.open() as fh:
-            rows = [r for r in csv.DictReader(fh) if r["source_id"] not in source_ids]
+            rows = [
+                {f: r.get(f, "") for f in FIELDS}
+                for r in csv.DictReader(fh)
+                if r["source_id"] not in source_ids
+            ]
     for source_id in source_ids:
         rows += _rows(source_id, districts)
     if OVERRIDES.exists():

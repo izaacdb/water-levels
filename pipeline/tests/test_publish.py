@@ -208,6 +208,70 @@ def test_a_country_with_several_sources_lists_them_all() -> None:
     assert cadences == {"uk-yorkshire": "weekly", "uk-southern": "monthly"}
 
 
+def test_monthly_sources_carry_forward_and_go_stale_by_their_own_clock() -> None:
+    """B3′/B24′: a monthly reading counts in later weeks and isn't 'out of date' for weeks."""
+    weekly = SourceMeta(id="es-miteco", country="ES", name="Weekly", url="https://w/")
+    monthly = SourceMeta(id="es-monthly", country="ES", name="Monthly", url="https://m/",
+                         cadence="monthly")  # fmt: skip
+    registry = REGISTRY.with_columns(source_id=pl.Series(["es-miteco", "es-monthly", "es-miteco"]))
+    store = pl.concat(
+        [
+            _store([("ES-a", date(2026, 10, 6), 30, 100)]),
+            _store([("ES-b", date(2026, 8, 31), 50, 100)]).with_columns(
+                source_id=pl.lit("es-monthly")
+            ),
+        ]
+    )
+    out = build_outputs(store, {"ES": registry}, RBDS, [weekly, monthly], now=NOW)
+    current = out.current.root
+    # Beta's August reading still counts in the country's W41 total: (30 + 50) / 200.
+    assert current["ES"].pct == pytest.approx(40.0)
+    assert (current["ES"].n_reporting, current["ES"].stale) == (2, False)
+    assert (current["ES-b"].as_of, current["ES-b"].stale) == (date(2026, 8, 31), False)
+
+
+def test_a_published_total_is_its_districts_figure_only() -> None:
+    """B25: Scotland's total shows on its district, not in the UK total or as a reservoir."""
+    yorkshire = SourceMeta(id="uk-yorkshire", country="UK", name="Yorkshire", url="https://y/")
+    scottish = SourceMeta(id="uk-scottish-water", country="UK", name="SW", url="https://s/")
+    registry = pl.DataFrame(
+        {
+            "id": ["UK-a", "UK-scottish-water-total"],
+            "source_id": ["uk-yorkshire", "uk-scottish-water"],
+            "source_key": ["a", "scottish-water-total"],
+            "name": ["Alpha", "Scottish Water published total"],
+            "rbd_code": ["UK04", "UK01"],
+            "lat": ["53.5", ""],
+            "lon": ["-1.8", ""],
+            "capacity_hm3": ["", "100"],
+            "kind": ["", "total"],
+        }
+    )
+    rbds = pl.DataFrame(
+        {"code": ["UK01", "UK04"], "country": ["UK", "UK"], "name": ["Scotland", "Humber"]}
+    )
+    store = pl.concat(
+        [
+            _store([("UK-a", date(2026, 10, 6), 30, 100)]).with_columns(
+                source_id=pl.lit("uk-yorkshire")
+            ),
+            _store([("UK-scottish-water-total", date(2026, 10, 5), 79, 100)]).with_columns(
+                source_id=pl.lit("uk-scottish-water")
+            ),
+        ]
+    )
+    out = build_outputs(store, {"UK": registry}, rbds, [yorkshire, scottish], now=NOW)
+    by_id = {a.id: a for a in out.areas.root}
+    current = out.current.root
+    assert current["UK"].pct == pytest.approx(30.0)  # Scotland's total isn't added in
+    assert current["UK"].n_total == 1
+    assert current["UK01"].pct == pytest.approx(79.0)
+    assert (by_id["UK01"].total_only, by_id["UK01"].capacity_hm3) == (True, 0)
+    assert by_id["UK04"].total_only is None
+    assert "UK-scottish-water-total" not in by_id
+    assert by_id["UK"].source_ids == ["uk-yorkshire"]
+
+
 def test_a_failing_source_is_noted_on_its_country_even_with_several() -> None:
     from pipeline.health import SourceHealth
 

@@ -153,3 +153,16 @@ def test_a_partial_fetch_publishes_what_arrived_and_counts_as_a_failure(tmp_path
     assert pl.read_parquet(store_path)["reservoir_id"].to_list() == ["ES-albarellos"]
     health = json.loads((tmp_path / "source-health.json").read_text())
     assert health["es-miteco"]["consecutive_failures"] == 1
+
+
+class FutureDated(FakeAdapter):
+    def parse(self, raw: bytes) -> pl.DataFrame:
+        rows = super().parse(raw)  # albarellos on 6 Oct, plus an unknown key
+        return pl.concat([rows, rows.head(1).with_columns(observed_on=pl.lit(date(2026, 12, 3)))])
+
+
+def test_readings_dated_in_the_future_are_dropped(tmp_path: Path) -> None:
+    """Some feeds swap day and month ('2026-12-03' for 12 March); never store a future date."""
+    store_path = tmp_path / "observations.parquet"
+    run([FutureDated()], store_path=store_path, out_dir=tmp_path / "s", now=NOW)
+    assert pl.read_parquet(store_path)["observed_on"].to_list() == [date(2026, 10, 6)]

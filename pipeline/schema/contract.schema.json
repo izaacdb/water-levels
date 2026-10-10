@@ -58,6 +58,17 @@
           "minItems": 1,
           "type": "array"
         },
+        "totalOnly": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "centroid": {
           "anyOf": [
             {

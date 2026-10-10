@@ -44,4 +44,12 @@ describe('AreaDetail', () => {
     render(<AreaDetail area={area} entry={fresh} sources={[source]} parent={parent} onBack={() => {}} onSelect={() => {}} />)
     expect(screen.getByText('vs normal: insufficient history')).toBeInTheDocument()
   })
+
+  it('explains a published total and shows no capacity or reservoir count (B25)', () => {
+    const scotland: Area = { ...area, id: 'UK01', name: 'Scotland', country: 'UK', capacityHm3: 0, totalOnly: true }
+    render(<AreaDetail area={scotland} entry={{ ...entry, nReporting: 1, nTotal: 1 }} sources={[source]} onBack={() => {}} onSelect={() => {}} />)
+    expect(screen.getByText(/Published as one total/)).toBeInTheDocument()
+    expect(screen.queryByText('Capacity')).not.toBeInTheDocument()
+    expect(screen.queryByText(/1 of 1 reservoirs/)).not.toBeInTheDocument()
+  })
 })

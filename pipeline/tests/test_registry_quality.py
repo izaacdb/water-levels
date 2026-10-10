@@ -73,5 +73,7 @@ def test_uk_reservoirs_belong_to_a_known_source_and_lie_in_great_britain() -> No
     assert reg["id"].is_unique().all()
     assert reg.select("source_id", "source_key").is_unique().all()
     assert reg["rbd_code"].is_in(set(load_rbds()["code"].to_list())).all()
-    assert reg["lat"].cast(pl.Float64).is_between(49.8, 60.9).all()
-    assert reg["lon"].cast(pl.Float64).is_between(-8.2, 1.8).all()
+    reservoirs = reg.filter(pl.col("kind") != "total")  # B25: totals have no position
+    assert reservoirs["lat"].cast(pl.Float64).is_not_null().all()
+    assert reservoirs["lat"].cast(pl.Float64).is_between(49.8, 60.9).all()
+    assert reservoirs["lon"].cast(pl.Float64).is_between(-8.2, 1.8).all()

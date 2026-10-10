@@ -16,6 +16,7 @@ from pipeline.adapters.cz_povodi import PovodiAdapter
 from pipeline.adapters.es_miteco import MitecoAdapter
 from pipeline.adapters.pt_apa import ApaAdapter
 from pipeline.adapters.uk_anglian import AnglianAdapter
+from pipeline.adapters.uk_scottish_water import ScottishWaterAdapter
 from pipeline.adapters.uk_severn_trent import HAFREN_DYFRDWY, SEVERN_TRENT, StoragePagesAdapter
 from pipeline.adapters.uk_stream import STREAM_COMPANIES, StreamAdapter
 from pipeline.canary import canary
@@ -32,6 +33,7 @@ ADAPTERS: list[SourceAdapter] = [
     StoragePagesAdapter(SEVERN_TRENT),
     StoragePagesAdapter(HAFREN_DYFRDWY),
     AnglianAdapter(),
+    ScottishWaterAdapter(),
 ]
 
 

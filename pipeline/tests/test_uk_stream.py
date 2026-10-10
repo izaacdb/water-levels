@@ -7,7 +7,14 @@ import polars as pl
 import pytest
 
 from pipeline.adapters.base import OBSERVATION_SCHEMA, PCT_FULL
-from pipeline.adapters.uk_stream import YORKSHIRE, StreamAdapter, display_name, parse_rows
+from pipeline.adapters.uk_stream import (
+    SOUTHERN,
+    STREAM_COMPANIES,
+    YORKSHIRE,
+    StreamAdapter,
+    display_name,
+    parse_rows,
+)
 
 FIXTURES = Path(__file__).parent / "fixtures" / "uk"
 SEARCH = json.loads((FIXTURES / "stream-search-yorkshire.json").read_text())
@@ -138,3 +145,36 @@ def test_history_yields_every_earlier_yearly_dataset_oldest_first() -> None:
 def test_metadata() -> None:
     meta = StreamAdapter(YORKSHIRE).meta
     assert (meta.id, meta.country, meta.cadence) == ("uk-yorkshire", "UK", "weekly")
+
+
+def test_a_company_can_pin_one_dataset_among_overlapping_ones() -> None:
+    """Southern publishes yearly datasets and one '2002 to Present'; only the latter is read."""
+    search = {
+        "features": [
+            {"properties": {"title": t, "type": "Feature Service", "owner": "DSlidel_southernwater",
+                            "url": f"https://x/{t.replace(' ', '_')}/FeatureServer"}}
+            for t in ("Southern Water Monthly Reservoir Levels 2025",
+                      "Southern Water Monthly Reservoir Levels 2002 to Present")
+        ]
+    }  # fmt: skip
+    seen: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "search" in request.url.path:
+            return httpx.Response(200, json=search)
+        seen.append(request.url.path)
+        return httpx.Response(200, json={"features": []})
+
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        adapter = StreamAdapter(SOUTHERN)
+        adapter.fetch(client)
+        assert list(adapter.fetch_history(client)) == []
+    assert seen == [
+        "/Southern_Water_Monthly_Reservoir_Levels_2002_to_Present/FeatureServer/0/query"
+    ]
+
+
+def test_slower_companies_are_monthly() -> None:
+    assert {StreamAdapter(c).meta.cadence for c in STREAM_COMPANIES if c is not YORKSHIRE} == {
+        "monthly"
+    }

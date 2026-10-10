@@ -74,7 +74,7 @@ export function ComparePanel({ areas, current, ids, mode, onModeChange, onChange
             </button>
             <span className="compare-sub">
               {area.level === 'country' ? 'Country' : `${LEVEL[area.level]} · ${countryName(area.country)}`} ·{' '}
-              {hm3.format(area.capacityHm3)} hm³
+              {area.totalOnly ? 'published total' : `${hm3.format(area.capacityHm3)} hm³`}
             </span>
             <button
               type="button"

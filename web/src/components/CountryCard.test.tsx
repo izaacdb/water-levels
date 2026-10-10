@@ -51,7 +51,7 @@ describe('CountryCard', () => {
 
   it('links every source and shows a coverage note for a partly covered country (B1a, B2′)', () => {
     const yorkshire: SourceInfo = { id: 'uk-yorkshire', country: 'UK', name: 'Yorkshire Water', url: 'https://y/' }
-    const severn: SourceInfo = { id: 'uk-severn-trent', country: 'UK', name: 'Severn Trent', url: 'https://s/' }
+    const severn: SourceInfo = { id: 'uk-severn-trent', country: 'UK', name: 'Severn Trent', url: 'https://s/', cadence: 'monthly' }
     render(
       <CountryCard
         name="United Kingdom"
@@ -64,6 +64,7 @@ describe('CountryCard', () => {
     expect(screen.getByRole('link', { name: 'Yorkshire Water' })).toHaveAttribute('href', 'https://y/')
     expect(screen.getByRole('link', { name: 'Severn Trent' })).toHaveAttribute('href', 'https://s/')
     expect(screen.getByText('England only')).toBeInTheDocument()
+    expect(screen.getByText('(monthly)')).toBeInTheDocument()
     expect(screen.queryByText('Withdrawn')).not.toBeInTheDocument()
   })
 })

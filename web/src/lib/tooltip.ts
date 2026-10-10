@@ -33,7 +33,8 @@ export function flagNotes(entry: CurrentEntry): string[] {
 
 export function tooltipLines(area: Area, entry: CurrentEntry): Tooltip {
   const lines = [`${formatPct(entry.pct)} full`, normalLine(entry), `As of ${formatDate(entry.asOf)}`]
-  if (area.level !== 'reservoir') lines.push(`${entry.nReporting} of ${entry.nTotal} reservoirs reporting`)
+  if (area.totalOnly) lines.push('Published total, not per reservoir')
+  else if (area.level !== 'reservoir') lines.push(`${entry.nReporting} of ${entry.nTotal} reservoirs reporting`)
   lines.push(...flagNotes(entry))
   return {
     title: area.name,

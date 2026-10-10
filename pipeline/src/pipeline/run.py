@@ -72,6 +72,12 @@ def run(
             else:
                 health_store.record(health, meta.id, now, None)
             for obs, fetched_at in parsed:
+                future = obs.filter(pl.col("observed_on") > (now + timedelta(days=1)).date())
+                if future.height:
+                    log.warning(
+                        "%s: dropping %d readings dated in the future", meta.id, future.height
+                    )
+                    obs = obs.filter(pl.col("observed_on") <= (now + timedelta(days=1)).date())
                 mapped, unknown = attach_reservoir_ids(obs, registries[meta.country], meta.id)
                 if unknown:
                     log.warning("%s: %d keys not in registry: %s", meta.id, len(unknown), unknown)
