@@ -14,7 +14,7 @@ import polars as pl
 from pipeline import store
 from pipeline.adapters.base import SourceAdapter
 from pipeline.publish import build_outputs, write_outputs
-from pipeline.registry import attach_reservoir_ids, load_registry
+from pipeline.registry import attach_reservoir_ids, load_rbds, load_registry
 
 log = logging.getLogger(__name__)
 USER_AGENT = "water-levels/0.1 (+https://github.com/izaacdb/water-levels)"
@@ -57,6 +57,6 @@ def run(
 
     merged = store.merge(store.load(store_path), pl.concat(fresh))
     store.save(merged, store_path)
-    outputs = build_outputs(merged, registries, [a.meta for a in adapters], now=now)
+    outputs = build_outputs(merged, registries, load_rbds(), [a.meta for a in adapters], now=now)
     write_outputs(*outputs, out_dir=out_dir)
     return report
