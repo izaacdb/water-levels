@@ -3,10 +3,13 @@ BG1000,BG,Dunavski
 BG2000,BG,Chernomorski
 BG3000,BG,Iztochnobelomorski
 BG4000,BG,Zapadnobelomorski
-CY001,CY,Κύπρος
+CY001,CY,ΚΎΠΡΟΣ
 CZ1000,CZ,Dunaj
 CZ5000,CZ,Labe
 CZ6000,CZ,Odra
+EL04,EL,ΔΥΤΙΚΗ ΣΤΕΡΕΑ ΕΛΛΑΔΑ
+EL06,EL,ΑΤΤΙΚΗ
+EL07,EL,ΑΝΑΤΟΛΙΚΗ ΣΤΕΡΕΑ ΕΛΛΑΔΑ
 ES010,ES,Miño-Sil
 ES014,ES,Galicia-Costa
 ES017,ES,Cantábrico Oriental

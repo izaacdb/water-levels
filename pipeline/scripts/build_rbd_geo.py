@@ -20,7 +20,12 @@ def official_name(raw: str) -> str:
     """Official local-language name, title-cased (E10).
 
     'TINTO, ODIEL Y PIEDRAS' -> 'Tinto, Odiel y Piedras'
+
+    Greek is left as published: title-casing capitals would drop the accents that
+    lower-case Greek requires ('ΑΤΤΙΚΗ' is right; 'Αττικη' is misspelt).
     """
+    if any("\u0370" <= ch <= "\u03ff" for ch in raw):
+        return raw
     words = raw.lower().split(" ")
     return " ".join(
         w if (i and w in SMALL) else "-".join(p[:1].upper() + p[1:] for p in w.split("-"))

@@ -33,6 +33,16 @@ def test_evinos_is_not_imported_before_it_was_commissioned() -> None:
     assert obs.filter(pl.col("source_key") == "mornos").height == 366
 
 
+def test_a_blank_cell_skips_only_that_reading() -> None:
+    page = (
+        "<table><tr><th>Ημερομηνία</th><th>ΕΥΗΝΟΣ</th><th>ΜΑΡΑΘΩΝΑΣ</th><th>ΜΟΡΝΟΣ</th>"
+        "<th>ΥΛΙΚΗ</th><th>Σύνολο</th></tr>"
+        "<tr><td>01/03/2003</td><td>90,000,000</td><td></td><td>500,000,000</td>"
+        "<td>300,000,000</td><td></td></tr></table>"
+    )
+    assert sorted(parse_reserves(page)["source_key"]) == ["evinos", "mornos", "yliki"]
+
+
 def test_an_empty_table_is_an_error() -> None:
     with pytest.raises(ValueError, match="no reserves"):
         parse_reserves("<table><tr><th>Ημερομηνία</th></tr></table>")

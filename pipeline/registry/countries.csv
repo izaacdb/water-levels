@@ -1,2 +1,3 @@
 code,status,note
 UK,active,"Reservoirs published by water companies in England and on the Welsh border (some only monthly). Scotland shows Scottish Water's published total, which isn't added into the UK figure. Northern Ireland doesn't publish reservoir levels"
+EL,active,"Only the four reservoirs that supply Athens, published by EYDAP"

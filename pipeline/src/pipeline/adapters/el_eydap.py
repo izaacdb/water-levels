@@ -63,8 +63,8 @@ def parse_reserves(page: str) -> pl.DataFrame:
             if column not in RESERVOIRS:
                 continue  # "Σύνολο": the total
             key, name = RESERVOIRS[column]
-            if key in COMMISSIONED and day < COMMISSIONED[key]:
-                continue
+            if (key in COMMISSIONED and day < COMMISSIONED[key]) or not value:
+                continue  # E12, or a day EYDAP left blank
             out.append(
                 {
                     "source_key": key,
