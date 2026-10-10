@@ -9,6 +9,7 @@ import polars as pl
 
 from pipeline.adapters.base import SourceMeta
 from pipeline.compute.aggregate import aggregate
+from pipeline.compute.normal import with_normals
 from pipeline.compute.stale import is_stale, snapshot_week
 from pipeline.compute.weekly import weekly_snapshot
 from pipeline.contract import (
@@ -105,6 +106,10 @@ def area_catalogue(
     return areas
 
 
+def _round(value: float | None) -> float | None:
+    return None if value is None else round(value, 1)
+
+
 def build_outputs(
     store: pl.DataFrame,
     registries: dict[str, pl.DataFrame],
@@ -118,7 +123,9 @@ def build_outputs(
     active = reservoirs.join(last_seen, on="reservoir_id").filter(
         pl.col("last_seen") >= today - RETIRED_AFTER
     )
-    by_area = aggregate(weekly_snapshot(store), membership(reservoirs), counted=membership(active))
+    by_area = with_normals(
+        aggregate(weekly_snapshot(store), membership(reservoirs), counted=membership(active))
+    )
     latest = (
         by_area.sort("week")
         .group_by("area_id", maintain_order=True)
@@ -137,6 +144,9 @@ def build_outputs(
         areas.append(area)
         current[area.id] = CurrentEntry(
             pct=round(row["pct"], 1),
+            normal_pct=_round(row["normal_pct"]),
+            anomaly_pts=_round(row["anomaly_pts"]),
+            normal_years=row["normal_years"],
             as_of=row["as_of"],
             stale=is_stale(row["as_of"], snapshot, today=today),
             n_reporting=row["n_reporting"],

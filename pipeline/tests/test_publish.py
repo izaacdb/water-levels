@@ -71,6 +71,7 @@ def test_country_area_and_current(outputs: tuple[Manifest, Areas, Current]) -> N
     entry = current.root["ES"]
     assert entry.pct == pytest.approx(40.0)
     assert entry.as_of == date(2026, 10, 6)
+    assert (entry.normal_pct, entry.anomaly_pts, entry.normal_years) == (None, None, 0)
     # Gamma is still in the network but missed this week (E1).
     assert (entry.n_reporting, entry.n_total, entry.stale) == (2, 3, False)
 
