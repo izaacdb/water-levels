@@ -1,0 +1,83 @@
+/* Generated from pipeline/schema/contract.schema.json by `npm run gen:contract`. Do not edit. */
+
+/**
+ * This interface was referenced by `Contract`'s JSON-Schema
+ * via the `definition` "Areas".
+ */
+export type Areas = Area[]
+
+export interface Contract {
+Manifest?: Manifest
+Areas?: Areas
+Current?: Current
+}
+/**
+ * This interface was referenced by `Contract`'s JSON-Schema
+ * via the `definition` "Manifest".
+ */
+export interface Manifest {
+schemaVersion?: number
+generatedAt: string
+snapshotWeek: string
+countries: CountryStatus[]
+sources: SourceInfo[]
+}
+/**
+ * This interface was referenced by `Contract`'s JSON-Schema
+ * via the `definition` "CountryStatus".
+ */
+export interface CountryStatus {
+code: string
+name: string
+status: ("active" | "stale" | "withdrawn")
+note?: (string | null)
+}
+/**
+ * This interface was referenced by `Contract`'s JSON-Schema
+ * via the `definition` "SourceInfo".
+ */
+export interface SourceInfo {
+id: string
+country: string
+name: string
+url: string
+lastFetched?: (string | null)
+lastPublished?: (string | null)
+lastError?: (string | null)
+}
+/**
+ * This interface was referenced by `Contract`'s JSON-Schema
+ * via the `definition` "Area".
+ */
+export interface Area {
+id: string
+level: ("country" | "region" | "reservoir")
+name: string
+country: string
+parentId?: (string | null)
+capacityHm3: number
+sourceId: string
+centroid?: ([number, number] | null)
+}
+/**
+ * This interface was referenced by `Contract`'s JSON-Schema
+ * via the `definition` "Current".
+ */
+export interface Current {
+[k: string]: CurrentEntry
+}
+/**
+ * This interface was referenced by `Contract`'s JSON-Schema
+ * via the `definition` "CurrentEntry".
+ */
+export interface CurrentEntry {
+pct: number
+anomalyPts?: (number | null)
+normalPct?: (number | null)
+normalYears?: number
+asOf: string
+stale: boolean
+nReporting: number
+nTotal: number
+flags?: string[]
+}
