@@ -30,7 +30,7 @@ def canary(
                 raw = adapter.fetch(client)
                 (out_dir / f"{meta.id}.raw").write_bytes(raw)
                 mapped, unknown = attach_reservoir_ids(
-                    adapter.parse(raw), load_registry(meta.country)
+                    adapter.parse(raw), load_registry(meta.country), meta.id
                 )
             except Exception as err:
                 results[meta.id] = {"ok": False, "problem": f"{type(err).__name__}: {err}"}
