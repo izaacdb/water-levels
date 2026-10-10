@@ -183,3 +183,60 @@ a {
   color: var(--muted);
   margin: 0;
 }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.toggle {
+  display: inline-flex;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 2px;
+  margin: 0;
+  background: var(--surface);
+  align-self: flex-start;
+}
+.toggle label {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+.toggle label.active {
+  background: var(--ink);
+  color: var(--surface);
+}
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.toggle label:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+}
+.normal {
+  margin: 0 0 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.tip {
+  font: 13px/1.4 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: #0b0b0b;
+}
+.tip strong {
+  font-size: 14px;
+}
+.tip-sub {
+  color: #52514e;
+  margin-bottom: 4px;
+}
+.tip .stale {
+  display: inline-block;
+  margin: 4px 0 0;
+}

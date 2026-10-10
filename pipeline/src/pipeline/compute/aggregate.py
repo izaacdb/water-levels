@@ -10,13 +10,20 @@ def plausible() -> pl.Expr:
     return (pl.col("volume_hm3") >= 0) & (pl.col("volume_hm3") <= pl.col("capacity_hm3"))
 
 
-def aggregate(weekly: pl.DataFrame, membership: pl.DataFrame) -> pl.DataFrame:
+def aggregate(
+    weekly: pl.DataFrame, membership: pl.DataFrame, counted: pl.DataFrame | None = None
+) -> pl.DataFrame:
     """Per area and week: total volume / total capacity across reporting reservoirs.
 
     ``membership`` has one row per (reservoir_id, area_id) pair; a reservoir
-    belongs to its country, its region and its own reservoir area.
+    belongs to its country, its region and its own reservoir area. ``counted``
+    (default: ``membership``) is the subset that makes up ``n_total`` (E1).
     """
-    totals = membership.group_by("area_id").agg(pl.len().cast(pl.Int64).alias("n_total"))
+    totals = (
+        (membership if counted is None else counted)
+        .group_by("area_id")
+        .agg(pl.len().cast(pl.Int64).alias("n_total"))
+    )
     return (
         weekly.filter(plausible())
         .join(membership, on="reservoir_id")

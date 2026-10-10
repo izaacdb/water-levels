@@ -1,0 +1,44 @@
+code,country,name
+BG1000,BG,Dunavski
+BG2000,BG,Chernomorski
+BG3000,BG,Iztochnobelomorski
+BG4000,BG,Zapadnobelomorski
+CY001,CY,Κύπρος
+CZ1000,CZ,Dunaj
+CZ5000,CZ,Labe
+CZ6000,CZ,Odra
+ES010,ES,Miño-Sil
+ES014,ES,Galicia-Costa
+ES017,ES,Cantábrico Oriental
+ES018,ES,Cantábrico Occidental
+ES020,ES,Duero
+ES030,ES,Tajo
+ES040,ES,Guadiana
+ES050,ES,Guadalquivir
+ES060,ES,Cuencas Mediterráneas Andaluzas
+ES063,ES,Guadalete y Barbate
+ES064,ES,"Tinto, Odiel y Piedras"
+ES070,ES,Segura
+ES080,ES,Júcar
+ES091,ES,Ebro
+ES100,ES,Distrito de Cuenca Fluvial de Cataluña
+ES110,ES,Islas Baleares
+ES120,ES,Gran Canaria
+ES122,ES,Fuerteventura
+ES123,ES,Lanzarote
+ES124,ES,Tenerife
+ES125,ES,La Palma
+ES126,ES,La Gomera
+ES127,ES,El Hierro
+ES150,ES,Ceuta
+ES160,ES,Melilla
+PTRH1,PT,Minho e Lima
+PTRH10,PT,Madeira
+PTRH2,PT,"Cávado, Ave e Leça"
+PTRH3,PT,Douro
+PTRH4A,PT,"Vouga, Mondego e Lis"
+PTRH5A,PT,Tejo e Ribeiras do Oeste
+PTRH6,PT,Sado e Mira
+PTRH7,PT,Guadiana
+PTRH8,PT,Ribeiras do Algarve
+PTRH9,PT,Açores

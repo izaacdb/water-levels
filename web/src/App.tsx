@@ -1,11 +1,15 @@
+import { useState } from 'react'
 import { CountryCard } from './components/CountryCard'
 import { Legend } from './components/Legend'
 import { MapView } from './components/MapView'
+import { ModeToggle } from './components/ModeToggle'
 import { formatWeek } from './lib/format'
 import { useAppData } from './lib/data'
+import type { Mode } from './lib/scale'
 
 export default function App() {
   const state = useAppData()
+  const [mode, setMode] = useState<Mode>('pct')
 
   return (
     <div className="app">
@@ -23,8 +27,9 @@ export default function App() {
 
       {state.status === 'ready' && (
         <main className="layout">
-          <MapView current={state.data.current} />
+          <MapView areas={state.data.areas} current={state.data.current} mode={mode} />
           <aside className="panel">
+            <ModeToggle mode={mode} onChange={setMode} />
             {state.data.areas
               .filter((a) => a.level === 'country')
               .map((area) => {
@@ -34,7 +39,8 @@ export default function App() {
                   <CountryCard key={area.id} name={area.name} entry={entry} source={source} />
                 ) : null
               })}
-            <Legend />
+            <Legend mode={mode} />
+            <p className="note">Zoom in to see river basins, then individual reservoirs.</p>
             <p className="note">
               Grey countries are not covered: they don't publish official per-reservoir data at least
               weekly.

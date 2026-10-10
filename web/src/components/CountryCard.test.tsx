@@ -15,6 +15,9 @@ const entry: CurrentEntry = {
   stale: false,
   nReporting: 375,
   nTotal: 402,
+  normalPct: 43.6,
+  anomalyPts: 14.7,
+  normalYears: 10,
   flags: [],
 }
 
@@ -22,6 +25,7 @@ describe('CountryCard', () => {
   it('shows % full, as-of date, coverage and a source link', () => {
     render(<CountryCard name="Spain" entry={entry} source={source} />)
     expect(screen.getByText('58.3%')).toBeInTheDocument()
+    expect(screen.getByText('+14.7 pts vs normal')).toBeInTheDocument()
     expect(screen.getByText(/6 Oct 2026/)).toBeInTheDocument()
     expect(screen.getByText(/375 of 402 reservoirs/)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /MITECO/ })).toHaveAttribute('href', source.url)
