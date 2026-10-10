@@ -40,4 +40,8 @@ describe('tooltipLines', () => {
     expect(t.subtitle).toBe('Reservoir · Spain')
     expect(t.lines).not.toContain('1 of 1 reservoirs reporting')
   })
+  it('notes a reading shown as published but outside capacity (E4)', () => {
+    const t = tooltipLines({ ...area, level: 'reservoir' }, { ...entry, pct: 160, flags: ['over_capacity'] })
+    expect(t.lines).toContain('Reported value exceeds capacity')
+  })
 })

@@ -21,9 +21,20 @@ export function normalLine(entry: CurrentEntry): string {
   return `${formatAnomaly(entry.anomalyPts)} vs normal${basis}`
 }
 
+const FLAG_NOTES: Record<string, string> = {
+  over_capacity: 'Reported value exceeds capacity',
+  negative: 'Reported value is negative',
+}
+
+/** E4: notes for readings shown as published but left out of totals. */
+export function flagNotes(entry: CurrentEntry): string[] {
+  return (entry.flags ?? []).map((f) => FLAG_NOTES[f] ?? f)
+}
+
 export function tooltipLines(area: Area, entry: CurrentEntry): Tooltip {
   const lines = [`${formatPct(entry.pct)} full`, normalLine(entry), `As of ${formatDate(entry.asOf)}`]
   if (area.level !== 'reservoir') lines.push(`${entry.nReporting} of ${entry.nTotal} reservoirs reporting`)
+  lines.push(...flagNotes(entry))
   return {
     title: area.name,
     subtitle: area.level === 'country' ? LEVEL_LABEL.country : `${LEVEL_LABEL[area.level]} · ${countryName(area.country)}`,

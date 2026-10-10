@@ -3,7 +3,7 @@ import type { Area, CurrentEntry, SourceInfo } from '../contract'
 import { useSeries } from '../lib/data'
 import { countryName, formatDate, formatPct } from '../lib/format'
 import { pctColor } from '../lib/scale'
-import { normalLine } from '../lib/tooltip'
+import { flagNotes, normalLine } from '../lib/tooltip'
 import { TrendChart, YearOnYearChart } from './LazyCharts'
 
 
@@ -59,6 +59,11 @@ export function AreaDetail({ area, entry, source, parent, onBack, onSelect, onCo
         {formatPct(entry.pct)} <span className="hero-label">full</span>
       </p>
       <p className="normal">{normalLine(entry)}</p>
+      {flagNotes(entry).map((note) => (
+        <p key={note} className="notice">
+          {note}. Shown as published; left out of basin and country totals.
+        </p>
+      ))}
       <dl className="facts">
         <dt>Capacity</dt>
         <dd>{hm3.format(area.capacityHm3)} hm³</dd>

@@ -52,3 +52,40 @@ def test_run_merges_into_store_and_publishes(tmp_path: Path) -> None:
 
     current = json.loads((tmp_path / "site" / "data" / "current.json").read_text())
     assert current["ES"]["pct"] == 24.2  # 22 / 91
+
+
+class ArchivedAdapter(FakeAdapter):
+    """A source with an archive: history is fetched once, when the store has none."""
+
+    history_calls = 0
+
+    def fetch_history(self, client: httpx.Client) -> list[bytes]:
+        ArchivedAdapter.history_calls += 1
+        return [b"old"]
+
+    def parse(self, raw: bytes) -> pl.DataFrame:
+        day = date(2026, 9, 29) if raw == b"old" else date(2026, 10, 6)
+        return pl.DataFrame(
+            [
+                {
+                    "source_key": "albarellos",
+                    "name": "Albarellos",
+                    "group": "Miño - Sil",
+                    "observed_on": day,
+                    "volume_hm3": 20.0,
+                    "capacity_hm3": 91.0,
+                }
+            ],
+            schema=OBSERVATION_SCHEMA,
+        )
+
+
+def test_history_is_backfilled_only_when_the_source_is_new(tmp_path: Path) -> None:
+    store_path = tmp_path / "observations.parquet"
+    run([ArchivedAdapter()], store_path=store_path, out_dir=tmp_path / "site", now=NOW)
+    assert sorted(pl.read_parquet(store_path)["observed_on"].to_list()) == [
+        date(2026, 9, 29),
+        date(2026, 10, 6),
+    ]
+    run([ArchivedAdapter()], store_path=store_path, out_dir=tmp_path / "site", now=NOW)
+    assert ArchivedAdapter.history_calls == 1
