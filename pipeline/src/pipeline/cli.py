@@ -1,0 +1,40 @@
+"""Command-line entry point: ``pipeline <command>``."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import logging
+from datetime import UTC, datetime
+from pathlib import Path
+
+from pipeline.adapters.es_miteco import MitecoAdapter
+from pipeline.contract import SCHEMA_PATH, contract_schema
+from pipeline.run import run
+
+ADAPTERS = [MitecoAdapter()]
+
+
+def _schema(_: argparse.Namespace) -> None:
+    SCHEMA_PATH.parent.mkdir(parents=True, exist_ok=True)
+    SCHEMA_PATH.write_text(json.dumps(contract_schema(), indent=2, ensure_ascii=False) + "\n")
+    print(f"wrote {SCHEMA_PATH}")
+
+
+def _run(args: argparse.Namespace) -> None:
+    report = run(ADAPTERS, store_path=args.store, out_dir=args.out, now=datetime.now(UTC))
+    for source, keys in report.unknown_keys.items():
+        print(f"::warning::{source}: {len(keys)} reservoirs missing from registry: {keys}")
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(prog="pipeline")
+    sub = parser.add_subparsers(required=True)
+    sub.add_parser("schema", help="export the JSON contract schema").set_defaults(func=_schema)
+    run_cmd = sub.add_parser("run", help="fetch sources, update the store, publish JSON")
+    run_cmd.add_argument("--store", type=Path, default=Path("data-store/observations.parquet"))
+    run_cmd.add_argument("--out", type=Path, default=Path("site-data"))
+    run_cmd.set_defaults(func=_run)
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
+    args = parser.parse_args(argv)
+    args.func(args)

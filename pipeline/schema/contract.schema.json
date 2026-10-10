@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Contract",
+  "type": "object",
+  "properties": {
+    "Manifest": {
+      "$ref": "#/$defs/Manifest"
+    },
+    "Areas": {
+      "$ref": "#/$defs/Areas"
+    },
+    "Current": {
+      "$ref": "#/$defs/Current"
+    }
+  },
+  "$defs": {
+    "Area": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "country",
+            "region",
+            "reservoir"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "capacityHm3": {
+          "type": "number"
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "centroid": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "level",
+        "name",
+        "country",
+        "capacityHm3",
+        "sourceId"
+      ],
+      "title": "Area",
+      "type": "object"
+    },
+    "Areas": {
+      "items": {
+        "$ref": "#/$defs/Area"
+      },
+      "title": "Areas",
+      "type": "array"
+    },
+    "CountryStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "stale",
+            "withdrawn"
+          ],
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "code",
+        "name",
+        "status"
+      ],
+      "title": "CountryStatus",
+      "type": "object"
+    },
+    "Current": {
+      "additionalProperties": {
+        "$ref": "#/$defs/CurrentEntry"
+      },
+      "title": "Current",
+      "type": "object"
+    },
+    "CurrentEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "pct": {
+          "maximum": 100,
+          "minimum": 0,
+          "type": "number"
+        },
+        "anomalyPts": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "normalPct": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "normalYears": {
+          "default": 0,
+          "type": "integer"
+        },
+        "asOf": {
+          "format": "date",
+          "type": "string"
+        },
+        "stale": {
+          "type": "boolean"
+        },
+        "nReporting": {
+          "type": "integer"
+        },
+        "nTotal": {
+          "type": "integer"
+        },
+        "flags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "pct",
+        "asOf",
+        "stale",
+        "nReporting",
+        "nTotal"
+      ],
+      "title": "CurrentEntry",
+      "type": "object"
+    },
+    "Manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "default": 1,
+          "type": "integer"
+        },
+        "generatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "snapshotWeek": {
+          "pattern": "^\\d{4}-W\\d{2}$",
+          "type": "string"
+        },
+        "countries": {
+          "items": {
+            "$ref": "#/$defs/CountryStatus"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/SourceInfo"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "generatedAt",
+        "snapshotWeek",
+        "countries",
+        "sources"
+      ],
+      "title": "Manifest",
+      "type": "object"
+    },
+    "SourceInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "lastFetched": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "lastPublished": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "lastError": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "country",
+        "name",
+        "url"
+      ],
+      "title": "SourceInfo",
+      "type": "object"
+    }
+  }
+}
