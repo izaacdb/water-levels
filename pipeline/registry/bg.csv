@@ -1,0 +1,52 @@
+id,source_key,name,group,rbd_code,lat,lon
+BG-aheloy,aheloy,Ахелой,БДЧР,BG2000,42.7075,27.5187
+BG-aleksandar-stamboliyski,aleksandar-stamboliyski,Александър Стамболийски,БДДР,BG1000,43.1076,25.1300
+BG-asenovets,asenovets,Асеновец,БДИБР,BG3000,42.7273,26.2464
+BG-batak,batak,Батак,БДИБР,BG3000,41.9711,24.1908
+BG-beglika,beglika,Беглика,БДИБР,BG3000,41.8240,24.1289
+BG-beli-iskar,beli-iskar,Бели Искър,БДДР,BG1000,42.1333,23.5667
+BG-beli-lom,beli-lom,Бели Лом,БДДР,BG1000,43.3975,26.6606
+BG-belmeken,belmeken,Белмекен,БДИБР,BG3000,42.1607,23.7969
+BG-borovitsa,borovitsa,Боровица,БДИБР,BG3000,41.7658,25.1294
+BG-chaira,chaira,Чаира,БДИБР,BG3000,42.1590,23.8709
+BG-domlyan,domlyan,Домлян,БДИБР,BG3000,42.5460,24.9210
+BG-dospat,dospat,Доспат,БДЗБР,BG4000,41.6983,24.0861
+BG-dyakovo,dyakovo,Дяково,БДЗБР,BG4000,42.3505,23.0873
+BG-georgi-traykov-tsonevo,georgi-traykov-tsonevo,Георги Трайков (Цонево),БДЧР,BG2000,43.0200,27.4200
+BG-golyam-beglik,golyam-beglik,Голям Беглик,БДИБР,BG3000,41.8077,24.1188
+BG-gorni-dabnik,gorni-dabnik,Горни Дъбник,БДДР,BG1000,43.3680,24.3230
+BG-hristo-smirnenski,hristo-smirnenski,Христо Смирненски,БДДР,BG1000,42.8072,25.2573
+BG-iskar,iskar,Искър,БДДР,BG1000,42.4706,23.5733
+BG-ivaylovgrad,ivaylovgrad,Ивайловград,БДИБР,BG3000,41.6296,25.9727
+BG-kalin,kalin,Калин,БДЗБР,BG4000,42.1742,23.2494
+BG-kamchiya,kamchiya,Камчия,БДЧР,BG2000,42.8697,26.8697
+BG-karagyol,karagyol,Карагьол,БДЗБР,BG4000,42.1853,23.2549
+BG-kardzhali,kardzhali,Кърджали,БДИБР,BG3000,41.6564,25.2897
+BG-koprinka,koprinka,Копринка,БДИБР,BG3000,42.6128,25.3195
+BG-krichim,krichim,Кричим,БДИБР,BG3000,41.9919,24.4676
+BG-kula,kula,Кула,БДДР,BG1000,43.9075,22.5147
+BG-malko-sharkovo,malko-sharkovo,Малко Шарково,БДИБР,BG3000,42.1000,26.8667
+BG-ognyanovo,ognyanovo,Огняново,БДДР,BG1000,42.6125,23.7496
+BG-ogosta,ogosta,Огоста,БДДР,BG1000,43.3917,23.2031
+BG-pancharevo,pancharevo,Панчарево,БДДР,BG1000,42.6000,23.4200
+BG-pchelina,pchelina,Пчелина,БДЗБР,BG4000,42.5188,22.8471
+BG-poroy,poroy,Порой,БДЧР,BG2000,42.7184,27.6237
+BG-pyasachnik,pyasachnik,Пясъчник,БДИБР,BG3000,42.4000,24.5667
+BG-rabisha,rabisha,Рабиша,БДДР,BG1000,43.7383,22.5858
+BG-rozov-kladenets,rozov-kladenets,Розов кладенец,БДИБР,BG3000,42.1425,25.9017
+BG-saedinenie,saedinenie,Съединение,БДЧР,BG2000,43.3333,26.5833
+BG-shiroka-polyana,shiroka-polyana,Широка поляна,БДИБР,BG3000,41.7667,24.1667
+BG-sopot,sopot,Сопот,БДДР,BG1000,43.0000,24.4333
+BG-srechenska-bara,srechenska-bara,Среченска бара,БДДР,BG1000,43.2060,23.2040
+BG-studen-kladenets,studen-kladenets,Студен кладенец,БДИБР,BG3000,41.6196,25.6418
+BG-studena,studena,Студена,БДЗБР,BG4000,42.5410,23.1590
+BG-ticha,ticha,Тича,БДЧР,BG2000,43.0436,26.7511
+BG-topolnitsa,topolnitsa,Тополница,БДИБР,BG3000,42.4314,24.0050
+BG-toshkov-chark,toshkov-chark,Тошков Чарк,БДИБР,BG3000,41.8100,24.1650
+BG-trakiets,trakiets,Тракиец,БДИБР,BG3000,41.8527,25.4059
+BG-tsankov-kamak,tsankov-kamak,Цанков камък,БДИБР,BG3000,41.7822,24.4369
+BG-vacha,vacha,Въча,БДИБР,BG3000,41.9405,24.4463
+BG-yasna-polyana,yasna-polyana,Ясна поляна,БДЧР,BG2000,42.2456,27.5758
+BG-yastrebino,yastrebino,Ястребино,БДДР,BG1000,43.1408,26.2828
+BG-yovkovtsi,yovkovtsi,Йовковци,БДДР,BG1000,42.9310,25.7970
+BG-zhrebchevo,zhrebchevo,Жребчево,БДИБР,BG3000,42.5958,25.9281
