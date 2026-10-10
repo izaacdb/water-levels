@@ -49,6 +49,7 @@ YORKSHIRE = StreamCompany(
     dataset_prefix="Yorkshire Water Reservoir Levels",
     owner="ywAGOLstreamData",
 )
+STREAM_COMPANIES = [YORKSHIRE]
 
 
 def display_name(raw: str) -> str:

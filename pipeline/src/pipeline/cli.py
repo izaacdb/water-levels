@@ -15,6 +15,7 @@ from pipeline.adapters.cy_wdd import WddAdapter
 from pipeline.adapters.cz_povodi import PovodiAdapter
 from pipeline.adapters.es_miteco import MitecoAdapter
 from pipeline.adapters.pt_apa import ApaAdapter
+from pipeline.adapters.uk_stream import STREAM_COMPANIES, StreamAdapter
 from pipeline.canary import canary
 from pipeline.contract import SCHEMA_PATH, contract_schema
 from pipeline.run import run
@@ -25,6 +26,7 @@ ADAPTERS: list[SourceAdapter] = [
     MoewAdapter(),
     WddAdapter(),
     PovodiAdapter(),
+    *(StreamAdapter(c) for c in STREAM_COMPANIES),
 ]
 
 
