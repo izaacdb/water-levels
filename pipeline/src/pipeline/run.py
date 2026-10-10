@@ -11,13 +11,12 @@ from pathlib import Path
 import httpx
 import polars as pl
 
-from pipeline import store
+from pipeline import http, store
 from pipeline.adapters.base import SourceAdapter
 from pipeline.publish import build_outputs, write_outputs
 from pipeline.registry import attach_reservoir_ids, load_rbds, load_registry
 
 log = logging.getLogger(__name__)
-USER_AGENT = "water-levels/0.1 (+https://github.com/izaacdb/water-levels)"
 
 
 @dataclass
@@ -36,7 +35,7 @@ def run(
     existing = store.load(store_path)
     known_sources = set(existing["source_id"].unique().to_list())
     fresh: list[pl.DataFrame] = []
-    with httpx.Client(headers={"User-Agent": USER_AGENT}) as client:
+    with http.client() as client:
         for adapter in adapters:
             meta = adapter.meta
             parsed: list[tuple[pl.DataFrame, datetime]] = []

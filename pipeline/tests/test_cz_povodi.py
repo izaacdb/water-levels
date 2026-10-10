@@ -36,3 +36,27 @@ def test_adapter_combines_all_five_enterprises() -> None:
     assert set(obs["group"].unique()) == {e.name for e in ENTERPRISES}
     assert obs["source_key"].is_unique().all()
     assert obs.height > 90
+
+
+def test_fetch_waits_out_the_portal_wait_page(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The portals answer with WaitPage.aspx until their data is ready; retry the page."""
+    import httpx
+
+    monkeypatch.setattr("pipeline.adapters.cz_povodi.time.sleep", lambda _: None)
+    calls: dict[str, int] = {}
+    pages = {e.url: (FIXTURES / f"{e.slug}.html").read_text() for e in ENTERPRISES}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        url = str(request.url)
+        if "WaitPage" in url:
+            return httpx.Response(200, text="<html>please wait</html>")
+        calls[url] = calls.get(url, 0) + 1
+        if calls[url] == 1:  # first visit: bounced to the wait page
+            return httpx.Response(
+                302, headers={"Location": url.rsplit("/", 1)[0] + "/WaitPage.aspx"}
+            )
+        return httpx.Response(200, text=pages[url])
+
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        obs = PovodiAdapter().parse(PovodiAdapter().fetch(client))
+    assert set(obs["group"].unique()) == {e.name for e in ENTERPRISES}

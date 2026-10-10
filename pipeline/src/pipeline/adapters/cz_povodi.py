@@ -11,6 +11,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import time
 from dataclasses import dataclass
 from datetime import date
 
@@ -79,6 +80,21 @@ def parse_volumes_page(page: str, enterprise: str) -> pl.DataFrame:
     return pl.DataFrame(rows, schema=OBSERVATION_SCHEMA)
 
 
+def _fetch_page(client: httpx.Client, url: str, attempts: int = 6) -> str:
+    """The portals bounce to WaitPage.aspx while they prepare data. A session that has
+    seen the wait page stays on it, so each attempt starts without cookies."""
+    for attempt in range(attempts):
+        client.cookies.clear()
+        response = client.get(
+            url, headers={"User-Agent": _BROWSER_UA}, timeout=60, follow_redirects=True
+        )
+        response.raise_for_status()
+        if "WaitPage" not in str(response.url):
+            return response.text
+        time.sleep(2 + 2 * attempt)
+    raise RuntimeError(f"{url} still showing its wait page after {attempts} attempts")
+
+
 class PovodiAdapter:
     meta = SourceMeta(
         id="cz-povodi",
@@ -89,14 +105,7 @@ class PovodiAdapter:
 
     def fetch(self, client: httpx.Client) -> bytes:
         """All five enterprises' pages, bundled as JSON {enterprise name: html}."""
-        bundle = {}
-        for e in ENTERPRISES:
-            response = client.get(
-                e.url, headers={"User-Agent": _BROWSER_UA}, timeout=60, follow_redirects=True
-            )
-            response.raise_for_status()
-            bundle[e.name] = response.text
-        return json.dumps(bundle).encode()
+        return json.dumps({e.name: _fetch_page(client, e.url) for e in ENTERPRISES}).encode()
 
     def parse(self, raw: bytes) -> pl.DataFrame:
         bundle: dict[str, str] = json.loads(raw)
