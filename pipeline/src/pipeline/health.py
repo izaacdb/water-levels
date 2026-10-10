@@ -38,3 +38,14 @@ def record(
         h.last_success, h.last_error, h.consecutive_failures = now.isoformat(), None, 0
     else:
         h.last_error, h.consecutive_failures = error, h.consecutive_failures + 1
+
+
+def alerts(health: dict[str, SourceHealth], threshold: int = 3) -> tuple[dict[str, str], list[str]]:
+    """Sources failing for `threshold`+ runs in a row (to raise), and healthy ones (to close)."""
+    failing = {
+        sid: h.last_error or "unknown error"
+        for sid, h in sorted(health.items())
+        if h.consecutive_failures >= threshold
+    }
+    healthy = [sid for sid, h in sorted(health.items()) if h.consecutive_failures == 0]
+    return failing, healthy
