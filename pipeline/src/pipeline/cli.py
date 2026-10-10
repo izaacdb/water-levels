@@ -15,6 +15,8 @@ from pipeline.adapters.cy_wdd import WddAdapter
 from pipeline.adapters.cz_povodi import PovodiAdapter
 from pipeline.adapters.es_miteco import MitecoAdapter
 from pipeline.adapters.pt_apa import ApaAdapter
+from pipeline.adapters.uk_anglian import AnglianAdapter
+from pipeline.adapters.uk_severn_trent import HAFREN_DYFRDWY, SEVERN_TRENT, StoragePagesAdapter
 from pipeline.adapters.uk_stream import STREAM_COMPANIES, StreamAdapter
 from pipeline.canary import canary
 from pipeline.contract import SCHEMA_PATH, contract_schema
@@ -27,6 +29,9 @@ ADAPTERS: list[SourceAdapter] = [
     WddAdapter(),
     PovodiAdapter(),
     *(StreamAdapter(c) for c in STREAM_COMPANIES),
+    StoragePagesAdapter(SEVERN_TRENT),
+    StoragePagesAdapter(HAFREN_DYFRDWY),
+    AnglianAdapter(),
 ]
 
 
