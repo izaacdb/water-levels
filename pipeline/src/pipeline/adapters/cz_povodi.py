@@ -12,13 +12,15 @@ import html
 import json
 import re
 import time
+from collections.abc import Iterator
 from dataclasses import dataclass
 from datetime import date
+from urllib.parse import unquote
 
 import httpx
 import polars as pl
 
-from pipeline.adapters.base import OBSERVATION_SCHEMA, SourceMeta, slugify
+from pipeline.adapters.base import OBSERVATION_SCHEMA, PartialFetch, SourceMeta, slugify
 
 
 @dataclass(frozen=True)
@@ -40,6 +42,7 @@ _BROWSER_UA = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/140 Safari/537.36 water-levels"
 )
+_TIMER = "ctl00$ObsahCPH$RefreshTimer"  # the wait page's postback timer
 
 
 def _cells(row: str) -> list[str]:
@@ -80,9 +83,66 @@ def parse_volumes_page(page: str, enterprise: str) -> pl.DataFrame:
     return pl.DataFrame(rows, schema=OBSERVATION_SCHEMA)
 
 
+def _delta_parts(text: str) -> Iterator[tuple[str, str, str]]:
+    """(type, id, content) from an ASP.NET AJAX partial-postback response,
+    which is a run of `length|type|id|content|` records."""
+    i = 0
+    try:
+        while i < len(text):
+            length_end = text.index("|", i)
+            kind_end = text.index("|", length_end + 1)
+            id_end = text.index("|", kind_end + 1)
+            start, length = id_end + 1, int(text[i:length_end])
+            yield (
+                text[length_end + 1 : kind_end],
+                text[kind_end + 1 : id_end],
+                text[start : start + length],
+            )
+            i = start + length + 1
+    except ValueError:
+        return  # not a delta response
+
+
+def _wait_out(client: httpx.Client, wait: httpx.Response, polls: int = 30) -> str | None:
+    """Do what the wait page's own timer does in a browser: post back until the
+    server answers with a redirect to the prepared page."""
+    fields = {
+        m.group(1): html.unescape(m.group(2))
+        for m in re.finditer(r'<input type="hidden" name="([^"]+)"[^>]*value="([^"]*)"', wait.text)
+    }
+    for _ in range(polls):
+        time.sleep(1)
+        response = client.post(
+            wait.url,
+            data={
+                **fields,
+                "ctl00$ObsahCPH$ScriptManager1": f"ctl00$ObsahCPH$UpdatePanel1|{_TIMER}",
+                "__EVENTTARGET": _TIMER,
+                "__EVENTARGUMENT": "",
+                "__ASYNCPOST": "true",
+            },
+            headers={"User-Agent": _BROWSER_UA, "X-MicrosoftAjax": "Delta=true"},
+            timeout=60,
+        )
+        response.raise_for_status()
+        for kind, id_, content in _delta_parts(response.text):
+            if kind == "hiddenField":
+                fields[id_] = content
+            elif kind == "pageRedirect":
+                page = client.get(
+                    wait.url.join(unquote(content)),
+                    headers={"User-Agent": _BROWSER_UA},
+                    timeout=60,
+                    follow_redirects=True,
+                )
+                page.raise_for_status()
+                return None if "WaitPage" in str(page.url) else page.text
+    return None
+
+
 def _fetch_page(client: httpx.Client, url: str, attempts: int = 6) -> str:
-    """The portals bounce to WaitPage.aspx while they prepare data. A session that has
-    seen the wait page stays on it, so each attempt starts without cookies."""
+    """The portals bounce to WaitPage.aspx while they prepare data. Wait it out the
+    way a browser does; failing that, start over without cookies."""
     for attempt in range(attempts):
         client.cookies.clear()
         response = client.get(
@@ -91,6 +151,8 @@ def _fetch_page(client: httpx.Client, url: str, attempts: int = 6) -> str:
         response.raise_for_status()
         if "WaitPage" not in str(response.url):
             return response.text
+        if (page := _wait_out(client, response)) is not None:
+            return page
         time.sleep(2 + 2 * attempt)
     raise RuntimeError(f"{url} still showing its wait page after {attempts} attempts")
 
@@ -104,8 +166,23 @@ class PovodiAdapter:
     )
 
     def fetch(self, client: httpx.Client) -> bytes:
-        """All five enterprises' pages, bundled as JSON {enterprise name: html}."""
-        return json.dumps({e.name: _fetch_page(client, e.url) for e in ENTERPRISES}).encode()
+        """All five enterprises' pages, bundled as JSON {enterprise name: html}.
+
+        One portal being down mustn't hide the other four: their pages are
+        published and the source is reported as partly failed."""
+        pages: dict[str, str] = {}
+        failures: dict[str, Exception] = {}
+        for e in ENTERPRISES:
+            try:
+                pages[e.name] = _fetch_page(client, e.url)
+            except (httpx.HTTPError, RuntimeError) as err:
+                failures[e.name] = err
+        if not pages:
+            raise next(iter(failures.values()))
+        raw = json.dumps(pages).encode()
+        if failures:
+            raise PartialFetch(raw, "; ".join(f"{name}: {err}" for name, err in failures.items()))
+        return raw
 
     def parse(self, raw: bytes) -> pl.DataFrame:
         bundle: dict[str, str] = json.loads(raw)

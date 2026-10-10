@@ -13,7 +13,7 @@ import polars as pl
 
 from pipeline import health as health_store
 from pipeline import http, store
-from pipeline.adapters.base import SourceAdapter
+from pipeline.adapters.base import PartialFetch, SourceAdapter
 from pipeline.publish import build_outputs, write_outputs
 from pipeline.registry import attach_reservoir_ids, load_rbds, load_registry, load_withdrawn
 
@@ -121,6 +121,10 @@ def _collect(
             log.warning("%s: history backfill interrupted: %s", meta.id, err)
     try:
         parsed.append((adapter.parse(adapter.fetch(client)), now))
+    except PartialFetch as err:
+        # Publish what arrived, but still count the run as failed for alerting.
+        parsed.append((adapter.parse(err.raw), now))
+        raise PartialFailure(parsed, err) from err
     except Exception as err:
         if parsed:
             raise PartialFailure(parsed, err) from err

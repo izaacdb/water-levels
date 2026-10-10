@@ -5,7 +5,7 @@ from pathlib import Path
 import httpx
 import polars as pl
 
-from pipeline.adapters.base import OBSERVATION_SCHEMA, SourceMeta
+from pipeline.adapters.base import OBSERVATION_SCHEMA, PartialFetch, SourceMeta
 from pipeline.run import run
 
 NOW = datetime(2026, 10, 10, 6, tzinfo=UTC)
@@ -139,3 +139,17 @@ def test_backfilled_history_is_kept_when_the_live_fetch_fails(tmp_path: Path) ->
     report = run([ArchiveButLiveDown()], store_path=store_path, out_dir=tmp_path / "s", now=NOW)
     assert "live site down" in report.errors["es-miteco"]
     assert pl.read_parquet(store_path)["observed_on"].to_list() == [date(2026, 9, 29)]
+
+
+class PartlyReachable(FakeAdapter):
+    def fetch(self, client: httpx.Client) -> bytes:
+        raise PartialFetch(b"raw", RuntimeError("one portal down"))
+
+
+def test_a_partial_fetch_publishes_what_arrived_and_counts_as_a_failure(tmp_path: Path) -> None:
+    store_path = tmp_path / "observations.parquet"
+    report = run([PartlyReachable()], store_path=store_path, out_dir=tmp_path / "s", now=NOW)
+    assert "one portal down" in report.errors["es-miteco"]
+    assert pl.read_parquet(store_path)["reservoir_id"].to_list() == ["ES-albarellos"]
+    health = json.loads((tmp_path / "source-health.json").read_text())
+    assert health["es-miteco"]["consecutive_failures"] == 1
