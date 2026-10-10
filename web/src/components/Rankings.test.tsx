@@ -10,7 +10,7 @@ function Harness({ onSelect = () => {} }: { onSelect?: (id: string) => void }) {
   return <Rankings areas={areas} current={current} opts={opts} onChange={setOpts} onSelect={onSelect} />
 }
 
-const mk = (id: string, name: string): Area => ({ id, level: 'region', name, country: 'ES', parentId: 'ES', capacityHm3: 1, sourceId: 'x' })
+const mk = (id: string, name: string): Area => ({ id, level: 'region', name, country: 'ES', parentId: 'ES', capacityHm3: 1, sourceIds: ['x'] })
 const areas = [mk('A', 'Ebro'), mk('B', 'Tajo'), mk('C', 'Segura')]
 const base = { normalYears: 10, asOf: '2026-10-06', nReporting: 1, nTotal: 1, flags: [] }
 const current: Current = {

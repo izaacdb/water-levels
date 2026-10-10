@@ -12,7 +12,7 @@ const payloads: Record<string, unknown> = {
     countries: [{ code: 'ES', name: 'Spain', status: 'active' }],
     sources: [{ id: 'es-miteco', country: 'ES', name: 'MITECO', url: 'https://www.miteco.gob.es/' }],
   },
-  'data/areas.json': [{ id: 'ES', level: 'country', name: 'Spain', country: 'ES', capacityHm3: 56000, sourceId: 'es-miteco' }],
+  'data/areas.json': [{ id: 'ES', level: 'country', name: 'Spain', country: 'ES', capacityHm3: 56000, sourceIds: ['es-miteco'] }],
   'data/current.json': {
     ES: { pct: 58.3, asOf: '2026-10-06', stale: false, nReporting: 375, nTotal: 402, flags: [] },
   },

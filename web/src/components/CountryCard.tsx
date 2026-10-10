@@ -1,18 +1,19 @@
 import type { CountryStatus, CurrentEntry, SourceInfo } from '../contract'
-import { formatDate, formatPct } from '../lib/format'
+import { formatDate, formatPct, sourceLabel } from '../lib/format'
 import { pctColor } from '../lib/scale'
 import { normalLine } from '../lib/tooltip'
+import { SourceLinks } from './SourceLinks'
 
 interface Props {
   name: string
   entry: CurrentEntry
-  source: SourceInfo
+  sources: SourceInfo[]
   status?: CountryStatus
   /** Opens the country's detail; the title becomes the button (no nested controls). */
   onOpen?: () => void
 }
 
-export function CountryCard({ name, entry, source, status, onOpen }: Props) {
+export function CountryCard({ name, entry, sources, status, onOpen }: Props) {
   const withdrawn = status?.status === 'withdrawn'
   return (
     <article className="card">
@@ -42,10 +43,7 @@ export function CountryCard({ name, entry, source, status, onOpen }: Props) {
       </p>
       {status?.note && <p className="status-note">{status.note}</p>}
       <p className="meta">
-        Source:{' '}
-        <a href={source.url} target="_blank" rel="noreferrer">
-          {source.name}
-        </a>
+        {sourceLabel(sources)}: <SourceLinks sources={sources} />
       </p>
     </article>
   )

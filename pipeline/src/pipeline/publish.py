@@ -36,10 +36,16 @@ COUNTRY_NAMES = {
     "BG": "Bulgaria",
     "CY": "Cyprus",
     "CZ": "Czechia",
+    "UK": "United Kingdom",
+    "EL": "Greece",
+    "DE": "Germany",
 }
 
 
-def _reservoirs(registries: dict[str, pl.DataFrame]) -> pl.DataFrame:
+def _reservoirs(registries: dict[str, pl.DataFrame], sources: list[SourceMeta]) -> pl.DataFrame:
+    """Every registered reservoir with its country and source (D6: a column when a
+    country has several sources, otherwise the country's one source)."""
+    default_source = {s.country: s.id for s in reversed(sources)}
     return pl.concat(
         [
             reg.select(
@@ -49,6 +55,11 @@ def _reservoirs(registries: dict[str, pl.DataFrame]) -> pl.DataFrame:
                 "name",
                 pl.col("lat").cast(pl.Float64, strict=False),
                 pl.col("lon").cast(pl.Float64, strict=False),
+                (
+                    pl.col("source_id")
+                    if "source_id" in reg.columns
+                    else pl.lit(default_source.get(country, ""))
+                ).alias("source_id"),
             )
             for country, reg in registries.items()
         ]
@@ -65,9 +76,14 @@ def membership(reservoirs: pl.DataFrame) -> pl.DataFrame:
     )
 
 
-def area_catalogue(
-    reservoirs: pl.DataFrame, rbds: pl.DataFrame, source_for_country: dict[str, str]
-) -> dict[str, Area]:
+def area_catalogue(reservoirs: pl.DataFrame, rbds: pl.DataFrame) -> dict[str, Area]:
+    sources = dict(
+        membership(reservoirs)
+        .join(reservoirs.select("reservoir_id", "source_id"), on="reservoir_id")
+        .group_by("area_id")
+        .agg(pl.col("source_id").unique().sort())
+        .iter_rows()
+    )
     areas: dict[str, Area] = {}
     for country in reservoirs["country"].unique().sort():
         areas[country] = Area(
@@ -76,7 +92,7 @@ def area_catalogue(
             name=COUNTRY_NAMES.get(country, country),
             country=country,
             capacity_hm3=0,
-            source_id=source_for_country[country],
+            source_ids=sources[country],
         )
     rbd_names = dict(rbds.select("code", "name").iter_rows())
     centres = reservoirs.group_by("rbd_code", "country").agg(
@@ -91,7 +107,7 @@ def area_catalogue(
             country=row["country"],
             parent_id=row["country"],
             capacity_hm3=0,
-            source_id=source_for_country[row["country"]],
+            source_ids=sources[row["rbd_code"]],
             centroid=[row["lon"], row["lat"]] if located else None,
         )
     for row in reservoirs.iter_rows(named=True):
@@ -103,7 +119,7 @@ def area_catalogue(
             country=row["country"],
             parent_id=row["rbd_code"],
             capacity_hm3=0,
-            source_id=source_for_country[row["country"]],
+            source_ids=[row["source_id"]],
             centroid=[row["lon"], row["lat"]] if located else None,
         )
     return areas
@@ -143,18 +159,23 @@ def _country_status(
     sources: list[SourceMeta],
     health: dict[str, SourceHealth],
     withdrawn: dict[str, str],
+    coverage: dict[str, str],
 ) -> CountryStatus:
-    """B24/E5/E6: active, stale (with why) or withdrawn (with the maintainers' note)."""
+    """B24/E5/E6: active, stale (with why) or withdrawn (with the maintainers' note).
+
+    B1a: a partly covered country leads its note with what the figures cover."""
     if area.id in withdrawn:
         return CountryStatus(
             code=area.id, name=area.name, status="withdrawn", note=withdrawn[area.id]
         )
+    covers = coverage.get(area.id)
     if not entry.stale:
-        return CountryStatus(code=area.id, name=area.name, status="active")
-    source = next((s for s in sources if s.country == area.id), None)
+        return CountryStatus(code=area.id, name=area.name, status="active", note=covers)
     note = f"Latest official figures are from {entry.as_of.day} {entry.as_of:%b %Y}."
-    if source and health.get(source.id) and health[source.id].last_error:
+    if any(health.get(s.id) and health[s.id].last_error for s in sources if s.country == area.id):
         note += " The latest update from the source failed; showing the last published figures."
+    if covers:
+        note = f"{covers}. {note}"
     return CountryStatus(code=area.id, name=area.name, status="stale", note=note)
 
 
@@ -176,11 +197,13 @@ def build_outputs(
     now: datetime,
     health: dict[str, SourceHealth] | None = None,
     withdrawn: dict[str, str] | None = None,
+    coverage: dict[str, str] | None = None,
 ) -> Outputs:
     health = health or {}
     withdrawn = withdrawn or {}
+    coverage = coverage or {}
     today = now.date()
-    reservoirs = _reservoirs(registries)
+    reservoirs = _reservoirs(registries, sources)
     last_seen = store.group_by("reservoir_id").agg(pl.col("observed_on").max().alias("last_seen"))
     active = reservoirs.join(last_seen, on="reservoir_id").filter(
         pl.col("last_seen") >= today - RETIRED_AFTER
@@ -195,7 +218,7 @@ def build_outputs(
         .filter(pl.col("area_id").is_in(membership(active)["area_id"].unique().implode()))
     )
     snapshot = snapshot_week(latest["as_of"].to_list(), today=today)
-    catalogue = area_catalogue(reservoirs, rbds, {s.country: s.id for s in sources})
+    catalogue = area_catalogue(reservoirs, rbds)
 
     areas: list[Area] = []
     current: dict[str, CurrentEntry] = {}
@@ -221,7 +244,7 @@ def build_outputs(
         generated_at=now,
         snapshot_week=snapshot,
         countries=[
-            _country_status(a, current[a.id], sources, health, withdrawn)
+            _country_status(a, current[a.id], sources, health, withdrawn, coverage)
             for a in areas
             if a.level == "country"
         ],
@@ -231,6 +254,7 @@ def build_outputs(
                 country=s.country,
                 name=s.name,
                 url=s.url,
+                cadence=s.cadence,
                 last_fetched=_last_success(health.get(s.id), now),
                 last_published=published.get(s.id),
                 last_error=health[s.id].last_error if s.id in health else None,

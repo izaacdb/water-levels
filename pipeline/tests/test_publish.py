@@ -166,6 +166,68 @@ def test_country_status_notes() -> None:
     assert "latest update" in spain.note.lower()
 
 
+def test_a_country_with_several_sources_lists_them_all() -> None:
+    """B2′: each reservoir links to its own company; regions and countries list all of theirs."""
+    yorkshire = SourceMeta(
+        id="uk-yorkshire", country="UK", name="Yorkshire Water", url="https://y/", cadence="weekly"
+    )
+    southern = SourceMeta(
+        id="uk-southern", country="UK", name="Southern Water", url="https://s/", cadence="monthly"
+    )
+    registry = pl.DataFrame(
+        {
+            "id": ["UK-a", "UK-b"],
+            "source_id": ["uk-yorkshire", "uk-southern"],
+            "source_key": ["a", "b"],
+            "name": ["Alpha", "Beta"],
+            "rbd_code": ["UK04", "UK07"],
+            "lat": ["53.5", "51.0"],
+            "lon": ["-1.8", "0.4"],
+        }
+    )
+    rbds = pl.DataFrame(
+        {"code": ["UK04", "UK07"], "country": ["UK", "UK"], "name": ["Humber", "South East"]}
+    )
+    store = pl.concat(
+        [
+            _store([("UK-a", date(2026, 10, 6), 30, 100)]).with_columns(
+                source_id=pl.lit("uk-yorkshire")
+            ),
+            _store([("UK-b", date(2026, 10, 6), 50, 100)]).with_columns(
+                source_id=pl.lit("uk-southern")
+            ),
+        ]
+    )
+    out = build_outputs(store, {"UK": registry}, rbds, [yorkshire, southern], now=NOW)
+    by_id = {a.id: a for a in out.areas.root}
+    assert by_id["UK-a"].source_ids == ["uk-yorkshire"]
+    assert by_id["UK04"].source_ids == ["uk-yorkshire"]
+    assert by_id["UK"].source_ids == ["uk-southern", "uk-yorkshire"]
+    assert by_id["UK"].name == "United Kingdom"
+    cadences = {s.id: s.cadence for s in out.manifest.sources}
+    assert cadences == {"uk-yorkshire": "weekly", "uk-southern": "monthly"}
+
+
+def test_a_failing_source_is_noted_on_its_country_even_with_several() -> None:
+    from pipeline.health import SourceHealth
+
+    store = _store([("ES-a", date(2026, 9, 1), 30, 100)])
+    other = SourceMeta(id="es-other", country="ES", name="Other", url="https://o/")
+    health = {"es-miteco": SourceHealth(last_error="down", consecutive_failures=1)}
+    out = build_outputs(store, {"ES": REGISTRY}, RBDS, [other, META], now=NOW, health=health)
+    assert "latest update" in (out.manifest.countries[0].note or "").lower()
+
+
+def test_active_countries_carry_their_coverage_note() -> None:
+    """B1a: partly covered countries say what's covered."""
+    store = _store([("ES-a", date(2026, 10, 6), 30, 100)])
+    out = build_outputs(
+        store, {"ES": REGISTRY}, RBDS, [META], now=NOW, coverage={"ES": "Mainland only"}
+    )
+    spain = out.manifest.countries[0]
+    assert (spain.status, spain.note) == ("active", "Mainland only")
+
+
 def test_withdrawn_country_keeps_its_data_with_an_explanation() -> None:
     """E6: a country that stops meeting the bar stays visible, marked and explained."""
     store = _store([("ES-a", date(2026, 10, 6), 30, 100)])

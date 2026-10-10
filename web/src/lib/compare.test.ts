@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { Area, Series } from '../contract'
 import { COMPARE_COLORS, assignSlots, compareOption } from './compare'
 
-const area = (id: string, country = 'ES'): Area => ({ id, level: 'region', name: id, country, capacityHm3: 100, sourceId: 'x' })
+const area = (id: string, country = 'ES'): Area => ({ id, level: 'region', name: id, country, capacityHm3: 100, sourceIds: ['x'] })
 const series = (id: string, pct: number[], normal: (number | null)[]): Series => ({
   areaId: id,
   weeks: ['2026-W40', '2026-W41'],

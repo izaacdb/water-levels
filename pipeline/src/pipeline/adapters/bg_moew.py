@@ -233,6 +233,7 @@ class MoewAdapter:
         country="BG",
         name="МОСВ — Ежедневен бюлетин за състоянието на водите",
         url=LISTING,
+        cadence="daily",
     )
 
     def fetch(self, client: httpx.Client) -> bytes:

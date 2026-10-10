@@ -51,8 +51,12 @@
         "capacityHm3": {
           "type": "number"
         },
-        "sourceId": {
-          "type": "string"
+        "sourceIds": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
         },
         "centroid": {
           "anyOf": [
@@ -77,7 +81,7 @@
         "name",
         "country",
         "capacityHm3",
-        "sourceId"
+        "sourceIds"
       ],
       "title": "Area",
       "type": "object"
@@ -201,7 +205,7 @@
       "additionalProperties": false,
       "properties": {
         "schemaVersion": {
-          "default": 1,
+          "default": 2,
           "type": "integer"
         },
         "generatedAt": {
@@ -325,6 +329,15 @@
           "type": "string"
         },
         "url": {
+          "type": "string"
+        },
+        "cadence": {
+          "default": "weekly",
+          "enum": [
+            "daily",
+            "weekly",
+            "monthly"
+          ],
           "type": "string"
         },
         "lastFetched": {

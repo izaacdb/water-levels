@@ -28,6 +28,12 @@ const COUNTRY_NAMES: Record<string, string> = {
   BG: 'Bulgaria',
   CY: 'Cyprus',
   CZ: 'Czechia',
+  UK: 'United Kingdom',
+  EL: 'Greece',
+  DE: 'Germany',
 }
 
 export const countryName = (code: string) => COUNTRY_NAMES[code] ?? code
+
+/** "Source"/"Sources" label for one or several official sources (B2′). */
+export const sourceLabel = (sources: unknown[]) => (sources.length > 1 ? 'Sources' : 'Source')
