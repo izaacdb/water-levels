@@ -1,0 +1,81 @@
+id,source_key,name,group,rbd_code,lat,lon
+PT-abrilongo,abrilongo,Abrilongo,GUADIANA,PTRH7,39.0961,-7.1214
+PT-aguieira,aguieira,Aguieira,MONDEGO,PTRH4A,40.3403,-8.1967
+PT-alijo,alijo,Alijó,DOURO,PTRH3,41.3086,-7.4914
+PT-alqueva,alqueva,Alqueva,GUADIANA,PTRH7,38.1975,-7.4964
+PT-alto-lindoso,alto-lindoso,Alto Lindoso,LIMA,PTRH1,41.8722,-8.2028
+PT-alto-rabagao,alto-rabagao,Alto Rabagão,CÁVADO,PTRH2,41.7397,-7.8578
+PT-alvito,alvito,Alvito,SADO,PTRH6,38.2901,-7.8967
+PT-apartadura,apartadura,Apartadura,TEJO,PTRH5A,39.3503,-7.3839
+PT-arade,arade,Arade,ARADE,PTRH8,37.2394,-8.3756
+PT-azibo,azibo,Azibo,DOURO,PTRH3,41.5569,-6.8900
+PT-baixo-sabor,baixo-sabor,Baixo Sabor,DOURO,PTRH3,41.2286,-7.0125
+PT-beliche,beliche,Beliche,GUADIANA,PTRH7,37.2754,-7.5093
+PT-belver,belver,Belver,TEJO,PTRH5A,39.4798,-7.9980
+PT-bemposta,bemposta,Bemposta,DOURO,PTRH3,41.3011,-6.4703
+PT-bouca,bouca,Bouçã,TEJO,PTRH5A,39.8531,-8.2197
+PT-bravura,bravura,Bravura,R. BARLAVENTO,PTRH8,37.2021,-8.6983
+PT-cabril,cabril,Cabril,TEJO,PTRH5A,39.9175,-8.1331
+PT-caia,caia,Caia,GUADIANA,PTRH7,38.9996,-7.1453
+PT-caldeirao,caldeirao,Caldeirão,MONDEGO,PTRH4A,40.5316,-7.3297
+PT-campilhas,campilhas,Campilhas,SADO,PTRH6,37.8437,-8.6191
+PT-canicada,canicada,Caniçada,CÁVADO,PTRH2,41.6530,-8.2310
+PT-capinha,capinha,Capinha,TEJO,PTRH5A,40.1700,-7.4300
+PT-carrapatelo,carrapatelo,Carrapatelo,DOURO,PTRH3,41.0855,-8.1311
+PT-castelo-bode,castelo-bode,Castelo de Bode,TEJO,PTRH5A,39.5428,-8.3197
+PT-corte-brique,corte-brique,Corte Brique,MIRA,PTRH6,37.5830,-8.4441
+PT-cova-viriato,cova-viriato,Cova do Viriato,TEJO,PTRH5A,40.3093,-7.5607
+PT-crestuma-lever,crestuma-lever,Crestuma-Lever,DOURO,PTRH3,41.0406,-8.3473
+PT-divor,divor,Divôr,TEJO,PTRH5A,38.7003,-7.9257
+PT-enxoe,enxoe,Enxoé,GUADIANA,PTRH7,37.9936,-7.4638
+PT-fagilde,fagilde,Fagilde,MONDEGO,PTRH4A,40.6337,-7.7932
+PT-fonte-serne,fonte-serne,Fonte Serne,SADO,PTRH6,37.8817,-8.4976
+PT-foz-tua,foz-tua,Foz Tua,DOURO,PTRH3,41.2200,-7.4200
+PT-fratel,fratel,Fratel,TEJO,PTRH5A,39.5433,-7.8028
+PT-fronhas,fronhas,Fronhas,MONDEGO,PTRH4A,40.2455,-8.1641
+PT-funcho,funcho,Funcho,ARADE,PTRH8,37.2621,-8.3827
+PT-guilhofrei,guilhofrei,Guilhofrei,AVE,PTRH2,41.5857,-8.1374
+PT-idanha,idanha,Idanha,TEJO,PTRH5A,39.9448,-7.2011
+PT-lagoa-comprida,lagoa-comprida,Lagoa Comprida,MONDEGO,PTRH4A,40.3636,-7.6497
+PT-lagoacho,lagoacho,Lagoacho,MONDEGO,PTRH4A,40.3861,-7.6201
+PT-lucefecit,lucefecit,Lucefecit,GUADIANA,PTRH7,38.6360,-7.4066
+PT-magos,magos,Magos,TEJO,PTRH5A,38.9966,-8.6885
+PT-maranhao,maranhao,Maranhão,TEJO,PTRH5A,39.0150,-7.9758
+PT-meimoa,meimoa,Meimoa,TEJO,PTRH5A,40.2612,-7.1426
+PT-minutos,minutos,Minutos,TEJO,PTRH5A,38.6598,-8.0978
+PT-miranda,miranda,Miranda,DOURO,PTRH3,41.4889,-6.2639
+PT-montargil,montargil,Montargil,TEJO,PTRH5A,39.0538,-8.1762
+PT-monte-gato,monte-gato,Monte Gato,SADO,PTRH6,,
+PT-monte-migueis,monte-migueis,Monte Migueis,SADO,PTRH6,,
+PT-monte-novo,monte-novo,Monte Novo,GUADIANA,PTRH7,38.5122,-7.7107
+PT-monte-rocha,monte-rocha,Monte da Rocha,SADO,PTRH6,37.7275,-8.2883
+PT-morgavel,morgavel,Morgavel,R. C. ALENTEJO,PTRH6,37.9024,-8.7637
+PT-odeleite,odeleite,Odeleite,GUADIANA,PTRH7,37.3278,-7.4858
+PT-odelouca,odelouca,Odelouca,ARADE,PTRH8,37.2868,-8.4722
+PT-odivelas,odivelas,Odivelas,SADO,PTRH6,38.1851,-8.1152
+PT-paradela,paradela,Paradela,CÁVADO,PTRH2,41.7689,-7.9503
+PT-pego-altar,pego-altar,Pego do Altar,SADO,PTRH6,38.4180,-8.3922
+PT-picote,picote,Picote,DOURO,PTRH3,41.3782,-6.3518
+PT-pocinho,pocinho,Pocinho,DOURO,PTRH3,41.0587,-7.0043
+PT-povoa,povoa,Póvoa,RIBEIRAS DO OESTE E TEJO,PTRH5A,39.4777,-7.5528
+PT-pracana,pracana,Pracana,TEJO,PTRH5A,39.5649,-7.8122
+PT-raiva,raiva,Raiva,MONDEGO,PTRH4A,40.3094,-8.2489
+PT-regua,regua,Régua,DOURO,PTRH3,41.1732,-7.5663
+PT-ribeiradio,ribeiradio,Ribeiradio,VOUGA,PTRH4A,40.7422,-8.3194
+PT-roxo,roxo,Roxo,SADO,PTRH6,37.9299,-8.0811
+PT-salamonde,salamonde,Salamonde,CÁVADO,PTRH2,41.6918,-8.0913
+PT-santa-agueda,santa-agueda,Santa Águeda,RIBEIRAS DO OESTE E TEJO,PTRH5A,,
+PT-santa-clara,santa-clara,Santa Clara,MIRA,PTRH6,37.5141,-8.4423
+PT-santa-luzia,santa-luzia,Santa Luzia,RIBEIRAS DO OESTE E TEJO,PTRH5A,40.0898,-7.8580
+PT-sao-domingos,sao-domingos,São Domingos,RIBEIRAS DO OESTE E TEJO,PTRH5A,39.3343,-9.3176
+PT-serra-serrada,serra-serrada,Serra Serrada,DOURO,PTRH3,41.9614,-6.7717
+PT-torrao,torrao,Torrão,DOURO,PTRH3,41.0974,-8.2611
+PT-touvedo,touvedo,Touvedo,LIMA,PTRH1,41.8125,-8.3537
+PT-vale-gaio,vale-gaio,Vale do Gaio,SADO,PTRH6,38.2476,-8.2952
+PT-vale-rossim,vale-rossim,Vale do Rossim,MONDEGO,PTRH4A,40.3997,-7.5887
+PT-valeira,valeira,Valeira,DOURO,PTRH3,41.1466,-7.2130
+PT-varosa,varosa,Varosa,DOURO,PTRH3,41.1206,-7.7760
+PT-venda-nova,venda-nova,Venda Nova,CÁVADO,PTRH2,41.6792,-7.9825
+PT-vigia,vigia,Vigia,GUADIANA,PTRH7,38.5387,-7.6079
+PT-vilar-tabuaco,vilar-tabuaco,Vilar-Tabuaço,DOURO,PTRH3,40.9867,-7.5356
+PT-vilarinho-furnas,vilarinho-furnas,Vilarinho das Furnas,CÁVADO,PTRH2,41.7635,-8.2090
