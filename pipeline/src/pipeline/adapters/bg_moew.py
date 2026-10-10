@@ -11,8 +11,10 @@ captures of the official files, one per ISO week.
 
 from __future__ import annotations
 
+import base64
 import html
 import io
+import json
 import logging
 import re
 import subprocess
@@ -108,11 +110,14 @@ def _float(text: str) -> float:
     return float(text.replace(",", "."))
 
 
-def _rows_to_frame(rows: list[list[str]], text: str) -> pl.DataFrame:
+def _rows_to_frame(rows: list[list[str]], text: str, fallback: date | None = None) -> pl.DataFrame:
     m = _DATE.search(text)
-    if not m:
+    if m:
+        observed = date(int(m.group(3)), int(m.group(2)), int(m.group(1)))
+    elif fallback:
+        observed = fallback  # some 2020 layouts keep the date out of the text layer
+    else:
         raise ValueError("no date found in bulletin")
-    observed = date(int(m.group(3)), int(m.group(2)), int(m.group(1)))
     out, seen = [], set()
     for cells in rows:
         # A reservoir row: number, basin directorate, name, total, dead, available volume, ...
@@ -146,17 +151,17 @@ def _cell_text(fragment: str) -> str:
     return " ".join(html.unescape(re.sub(r"<[^>]+>", " ", fragment)).split())
 
 
-def parse_html(raw: bytes) -> pl.DataFrame:
+def parse_html(raw: bytes, fallback: date | None = None) -> pl.DataFrame:
     """A bulletin converted to HTML by LibreOffice."""
     doc = raw.decode("utf-8", errors="replace")
     rows = [
         [c for c in (_cell_text(td) for td in re.findall(r"<td.*?</td>", tr, re.S)) if c]
         for tr in re.findall(r"<tr.*?</tr>", doc, re.S)
     ]
-    return _rows_to_frame(rows, _cell_text(doc))
+    return _rows_to_frame(rows, _cell_text(doc), fallback)
 
 
-def parse_pdf(raw: bytes) -> pl.DataFrame:
+def parse_pdf(raw: bytes, fallback: date | None = None) -> pl.DataFrame:
     rows: list[list[str]] = []
     text = ""
     with pdfplumber.open(io.BytesIO(raw)) as pdf:
@@ -164,7 +169,18 @@ def parse_pdf(raw: bytes) -> pl.DataFrame:
             text += (page.extract_text() or "") + "\n"
             for table in page.extract_tables():
                 rows += [[" ".join(c.split()) for c in r if c and c.strip()] for r in table]
-    return _rows_to_frame(rows, text)
+    return _rows_to_frame(rows, text, fallback)
+
+
+def _complete(raw: bytes) -> bool:
+    """Archived PDFs are sometimes truncated; a complete one ends with an EOF marker."""
+    return not raw.startswith(b"%PDF") or b"%%EOF" in raw[-2048:]
+
+
+def _envelope(day: date, content: bytes) -> bytes:
+    return json.dumps(
+        {"date": day.isoformat(), "content": base64.b64encode(content).decode()}
+    ).encode()
 
 
 def word_to_html(raw: bytes) -> bytes:
@@ -217,7 +233,7 @@ class MoewAdapter:
 
     def fetch_history(self, client: httpx.Client) -> Iterator[bytes]:
         """One archived bulletin per ISO week (the latest that week), oldest first."""
-        by_week: dict[tuple[int, int], tuple[date, str]] = {}
+        by_week: dict[tuple[int, int], list[tuple[date, str]]] = {}
         for folder in ARCHIVE_FOLDERS:
             try:
                 index = client.get(
@@ -242,24 +258,37 @@ class MoewAdapter:
                 if not m:
                     continue
                 day = date(int(m.group(3)), int(m.group(2)), int(m.group(1)))
-                week = day.isocalendar()[:2]
-                if week not in by_week or day > by_week[week][0]:
-                    by_week[week] = (day, f"https://web.archive.org/web/{ts}id_/{original}")
-        for _, url in sorted(by_week.values()):
-            try:
-                response = client.get(url, timeout=120, follow_redirects=True)
-                response.raise_for_status()
-                yield response.content
-            except httpx.HTTPError as err:
-                log.warning("skipping archived bulletin %s: %s", url, err)
-            time.sleep(1)  # be gentle with the Internet Archive
+                url = f"https://web.archive.org/web/{ts}id_/{original}"
+                by_week.setdefault(day.isocalendar()[:2], []).append((day, url))
+        for week in sorted(by_week):
+            # Latest edition first; some captures are truncated, so fall back within the week.
+            for day, url in sorted(by_week[week], reverse=True):
+                time.sleep(1)  # be gentle with the Internet Archive
+                try:
+                    response = client.get(url, timeout=120, follow_redirects=True)
+                    response.raise_for_status()
+                except httpx.HTTPError as err:
+                    log.warning("skipping archived bulletin %s: %s", url, err)
+                    continue
+                if not _complete(response.content):
+                    log.warning("skipping truncated archived bulletin %s", url)
+                    continue
+                yield _envelope(day, response.content)
+                break
 
     def parse(self, raw: bytes) -> pl.DataFrame:
+        fallback = None
+        if raw.startswith(b'{"date"'):  # archived edition with the date from its file name
+            envelope = json.loads(raw)
+            fallback, raw = (
+                date.fromisoformat(envelope["date"]),
+                base64.b64decode(envelope["content"]),
+            )
         if raw.startswith(b"%PDF"):
-            return parse_pdf(raw)
+            return parse_pdf(raw, fallback)
         if raw.startswith(b"\xd0\xcf\x11\xe0"):  # OLE2: a Word 97-2003 document
             try:
-                return parse_html(word_to_html(raw))
+                return parse_html(word_to_html(raw), fallback)
             except (subprocess.CalledProcessError, FileNotFoundError) as err:
                 raise ValueError(f"could not convert Word bulletin: {err}") from err
-        return parse_html(raw)
+        return parse_html(raw, fallback)

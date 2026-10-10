@@ -75,3 +75,42 @@ def test_bulletin_date_from_page_slug() -> None:
 def test_parse_detects_word_documents() -> None:
     with pytest.raises(ValueError, match="bulletin"):
         MoewAdapter().parse(b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1" + b"\0" * 512)
+
+
+def test_history_skips_truncated_captures_and_carries_the_file_date(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import httpx
+
+    monkeypatch.setattr("pipeline.adapters.bg_moew.time.sleep", lambda _: None)
+    good = (FIXTURES / "bulletin-2022-03-01.pdf").read_bytes()
+    folder = "moew.government.bg/static/media/ups/tiny/Daily%20Bulletin/"
+    cdx = [
+        ["timestamp", "original"],
+        ["20220302000000", f"https://www.{folder}02032022_Bulletin_Daily.pdf"],  # truncated
+        ["20220301000000", f"https://www.{folder}01032022_Bulletin_Daily.pdf"],  # same week, ok
+    ]
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/cdx/search/cdx":
+            in_old_folder = "Water" not in request.url.params["url"]
+            return httpx.Response(200, json=cdx if in_old_folder else [["timestamp", "original"]])
+        if "02032022" in str(request.url):
+            return httpx.Response(200, content=good[: len(good) // 2])
+        return httpx.Response(200, content=good)
+
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        batches = list(MoewAdapter().fetch_history(client))
+    assert len(batches) == 1
+    obs = MoewAdapter().parse(batches[0])
+    assert obs["observed_on"].unique().to_list() == [date(2022, 3, 1)]
+
+
+def test_file_date_is_used_when_the_text_has_none() -> None:
+    import base64
+    import json
+
+    pdf = (FIXTURES / "bulletin-2022-03-01.pdf").read_bytes()
+    envelope = json.dumps({"date": "2022-03-01", "content": base64.b64encode(pdf).decode()})
+    obs = MoewAdapter().parse(envelope.encode())
+    assert obs["observed_on"].unique().to_list() == [date(2022, 3, 1)]
