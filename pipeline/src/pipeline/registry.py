@@ -17,6 +17,11 @@ def load_registry(country: str) -> pl.DataFrame:
     return pl.read_csv(REGISTRY_DIR / f"{country.lower()}.csv", infer_schema=False)
 
 
+def load_rbds() -> pl.DataFrame:
+    """WFD river basin districts: code, country, official local name."""
+    return pl.read_csv(REGISTRY_DIR / "rbd.csv", infer_schema=False)
+
+
 def attach_reservoir_ids(
     obs: pl.DataFrame, registry: pl.DataFrame
 ) -> tuple[pl.DataFrame, list[str]]:
