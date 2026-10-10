@@ -13,6 +13,7 @@
     "gen:contract": "node scripts/gen-contract.mjs"
   },
   "dependencies": {
+    "echarts": "^6.1.0",
     "maplibre-gl": "^6.13.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
