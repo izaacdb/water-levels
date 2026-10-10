@@ -46,3 +46,19 @@ def test_czech_reservoirs_have_districts_and_located_ones_are_in_czechia() -> No
     assert located["lon"].cast(pl.Float64).is_between(12.0, 18.9).all()
     # Assigned by geography, not by enterprise: Bedřichov (Povodí Labe) drains to the Oder.
     assert reg.filter(pl.col("source_key") == "bedrichov")["rbd_code"].item() == "CZ6000"
+
+
+def test_cypriot_dams_are_located_in_cyprus() -> None:
+    reg = load_registry("CY")
+    assert reg.height == 21
+    assert (reg["rbd_code"] == "CY001").all()
+    assert reg["lat"].cast(pl.Float64).is_between(34.5, 35.7).all()
+    assert reg["lon"].cast(pl.Float64).is_between(32.2, 34.6).all()
+
+
+def test_bulgarian_reservoirs_are_located_in_bulgaria() -> None:
+    reg = load_registry("BG")
+    rbds = set(load_rbds()["code"].to_list())
+    assert reg["rbd_code"].is_in(rbds).all()
+    assert reg["lat"].cast(pl.Float64).is_between(41.2, 44.3).all()
+    assert reg["lon"].cast(pl.Float64).is_between(22.3, 28.7).all()
