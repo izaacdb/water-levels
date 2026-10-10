@@ -13,6 +13,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "pipeline" / "registry" / "rbd-source.geojson"
+# WISE's nameText for some districts lists their reporting sub-units rather than the
+# district's own official name.
+NAME_OVERRIDES = {"DE5000": "Elbe"}
 SMALL = {"y", "e", "de", "do", "da", "del", "la", "las", "los", "and"}
 
 
@@ -38,7 +41,8 @@ def main() -> None:
     features, rows = [], []
     for f in src["features"]:
         p = f["properties"]
-        code, name = p["thematicIdIdentifier"], official_name(p["nameText"])
+        code = p["thematicIdIdentifier"]
+        name = NAME_OVERRIDES.get(code) or official_name(p["nameText"])
         features.append(
             {
                 "type": "Feature",

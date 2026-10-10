@@ -87,3 +87,12 @@ def test_greek_reservoirs_have_cited_capacities_and_lie_in_greece() -> None:
     assert (reg["capacity_source"].str.len_chars() > 0).all()
     assert reg["lat"].cast(pl.Float64).is_between(34.8, 41.8).all()
     assert reg["lon"].cast(pl.Float64).is_between(19.3, 29.7).all()
+
+
+def test_saxon_reservoirs_have_capacities_and_lie_in_saxony() -> None:
+    reg = load_registry("DE")
+    assert reg.height >= 30
+    assert reg["rbd_code"].is_in(set(load_rbds()["code"].to_list())).all()
+    assert (reg["capacity_hm3"].cast(pl.Float64) > 0).all()
+    assert reg["lat"].cast(pl.Float64).is_between(50.1, 51.7).all()
+    assert reg["lon"].cast(pl.Float64).is_between(11.8, 15.1).all()

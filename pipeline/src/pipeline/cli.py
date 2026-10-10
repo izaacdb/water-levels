@@ -13,6 +13,7 @@ from pipeline.adapters.base import SourceAdapter
 from pipeline.adapters.bg_moew import MoewAdapter
 from pipeline.adapters.cy_wdd import WddAdapter
 from pipeline.adapters.cz_povodi import PovodiAdapter
+from pipeline.adapters.de_ltv import LtvAdapter
 from pipeline.adapters.el_eydap import EydapAdapter
 from pipeline.adapters.es_miteco import MitecoAdapter
 from pipeline.adapters.pt_apa import ApaAdapter
@@ -36,6 +37,7 @@ ADAPTERS: list[SourceAdapter] = [
     AnglianAdapter(),
     ScottishWaterAdapter(),
     EydapAdapter(),
+    LtvAdapter(),
 ]
 
 
