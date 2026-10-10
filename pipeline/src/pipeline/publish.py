@@ -29,6 +29,9 @@ from pipeline.health import SourceHealth
 # (decommissioned, merged into a system, ...). Its history still counts in the
 # weeks it reported, but it no longer appears in current views or coverage counts.
 RETIRED_AFTER = timedelta(days=365)
+# B3′: how many weeks a monthly source's reading keeps counting after its own week.
+CARRY_WEEKS = 5
+_SPEED = {"daily": 0, "weekly": 1, "monthly": 2}
 
 COUNTRY_NAMES = {
     "ES": "Spain",
@@ -179,6 +182,12 @@ def _country_status(
     return CountryStatus(code=area.id, name=area.name, status="stale", note=note)
 
 
+def _cadence(area: Area, sources: list[SourceMeta]) -> str:
+    """An area is judged by its fastest source: that's where its as-of date comes from."""
+    cadences = [s.cadence for s in sources if s.id in area.source_ids] or ["weekly"]
+    return min(cadences, key=_SPEED.__getitem__)
+
+
 def _last_success(h: SourceHealth | None, now: datetime) -> datetime | None:
     if h is None:
         return now
@@ -208,8 +217,13 @@ def build_outputs(
     active = reservoirs.join(last_seen, on="reservoir_id").filter(
         pl.col("last_seen") >= today - RETIRED_AFTER
     )
+    carry = {s.id: CARRY_WEEKS for s in sources if s.cadence == "monthly"}
     by_area = with_normals(
-        aggregate(weekly_snapshot(store), membership(reservoirs), counted=membership(active))
+        aggregate(
+            weekly_snapshot(store, carry=carry, until=today),
+            membership(reservoirs),
+            counted=membership(active),
+        )
     )
     latest = (
         by_area.sort("week")
@@ -233,7 +247,7 @@ def build_outputs(
             anomaly_pts=_round(row["anomaly_pts"]),
             normal_years=row["normal_years"],
             as_of=row["as_of"],
-            stale=is_stale(row["as_of"], snapshot, today=today),
+            stale=is_stale(row["as_of"], snapshot, today=today, cadence=_cadence(area, sources)),
             n_reporting=row["n_reporting"],
             n_total=row["n_total"],
             flags=[row["flag"]] if row["flag"] else [],

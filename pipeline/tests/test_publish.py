@@ -208,6 +208,28 @@ def test_a_country_with_several_sources_lists_them_all() -> None:
     assert cadences == {"uk-yorkshire": "weekly", "uk-southern": "monthly"}
 
 
+def test_monthly_sources_carry_forward_and_go_stale_by_their_own_clock() -> None:
+    """B3′/B24′: a monthly reading counts in later weeks and isn't 'out of date' for weeks."""
+    weekly = SourceMeta(id="es-miteco", country="ES", name="Weekly", url="https://w/")
+    monthly = SourceMeta(id="es-monthly", country="ES", name="Monthly", url="https://m/",
+                         cadence="monthly")  # fmt: skip
+    registry = REGISTRY.with_columns(source_id=pl.Series(["es-miteco", "es-monthly", "es-miteco"]))
+    store = pl.concat(
+        [
+            _store([("ES-a", date(2026, 10, 6), 30, 100)]),
+            _store([("ES-b", date(2026, 8, 31), 50, 100)]).with_columns(
+                source_id=pl.lit("es-monthly")
+            ),
+        ]
+    )
+    out = build_outputs(store, {"ES": registry}, RBDS, [weekly, monthly], now=NOW)
+    current = out.current.root
+    # Beta's August reading still counts in the country's W41 total: (30 + 50) / 200.
+    assert current["ES"].pct == pytest.approx(40.0)
+    assert (current["ES"].n_reporting, current["ES"].stale) == (2, False)
+    assert (current["ES-b"].as_of, current["ES-b"].stale) == (date(2026, 8, 31), False)
+
+
 def test_a_failing_source_is_noted_on_its_country_even_with_several() -> None:
     from pipeline.health import SourceHealth
 
