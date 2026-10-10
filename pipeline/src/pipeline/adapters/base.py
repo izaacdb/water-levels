@@ -30,6 +30,14 @@ class SourceMeta:
     url: str
 
 
+class PartialFetch(Exception):
+    """Only part of a source was reachable: `raw` holds what arrived and can be parsed."""
+
+    def __init__(self, raw: bytes, cause: object) -> None:
+        super().__init__(str(cause))
+        self.raw = raw
+
+
 class SourceAdapter(Protocol):
     meta: SourceMeta
 
