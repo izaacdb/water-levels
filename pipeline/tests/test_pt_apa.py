@@ -87,3 +87,22 @@ def test_archived_captures_parses_the_cdx_index() -> None:
 def test_adapter_metadata() -> None:
     meta = ApaAdapter().meta
     assert (meta.id, meta.country) == ("pt-apa", "PT")
+
+
+def test_history_survives_an_unavailable_archive_index(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A 503 from the archive's index for one URL must not abort the backfill."""
+    import httpx
+
+    monkeypatch.setattr("pipeline.adapters.pt_apa.time.sleep", lambda _: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/cdx/search/cdx":
+            if "snirh" in request.url.params["url"]:
+                return httpx.Response(503)
+            return httpx.Response(
+                200, json=[["timestamp", "original"], ["2025", "https://a/x.pdf"]]
+            )
+        return httpx.Response(200, content=b"%PDF-archived")
+
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        assert list(ApaAdapter().fetch_history(client)) == [b"%PDF-archived"]

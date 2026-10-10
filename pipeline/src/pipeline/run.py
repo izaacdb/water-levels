@@ -44,11 +44,17 @@ def run(
             if meta.id not in known_sources and fetch_history is not None:
                 # First run for a source with an archive: backfill its history once.
                 # Archived rows count as fetched just before the live one, so live wins.
-                for raw in fetch_history(client):
-                    try:
-                        parsed.append((adapter.parse(raw), now - timedelta(microseconds=1)))
-                    except Exception as err:  # one bad archived edition mustn't stop the rest
-                        log.warning("%s: skipping unparseable archived edition: %s", meta.id, err)
+                try:
+                    for raw in fetch_history(client):
+                        try:
+                            parsed.append((adapter.parse(raw), now - timedelta(microseconds=1)))
+                        except Exception as err:  # one bad edition mustn't stop the rest
+                            log.warning(
+                                "%s: skipping unparseable archived edition: %s", meta.id, err
+                            )
+                except httpx.HTTPError as err:
+                    # Keep whatever history arrived; the live fetch below still runs.
+                    log.warning("%s: history backfill interrupted: %s", meta.id, err)
             parsed.append((adapter.parse(adapter.fetch(client)), now))
             for obs, fetched_at in parsed:
                 mapped, unknown = attach_reservoir_ids(obs, registries[meta.country])

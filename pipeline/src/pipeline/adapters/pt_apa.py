@@ -54,19 +54,24 @@ class ApaAdapter:
     def fetch_history(self, client: httpx.Client) -> Iterator[bytes]:
         """Every distinct archived edition of the bulletin, oldest first."""
         for url in ARCHIVED_URLS:
-            index = client.get(
-                CDX,
-                params={
-                    "url": url.split("://", 1)[1],
-                    "output": "json",
-                    "filter": "statuscode:200",
-                    "collapse": "digest",
-                    "fl": "timestamp,original",
-                },
-                timeout=120,
-            )
-            index.raise_for_status()
-            for capture in archived_captures(index.json()):
+            try:
+                index = client.get(
+                    CDX,
+                    params={
+                        "url": url.split("://", 1)[1],
+                        "output": "json",
+                        "filter": "statuscode:200",
+                        "collapse": "digest",
+                        "fl": "timestamp,original",
+                    },
+                    timeout=120,
+                )
+                index.raise_for_status()
+                captures = archived_captures(index.json())
+            except (httpx.HTTPError, ValueError) as err:
+                log.warning("archive index unavailable for %s: %s", url, err)
+                continue
+            for capture in captures:
                 try:
                     response = client.get(capture, follow_redirects=True, timeout=120)
                     response.raise_for_status()
