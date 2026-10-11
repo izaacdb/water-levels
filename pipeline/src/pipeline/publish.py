@@ -29,6 +29,9 @@ from pipeline.health import SourceHealth
 # (decommissioned, merged into a system, ...). Its history still counts in the
 # weeks it reported, but it no longer appears in current views or coverage counts.
 RETIRED_AFTER = timedelta(days=365)
+# B3′: how many weeks a monthly source's reading keeps counting after its own week.
+CARRY_WEEKS = 5
+_SPEED = {"daily": 0, "weekly": 1, "monthly": 2}
 
 COUNTRY_NAMES = {
     "ES": "Spain",
@@ -36,10 +39,16 @@ COUNTRY_NAMES = {
     "BG": "Bulgaria",
     "CY": "Cyprus",
     "CZ": "Czechia",
+    "UK": "United Kingdom",
+    "EL": "Greece",
+    "DE": "Germany",
 }
 
 
-def _reservoirs(registries: dict[str, pl.DataFrame]) -> pl.DataFrame:
+def _reservoirs(registries: dict[str, pl.DataFrame], sources: list[SourceMeta]) -> pl.DataFrame:
+    """Every registered reservoir with its country and source (D6: a column when a
+    country has several sources, otherwise the country's one source)."""
+    default_source = {s.country: s.id for s in reversed(sources)}
     return pl.concat(
         [
             reg.select(
@@ -49,6 +58,15 @@ def _reservoirs(registries: dict[str, pl.DataFrame]) -> pl.DataFrame:
                 "name",
                 pl.col("lat").cast(pl.Float64, strict=False),
                 pl.col("lon").cast(pl.Float64, strict=False),
+                (
+                    pl.col("source_id")
+                    if "source_id" in reg.columns
+                    else pl.lit(default_source.get(country, ""))
+                ).alias("source_id"),
+                # B25: "total" rows are a source's published total, not a reservoir.
+                (pl.col("kind").fill_null("") if "kind" in reg.columns else pl.lit("")).alias(
+                    "kind"
+                ),
             )
             for country, reg in registries.items()
         ]
@@ -56,18 +74,29 @@ def _reservoirs(registries: dict[str, pl.DataFrame]) -> pl.DataFrame:
 
 
 def membership(reservoirs: pl.DataFrame) -> pl.DataFrame:
-    """Every (reservoir, area) pair: its country, its river basin district and itself."""
+    """Every (reservoir, area) pair: its country, its river basin district and itself.
+
+    B25: a published total belongs to its district only.
+    """
+    is_total = pl.col("kind") == "total" if "kind" in reservoirs.columns else pl.lit(False)
     return pl.concat(
         [
-            reservoirs.select("reservoir_id", pl.col(col).alias("area_id"))
+            reservoirs.filter(~is_total | (pl.lit(col) == "rbd_code")).select(
+                "reservoir_id", pl.col(col).alias("area_id")
+            )
             for col in ("country", "rbd_code", "reservoir_id")
         ]
     )
 
 
-def area_catalogue(
-    reservoirs: pl.DataFrame, rbds: pl.DataFrame, source_for_country: dict[str, str]
-) -> dict[str, Area]:
+def area_catalogue(reservoirs: pl.DataFrame, rbds: pl.DataFrame) -> dict[str, Area]:
+    sources = dict(
+        membership(reservoirs)
+        .join(reservoirs.select("reservoir_id", "source_id"), on="reservoir_id")
+        .group_by("area_id")
+        .agg(pl.col("source_id").unique().sort())
+        .iter_rows()
+    )
     areas: dict[str, Area] = {}
     for country in reservoirs["country"].unique().sort():
         areas[country] = Area(
@@ -76,11 +105,16 @@ def area_catalogue(
             name=COUNTRY_NAMES.get(country, country),
             country=country,
             capacity_hm3=0,
-            source_id=source_for_country[country],
+            source_ids=sources[country],
         )
     rbd_names = dict(rbds.select("code", "name").iter_rows())
     centres = reservoirs.group_by("rbd_code", "country").agg(
         pl.col("lon").mean().round(3), pl.col("lat").mean().round(3)
+    )
+    totals_only = set(
+        reservoirs.group_by("rbd_code")
+        .agg((pl.col("kind") == "total").all().alias("all_totals"))
+        .filter("all_totals")["rbd_code"]
     )
     for row in centres.iter_rows(named=True):
         located = row["lon"] is not None and row["lat"] is not None
@@ -91,10 +125,11 @@ def area_catalogue(
             country=row["country"],
             parent_id=row["country"],
             capacity_hm3=0,
-            source_id=source_for_country[row["country"]],
+            source_ids=sources[row["rbd_code"]],
             centroid=[row["lon"], row["lat"]] if located else None,
+            total_only=True if row["rbd_code"] in totals_only else None,
         )
-    for row in reservoirs.iter_rows(named=True):
+    for row in reservoirs.filter(pl.col("kind") != "total").iter_rows(named=True):
         located = row["lon"] is not None and row["lat"] is not None
         areas[row["reservoir_id"]] = Area(
             id=row["reservoir_id"],
@@ -103,7 +138,7 @@ def area_catalogue(
             country=row["country"],
             parent_id=row["rbd_code"],
             capacity_hm3=0,
-            source_id=source_for_country[row["country"]],
+            source_ids=[row["source_id"]],
             centroid=[row["lon"], row["lat"]] if located else None,
         )
     return areas
@@ -143,19 +178,30 @@ def _country_status(
     sources: list[SourceMeta],
     health: dict[str, SourceHealth],
     withdrawn: dict[str, str],
+    coverage: dict[str, str],
 ) -> CountryStatus:
-    """B24/E5/E6: active, stale (with why) or withdrawn (with the maintainers' note)."""
+    """B24/E5/E6: active, stale (with why) or withdrawn (with the maintainers' note).
+
+    B1a: a partly covered country leads its note with what the figures cover."""
     if area.id in withdrawn:
         return CountryStatus(
             code=area.id, name=area.name, status="withdrawn", note=withdrawn[area.id]
         )
+    covers = coverage.get(area.id)
     if not entry.stale:
-        return CountryStatus(code=area.id, name=area.name, status="active")
-    source = next((s for s in sources if s.country == area.id), None)
+        return CountryStatus(code=area.id, name=area.name, status="active", note=covers)
     note = f"Latest official figures are from {entry.as_of.day} {entry.as_of:%b %Y}."
-    if source and health.get(source.id) and health[source.id].last_error:
+    if any(health.get(s.id) and health[s.id].last_error for s in sources if s.country == area.id):
         note += " The latest update from the source failed; showing the last published figures."
+    if covers:
+        note = f"{covers}. {note}"
     return CountryStatus(code=area.id, name=area.name, status="stale", note=note)
+
+
+def _cadence(area: Area, sources: list[SourceMeta]) -> str:
+    """An area is judged by its fastest source: that's where its as-of date comes from."""
+    cadences = [s.cadence for s in sources if s.id in area.source_ids] or ["weekly"]
+    return min(cadences, key=_SPEED.__getitem__)
 
 
 def _last_success(h: SourceHealth | None, now: datetime) -> datetime | None:
@@ -176,17 +222,24 @@ def build_outputs(
     now: datetime,
     health: dict[str, SourceHealth] | None = None,
     withdrawn: dict[str, str] | None = None,
+    coverage: dict[str, str] | None = None,
 ) -> Outputs:
     health = health or {}
     withdrawn = withdrawn or {}
+    coverage = coverage or {}
     today = now.date()
-    reservoirs = _reservoirs(registries)
+    reservoirs = _reservoirs(registries, sources)
     last_seen = store.group_by("reservoir_id").agg(pl.col("observed_on").max().alias("last_seen"))
     active = reservoirs.join(last_seen, on="reservoir_id").filter(
         pl.col("last_seen") >= today - RETIRED_AFTER
     )
+    carry = {s.id: CARRY_WEEKS for s in sources if s.cadence == "monthly"}
     by_area = with_normals(
-        aggregate(weekly_snapshot(store), membership(reservoirs), counted=membership(active))
+        aggregate(
+            weekly_snapshot(store, carry=carry, until=today),
+            membership(reservoirs),
+            counted=membership(active),
+        )
     )
     latest = (
         by_area.sort("week")
@@ -195,13 +248,15 @@ def build_outputs(
         .filter(pl.col("area_id").is_in(membership(active)["area_id"].unique().implode()))
     )
     snapshot = snapshot_week(latest["as_of"].to_list(), today=today)
-    catalogue = area_catalogue(reservoirs, rbds, {s.country: s.id for s in sources})
+    catalogue = area_catalogue(reservoirs, rbds)
 
     areas: list[Area] = []
     current: dict[str, CurrentEntry] = {}
     for row in latest.sort("area_id").iter_rows(named=True):
-        area = catalogue[row["area_id"]].model_copy(
-            update={"capacity_hm3": round(row["capacity_hm3"], 1)}
+        area = catalogue[row["area_id"]]
+        # A published total has no real capacity behind it (B25).
+        area = area.model_copy(
+            update={"capacity_hm3": 0 if area.total_only else round(row["capacity_hm3"], 1)}
         )
         areas.append(area)
         current[area.id] = CurrentEntry(
@@ -210,7 +265,7 @@ def build_outputs(
             anomaly_pts=_round(row["anomaly_pts"]),
             normal_years=row["normal_years"],
             as_of=row["as_of"],
-            stale=is_stale(row["as_of"], snapshot, today=today),
+            stale=is_stale(row["as_of"], snapshot, today=today, cadence=_cadence(area, sources)),
             n_reporting=row["n_reporting"],
             n_total=row["n_total"],
             flags=[row["flag"]] if row["flag"] else [],
@@ -221,7 +276,7 @@ def build_outputs(
         generated_at=now,
         snapshot_week=snapshot,
         countries=[
-            _country_status(a, current[a.id], sources, health, withdrawn)
+            _country_status(a, current[a.id], sources, health, withdrawn, coverage)
             for a in areas
             if a.level == "country"
         ],
@@ -231,6 +286,7 @@ def build_outputs(
                 country=s.country,
                 name=s.name,
                 url=s.url,
+                cadence=s.cadence,
                 last_fetched=_last_success(health.get(s.id), now),
                 last_published=published.get(s.id),
                 last_error=health[s.id].last_error if s.id in health else None,

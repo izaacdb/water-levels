@@ -91,3 +91,22 @@ def test_exact_week_wins_over_neighbours() -> None:
     history = [(2020 + i, 41, 50.0) for i in range(5)] + [(2020 + i, 40, 0.0) for i in range(5)]
     r = row(with_normals(weeks([*history, (2025, 41, 60.0)])), "2025-W41")
     assert r["normal_pct"] == pytest.approx(50.0)
+
+
+def test_years_with_different_coverage_dont_count() -> None:
+    """A normal compares like with like: years whose reporting capacity differs by more
+    than 20% from this week's (e.g. before most of a country's sources began publishing)
+    describe a different set of reservoirs."""
+    history = [(2016 + i, 41, 90.0, 40.0) for i in range(6)]  # 2016-21: a small subset
+    history += [(2022 + i, 41, 50.0, 200.0) for i in range(4)]  # 2022-25: today's set
+    df = pl.DataFrame(
+        {
+            "area_id": ["UK"] * 11,
+            "week": [f"{y}-W{w:02d}" for y, w, _, _ in history] + ["2026-W41"],
+            "pct": [p for _, _, p, _ in history] + [45.0],
+            "capacity_hm3": [c for *_, c in history] + [210.0],
+        }
+    )
+    r = row(with_normals(df), "2026-W41")
+    assert r["normal_years"] == 4  # only 2022-25 are comparable
+    assert r["normal_pct"] is None  # ...so: insufficient history

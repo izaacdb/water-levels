@@ -15,7 +15,13 @@ from pipeline import health as health_store
 from pipeline import http, store
 from pipeline.adapters.base import PartialFetch, SourceAdapter
 from pipeline.publish import build_outputs, write_outputs
-from pipeline.registry import attach_reservoir_ids, load_rbds, load_registry, load_withdrawn
+from pipeline.registry import (
+    attach_reservoir_ids,
+    load_coverage,
+    load_rbds,
+    load_registry,
+    load_withdrawn,
+)
 
 log = logging.getLogger(__name__)
 
@@ -66,7 +72,13 @@ def run(
             else:
                 health_store.record(health, meta.id, now, None)
             for obs, fetched_at in parsed:
-                mapped, unknown = attach_reservoir_ids(obs, registries[meta.country])
+                future = obs.filter(pl.col("observed_on") > (now + timedelta(days=1)).date())
+                if future.height:
+                    log.warning(
+                        "%s: dropping %d readings dated in the future", meta.id, future.height
+                    )
+                    obs = obs.filter(pl.col("observed_on") <= (now + timedelta(days=1)).date())
+                mapped, unknown = attach_reservoir_ids(obs, registries[meta.country], meta.id)
                 if unknown:
                     log.warning("%s: %d keys not in registry: %s", meta.id, len(unknown), unknown)
                     report.unknown_keys.setdefault(meta.id, [])
@@ -95,6 +107,7 @@ def run(
         now=now,
         health=health,
         withdrawn=load_withdrawn(),
+        coverage=load_coverage(),
     )
     write_outputs(outputs, out_dir=out_dir)
     return report

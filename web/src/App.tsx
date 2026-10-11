@@ -19,7 +19,8 @@ interface PanelProps {
 }
 
 function Panel({ data, state, update }: PanelProps) {
-  const sourceFor = (sourceId: string) => data.manifest.sources.find((s) => s.id === sourceId)
+  const sourcesFor = (ids: string[]) =>
+    ids.flatMap((id) => data.manifest.sources.filter((s) => s.id === id))
   const select = (id: string) => update({ area: id })
   const addToCompare = (id: string) =>
     update({ cmp: state.cmp.includes(id) ? state.cmp : [...state.cmp, id].slice(0, MAX_COMPARE), view: 'compare', area: null })
@@ -32,7 +33,7 @@ function Panel({ data, state, update }: PanelProps) {
         key={area.id}
         area={area}
         entry={entry}
-        source={sourceFor(area.sourceId)}
+        sources={sourcesFor(area.sourceIds)}
         parent={data.areas.find((a) => a.id === area.parentId)}
         onBack={() => update({ area: null })}
         onSelect={select}
@@ -84,13 +85,13 @@ function Panel({ data, state, update }: PanelProps) {
             .filter((a) => a.level === 'country')
             .map((country) => {
               const countryEntry = data.current[country.id]
-              const source = sourceFor(country.sourceId)
-              return countryEntry && source ? (
+              const sources = sourcesFor(country.sourceIds)
+              return countryEntry && sources.length ? (
                 <CountryCard
                   key={country.id}
                   name={country.name}
                   entry={countryEntry}
-                  source={source}
+                  sources={sources}
                   status={data.manifest.countries.find((c) => c.code === country.id)}
                   onOpen={() => select(country.id)}
                 />

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { Area, CurrentEntry } from '../contract'
 import { tooltipLines } from './tooltip'
 
-const area: Area = { id: 'ES050', level: 'region', name: 'Guadalquivir', country: 'ES', capacityHm3: 8000, sourceId: 'es-miteco' }
+const area: Area = { id: 'ES050', level: 'region', name: 'Guadalquivir', country: 'ES', capacityHm3: 8000, sourceIds: ['es-miteco'] }
 const entry: CurrentEntry = {
   pct: 69.1,
   anomalyPts: 35.7,
@@ -23,6 +23,12 @@ describe('tooltipLines', () => {
       lines: ['69.1% full', '+35.7 pts vs normal', 'As of 6 Oct 2026', '38 of 41 reservoirs reporting'],
       stale: false,
     })
+  })
+
+  it('calls a published total what it is rather than counting reservoirs (B25)', () => {
+    const t = tooltipLines({ ...area, totalOnly: true }, { ...entry, nReporting: 1, nTotal: 1 })
+    expect(t.lines).toContain('Published total, not per reservoir')
+    expect(t.lines.join(' ')).not.toMatch(/reservoirs reporting/)
   })
 
   it('says insufficient history when there is no normal (E2)', () => {

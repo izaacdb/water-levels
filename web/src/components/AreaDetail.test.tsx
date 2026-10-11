@@ -12,14 +12,14 @@ vi.mock('../lib/data', async (orig) => ({
   useSeries: () => ({ status: 'ready', data: { areaId: 'ES050', weeks: [], pct: [], normal: [], p10: [], p90: [], n: [] } }),
 }))
 
-const area: Area = { id: 'ES050', level: 'region', name: 'Guadalquivir', country: 'ES', parentId: 'ES', capacityHm3: 8113.4, sourceId: 'es-miteco' }
-const parent: Area = { id: 'ES', level: 'country', name: 'Spain', country: 'ES', capacityHm3: 56000, sourceId: 'es-miteco' }
+const area: Area = { id: 'ES050', level: 'region', name: 'Guadalquivir', country: 'ES', parentId: 'ES', capacityHm3: 8113.4, sourceIds: ['es-miteco'] }
+const parent: Area = { id: 'ES', level: 'country', name: 'Spain', country: 'ES', capacityHm3: 56000, sourceIds: ['es-miteco'] }
 const entry: CurrentEntry = { pct: 69.1, anomalyPts: 35.7, normalPct: 33.4, normalYears: 10, asOf: '2026-10-06', stale: false, nReporting: 47, nTotal: 47, flags: [] }
 const source: SourceInfo = { id: 'es-miteco', country: 'ES', name: 'MITECO', url: 'https://www.miteco.gob.es/' }
 
 describe('AreaDetail', () => {
   it('shows the figures, source and both charts (B16–B18)', async () => {
-    render(<AreaDetail area={area} entry={entry} source={source} parent={parent} onBack={() => {}} onSelect={() => {}} />)
+    render(<AreaDetail area={area} entry={entry} sources={[source]} parent={parent} onBack={() => {}} onSelect={() => {}} />)
     expect(screen.getByRole('heading', { name: 'Guadalquivir' })).toBeInTheDocument()
     expect(screen.getByText('69.1%')).toBeInTheDocument()
     expect(screen.getByText('+35.7 pts vs normal')).toBeInTheDocument()
@@ -33,7 +33,7 @@ describe('AreaDetail', () => {
   it('navigates back and up to the parent area', () => {
     const onBack = vi.fn()
     const onSelect = vi.fn()
-    render(<AreaDetail area={area} entry={entry} source={source} parent={parent} onBack={onBack} onSelect={onSelect} />)
+    render(<AreaDetail area={area} entry={entry} sources={[source]} parent={parent} onBack={onBack} onSelect={onSelect} />)
     fireEvent.click(screen.getByRole('button', { name: /back/i }))
     expect(onBack).toHaveBeenCalled()
     fireEvent.click(screen.getByRole('button', { name: 'Spain' }))
@@ -41,7 +41,15 @@ describe('AreaDetail', () => {
   })
   it('reads "insufficient history" when there is no normal yet (E2)', () => {
     const fresh = { ...entry, anomalyPts: null, normalPct: null, normalYears: 0 }
-    render(<AreaDetail area={area} entry={fresh} source={source} parent={parent} onBack={() => {}} onSelect={() => {}} />)
+    render(<AreaDetail area={area} entry={fresh} sources={[source]} parent={parent} onBack={() => {}} onSelect={() => {}} />)
     expect(screen.getByText('vs normal: insufficient history')).toBeInTheDocument()
+  })
+
+  it('explains a published total and shows no capacity or reservoir count (B25)', () => {
+    const scotland: Area = { ...area, id: 'UK01', name: 'Scotland', country: 'UK', capacityHm3: 0, totalOnly: true }
+    render(<AreaDetail area={scotland} entry={{ ...entry, nReporting: 1, nTotal: 1 }} sources={[source]} onBack={() => {}} onSelect={() => {}} />)
+    expect(screen.getByText(/Published as one total/)).toBeInTheDocument()
+    expect(screen.queryByText('Capacity')).not.toBeInTheDocument()
+    expect(screen.queryByText(/1 of 1 reservoirs/)).not.toBeInTheDocument()
   })
 })

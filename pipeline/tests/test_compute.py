@@ -149,3 +149,39 @@ def test_weekly_sources_are_not_stale_when_daily_sources_enter_a_new_week() -> N
     assert is_stale(date(2026, 10, 6), snap, today=today) is False
     # A source that missed the whole of W41 is out of date.
     assert is_stale(date(2026, 9, 29), snap, today=today) is True
+
+
+def _monthly(rows: list[tuple[str, date, float]]) -> pl.DataFrame:
+    return store([(r, d, v, 100) for r, d, v in rows]).with_columns(source_id=pl.lit("uk-monthly"))
+
+
+def test_monthly_readings_carry_forward_until_the_next_one() -> None:
+    """B3′: a slower source's reading fills the following weeks, keeping its own date."""
+    df = _monthly([("M", date(2026, 7, 31), 40), ("M", date(2026, 8, 31), 50)])
+    weekly = weekly_snapshot(df, carry={"uk-monthly": 5}, until=date(2026, 10, 10))
+    by_week = {r["week"]: (r["volume_hm3"], r["observed_on"]) for r in weekly.to_dicts()}
+    assert by_week["2026-W31"] == (40, date(2026, 7, 31))  # the reading's own week
+    assert by_week["2026-W35"] == (40, date(2026, 7, 31))  # carried 4 weeks
+    assert by_week["2026-W36"] == (50, date(2026, 8, 31))  # the next reading takes over
+    assert by_week["2026-W41"] == (50, date(2026, 8, 31))  # carried 5 weeks...
+    assert "2026-W42" not in by_week  # ...never into the future
+
+
+def test_carry_forward_stops_after_its_window() -> None:
+    df = _monthly([("M", date(2026, 6, 1), 40)])
+    weekly = weekly_snapshot(df, carry={"uk-monthly": 5}, until=date(2026, 10, 10))
+    assert weekly["week"].to_list() == [f"2026-W{w}" for w in range(23, 29)]
+
+
+def test_weekly_sources_are_not_carried() -> None:
+    df = store([("A", date(2026, 9, 1), 10, 100)])
+    weekly = weekly_snapshot(df, carry={"uk-monthly": 5}, until=date(2026, 10, 10))
+    assert weekly.height == 1
+
+
+@pytest.mark.parametrize(
+    ("as_of", "expected"),
+    [(date(2026, 8, 31), False), (date(2026, 8, 8), True)],  # 40 and 63 days old
+)
+def test_monthly_sources_are_stale_only_after_62_days(as_of: date, expected: bool) -> None:
+    assert is_stale(as_of, "2026-W41", today=date(2026, 10, 10), cadence="monthly") is expected

@@ -1,0 +1,33 @@
+id,source_key,name,group,rbd_code,lat,lon,capacity_hm3,ltv_id
+DE-altenberg,altenberg,Altenberg,LTV Sachsen,DE5000,50.7666,13.7523,0.896,207
+DE-baderitz,baderitz,Baderitz,LTV Sachsen,DE5000,51.2233,13.0196,0.291,1228
+DE-bautzen,bautzen,Bautzen,LTV Sachsen,DE5000,51.2140,14.4565,37.687,101
+DE-carlsfeld,carlsfeld,Carlsfeld,LTV Sachsen,DE5000,50.4197,12.5953,2.406,401
+DE-cranzahl,cranzahl,Cranzahl,LTV Sachsen,DE5000,50.4997,13.0041,2.846,303
+DE-dollnitzsee,dollnitzsee,Döllnitzsee,LTV Sachsen,DE5000,51.2686,12.9351,2.269,608
+DE-droda,droda,Dröda,LTV Sachsen,DE5000,50.3905,12.0428,14.319,504
+DE-eibenstock,eibenstock,Eibenstock,LTV Sachsen,DE5000,50.5269,12.5875,64.636,403
+DE-falkenstein,falkenstein,Falkenstein,LTV Sachsen,DE5000,50.4641,12.3775,0.943,505
+DE-gottleuba,gottleuba,Gottleuba,LTV Sachsen,DE5000,50.8307,13.9318,9.472,204
+DE-kauscha,kauscha,Kauscha,LTV Sachsen,DE5000,50.9890,13.7764,0.012,209
+DE-klingenberg,klingenberg,Klingenberg,LTV Sachsen,DE5000,50.8955,13.5495,14.139,202
+DE-koberbach,koberbach,Koberbach,LTV Sachsen,DE5000,50.7990,12.2896,2.340,406
+DE-lehnmuhle,lehnmuhle,Lehnmühle,LTV Sachsen,DE5000,50.8235,13.5921,16.904,201
+DE-lichtenberg,lichtenberg,Lichtenberg,LTV Sachsen,DE5000,50.8059,13.4566,11.442,302
+DE-malter,malter,Malter,LTV Sachsen,DE5000,50.9169,13.6543,4.355,203
+DE-muldenberg,muldenberg,Muldenberg,LTV Sachsen,DE5000,50.4079,12.3990,4.926,506
+DE-neunzehnhain-1,neunzehnhain-1,Neunzehnhain 1,LTV Sachsen,DE5000,50.7259,13.1541,0.507,306
+DE-neunzehnhain-2,neunzehnhain-2,Neunzehnhain 2,LTV Sachsen,DE5000,50.7259,13.1541,2.895,307
+DE-pirk,pirk,Pirk,LTV Sachsen,DE5000,50.4251,12.1168,7.146,501
+DE-pohl,pohl,Pöhl,LTV Sachsen,DE5000,50.5348,12.1974,52.831,502
+DE-quitzdorf,quitzdorf,Quitzdorf,LTV Sachsen,DE5000,51.2754,14.7662,16.480,102
+DE-radeburg-i,radeburg-i,Radeburg I,LTV Sachsen,DE5000,51.2130,13.7480,0.400,205
+DE-radeburg-ii,radeburg-ii,Radeburg II,LTV Sachsen,DE5000,51.2149,13.7241,5.000,206
+DE-rauschenbach,rauschenbach,Rauschenbach,LTV Sachsen,DE5000,50.7000,13.5159,14.227,301
+DE-saidenbach,saidenbach,Saidenbach,LTV Sachsen,DE5000,50.7327,13.2310,19.358,305
+DE-schombach,schombach,Schömbach,LTV Sachsen,DE5000,50.9869,12.5758,1.500,601
+DE-sosa,sosa,Sosa,LTV Sachsen,DE5000,50.4903,12.6439,5.540,402
+DE-stollberg,stollberg,Stollberg,LTV Sachsen,DE5000,50.7088,12.7763,1.000,404
+DE-wallroda,wallroda,Wallroda,LTV Sachsen,DE5000,51.1179,13.9833,0.600,210
+DE-werda,werda,Werda,LTV Sachsen,DE5000,50.4467,12.3147,3.628,503
+DE-wolfersgrun,wolfersgrun,Wolfersgrün,LTV Sachsen,DE5000,50.6228,12.4811,0.327,1257

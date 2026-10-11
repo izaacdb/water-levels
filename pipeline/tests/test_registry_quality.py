@@ -62,3 +62,37 @@ def test_bulgarian_reservoirs_are_located_in_bulgaria() -> None:
     assert reg["rbd_code"].is_in(rbds).all()
     assert reg["lat"].cast(pl.Float64).is_between(41.2, 44.3).all()
     assert reg["lon"].cast(pl.Float64).is_between(22.3, 28.7).all()
+
+
+def test_uk_reservoirs_belong_to_a_known_source_and_lie_in_great_britain() -> None:
+    from pipeline.cli import ADAPTERS
+
+    reg = load_registry("UK")
+    sources = {a.meta.id for a in ADAPTERS if a.meta.country == "UK"}
+    assert set(reg["source_id"].unique()) <= sources
+    assert reg["id"].is_unique().all()
+    assert reg.select("source_id", "source_key").is_unique().all()
+    assert reg["rbd_code"].is_in(set(load_rbds()["code"].to_list())).all()
+    reservoirs = reg.filter(pl.col("kind") != "total")  # B25: totals have no position
+    assert reservoirs["lat"].cast(pl.Float64).is_not_null().all()
+    assert reservoirs["lat"].cast(pl.Float64).is_between(49.8, 60.9).all()
+    assert reservoirs["lon"].cast(pl.Float64).is_between(-8.2, 1.8).all()
+
+
+def test_greek_reservoirs_have_cited_capacities_and_lie_in_greece() -> None:
+    reg = load_registry("EL")
+    assert set(reg["source_key"]) == {"mornos", "evinos", "yliki", "marathonas"}
+    assert reg["rbd_code"].is_in(set(load_rbds()["code"].to_list())).all()
+    assert reg["capacity_hm3"].cast(pl.Float64).is_not_null().all()
+    assert (reg["capacity_source"].str.len_chars() > 0).all()
+    assert reg["lat"].cast(pl.Float64).is_between(34.8, 41.8).all()
+    assert reg["lon"].cast(pl.Float64).is_between(19.3, 29.7).all()
+
+
+def test_saxon_reservoirs_have_capacities_and_lie_in_saxony() -> None:
+    reg = load_registry("DE")
+    assert reg.height >= 30
+    assert reg["rbd_code"].is_in(set(load_rbds()["code"].to_list())).all()
+    assert (reg["capacity_hm3"].cast(pl.Float64) > 0).all()
+    assert reg["lat"].cast(pl.Float64).is_between(50.1, 51.7).all()
+    assert reg["lon"].cast(pl.Float64).is_between(11.8, 15.1).all()

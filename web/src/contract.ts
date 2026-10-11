@@ -42,6 +42,7 @@ id: string
 country: string
 name: string
 url: string
+cadence?: ("daily" | "weekly" | "monthly")
 lastFetched?: (string | null)
 lastPublished?: (string | null)
 lastError?: (string | null)
@@ -57,7 +58,11 @@ name: string
 country: string
 parentId?: (string | null)
 capacityHm3: number
-sourceId: string
+/**
+ * @minItems 1
+ */
+sourceIds: [string, ...(string)[]]
+totalOnly?: (boolean | null)
 centroid?: ([number, number] | null)
 }
 /**

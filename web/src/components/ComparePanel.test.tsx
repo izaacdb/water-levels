@@ -17,7 +17,7 @@ const mk = (id: string, name: string, level: Area['level'] = 'region', country =
   name,
   country,
   capacityHm3: 1234,
-  sourceId: 'x',
+  sourceIds: ['x'],
 })
 const areas = [mk('ES', 'Spain', 'country'), mk('ES050', 'Guadalquivir'), mk('ES091', 'Ebro'), mk('ES030', 'Tajo'), mk('ES020', 'Duero'), mk('ES040', 'Guadiana'), mk('ES010', 'Miño-Sil')]
 const current: Current = Object.fromEntries(

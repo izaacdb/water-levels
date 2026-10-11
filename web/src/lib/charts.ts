@@ -33,6 +33,12 @@ const pctAxis = {
 
 const hasNumber = (v: number | null): v is number => v != null
 
+const tenYearsBefore = (ms: number) => {
+  const d = new Date(ms)
+  d.setUTCFullYear(d.getUTCFullYear() - 10)
+  return d.getTime()
+}
+
 /** B17: % full over the 10-year window, with the normal band behind it. */
 export function trendOption(s: Series) {
   const t = s.weeks.map((w) => isoWeekStart(w).getTime())
@@ -72,7 +78,15 @@ export function trendOption(s: Series) {
   return {
     animation: false,
     grid: { left: 40, right: 12, top: 12, bottom: 28 },
-    xAxis: { ...axisCommon, type: 'time' as const, splitLine: { show: false } },
+    // B6: always the full 10-year window, so a short history (a source we only
+    // started archiving recently) isn't stretched across the chart down to hours.
+    xAxis: {
+      ...axisCommon,
+      type: 'time' as const,
+      splitLine: { show: false },
+      min: t.length ? tenYearsBefore(t[t.length - 1]) : undefined,
+      max: t.length ? t[t.length - 1] : undefined,
+    },
     yAxis: pctAxis,
     tooltip: {
       trigger: 'axis' as const,

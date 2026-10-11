@@ -163,6 +163,7 @@ class PovodiAdapter:
         country="CZ",
         name="Povodí state enterprises — reservoir conservation storage",
         url="https://www.pvl.cz/portal/nadrze/cz/index.htm",
+        cadence="daily",
     )
 
     def fetch(self, client: httpx.Client) -> bytes:

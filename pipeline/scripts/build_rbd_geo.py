@@ -13,6 +13,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "pipeline" / "registry" / "rbd-source.geojson"
+# WISE's nameText for some districts lists their reporting sub-units rather than the
+# district's own official name.
+NAME_OVERRIDES = {"DE5000": "Elbe"}
 SMALL = {"y", "e", "de", "do", "da", "del", "la", "las", "los", "and"}
 
 
@@ -20,7 +23,12 @@ def official_name(raw: str) -> str:
     """Official local-language name, title-cased (E10).
 
     'TINTO, ODIEL Y PIEDRAS' -> 'Tinto, Odiel y Piedras'
+
+    Greek is left as published: title-casing capitals would drop the accents that
+    lower-case Greek requires ('ΑΤΤΙΚΗ' is right; 'Αττικη' is misspelt).
     """
+    if any("\u0370" <= ch <= "\u03ff" for ch in raw):
+        return raw
     words = raw.lower().split(" ")
     return " ".join(
         w if (i and w in SMALL) else "-".join(p[:1].upper() + p[1:] for p in w.split("-"))
@@ -33,7 +41,8 @@ def main() -> None:
     features, rows = [], []
     for f in src["features"]:
         p = f["properties"]
-        code, name = p["thematicIdIdentifier"], official_name(p["nameText"])
+        code = p["thematicIdIdentifier"]
+        name = NAME_OVERRIDES.get(code) or official_name(p["nameText"])
         features.append(
             {
                 "type": "Feature",

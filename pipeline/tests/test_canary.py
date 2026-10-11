@@ -77,3 +77,15 @@ def test_fetch_or_parse_errors_fail(tmp_path: Path) -> None:
     result = canary([Adapter(fail=True)], store_with(3), tmp_path)
     assert result["es-miteco"]["ok"] is False
     assert "down" in result["es-miteco"]["problem"]
+
+
+def test_a_company_only_matches_its_own_reservoirs(tmp_path: Path) -> None:
+    """D6: in a country with several companies, another company's key isn't a match."""
+
+    class Southern(Adapter):
+        meta = SourceMeta(id="uk-southern", country="UK", name="S", url="https://s/")
+
+    # "derwent" is Severn Trent's in the real UK registry, not Southern's.
+    results = canary([Southern(keys=["derwent"])], pl.DataFrame(schema=STORE_SCHEMA), tmp_path)
+    assert results["uk-southern"]["unknown_keys"] == ["derwent"]
+    assert results["uk-southern"]["ok"] is False
