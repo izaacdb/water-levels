@@ -2,80 +2,80 @@
   "bg-moew": {
     "last_success": "2026-10-15T10:32:30.903634+00:00",
     "last_error": "ValueError: no bulletin attachment on /bg/ejedneven-byuletin-za-sustoyanieto-na-vodite-za-16-oktomvri-2026/",
-    "consecutive_failures": 3
+    "consecutive_failures": 4
   },
   "cy-wdd": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "cz-povodi": {
     "last_success": null,
     "last_error": "PartialFetch: Povod\u00ed Oh\u0159e: Client error '403 Forbidden' for url 'https://sap.poh.cz/portal/nadrze/cz/Objemy.aspx'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
-    "consecutive_failures": 11
+    "consecutive_failures": 12
   },
   "de-ltv": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "el-eydap": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "es-miteco": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "pt-apa": {
     "last_success": "2026-10-11T11:47:10.058233+00:00",
     "last_error": "RemoteProtocolError: Server disconnected without sending a response.",
-    "consecutive_failures": 7
+    "consecutive_failures": 8
   },
   "uk-anglian": {
     "last_success": null,
     "last_error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.anglianwater.co.uk/services/water-supply/monitoring-water-resources'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
-    "consecutive_failures": 9
+    "consecutive_failures": 10
   },
   "uk-hafren-dyfrdwy": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-scottish-water": {
     "last_success": "2026-10-18T10:04:42.676642+00:00",
-    "last_error": null,
-    "consecutive_failures": 0
+    "last_error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.scottishwater.co.uk/Your-Home/Your-Water/Managing-Water-Resources/Scotlands-Water-Resource-Levels'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+    "consecutive_failures": 1
   },
   "uk-ses": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-severn-trent": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-south-west": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-southern": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-wessex": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-yorkshire": {
-    "last_success": "2026-10-18T10:04:42.676642+00:00",
+    "last_success": "2026-10-19T11:31:05.529415+00:00",
     "last_error": null,
     "consecutive_failures": 0
   }
