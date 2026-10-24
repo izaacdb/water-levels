@@ -1,81 +1,81 @@
 {
   "bg-moew": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "cy-wdd": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "cz-povodi": {
     "last_success": null,
     "last_error": "PartialFetch: Povod\u00ed Oh\u0159e: Client error '403 Forbidden' for url 'https://sap.poh.cz/portal/nadrze/cz/Objemy.aspx'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
-    "consecutive_failures": 16
+    "consecutive_failures": 17
   },
   "de-ltv": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "el-eydap": {
-    "last_success": "2026-10-22T10:49:22.197396+00:00",
-    "last_error": "ValueError: time data '\u03a5\u03c0\u03ae\u03c1\u03be\u03b5 \u03ad\u03bd\u03b1 \u03c3\u03c6\u03ac\u03bb\u03bc\u03b1 \u03ba\u03b1\u03c4\u03ac \u03c4\u03b7 \u03b4\u03b9\u03b1\u03c3\u03cd\u03bd\u03b4\u03b5\u03c3\u03b7 \u03bc\u03b5 \u03c4\u03b7 \u03b2\u03ac\u03c3\u03b7 \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03c9\u03bd. \u03a0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb\u03bf\u03cd\u03bc\u03b5 \u03b5\u03c0\u03b9\u03ba\u03bf\u03b9\u03bd\u03c9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03c4\u03b7\u03bb\u03ad\u03c6\u03c9\u03bd\u03bf 1022 \u03ae \u03b4\u03bf\u03ba\u03b9\u03bc\u03ac\u03c3\u03c4\u03b5 \u03be\u03b1\u03bd\u03ac \u03b1\u03c1\u03b3\u03cc\u03c4\u03b5\u03c1\u03b1.' does not match format '%d/%m/%Y'",
-    "consecutive_failures": 1
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
+    "last_error": null,
+    "consecutive_failures": 0
   },
   "es-miteco": {
     "last_success": "2026-10-23T10:41:41.819679+00:00",
-    "last_error": null,
-    "consecutive_failures": 0
+    "last_error": "RemoteProtocolError: peer closed connection without sending complete message body (received 8388608 bytes, expected 10377727)",
+    "consecutive_failures": 1
   },
   "pt-apa": {
     "last_success": "2026-10-11T11:47:10.058233+00:00",
     "last_error": "RemoteProtocolError: Server disconnected without sending a response.",
-    "consecutive_failures": 12
+    "consecutive_failures": 13
   },
   "uk-anglian": {
     "last_success": null,
     "last_error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.anglianwater.co.uk/services/water-supply/monitoring-water-resources'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
-    "consecutive_failures": 14
+    "consecutive_failures": 15
   },
   "uk-hafren-dyfrdwy": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-scottish-water": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-ses": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-severn-trent": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-south-west": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-southern": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-wessex": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-yorkshire": {
-    "last_success": "2026-10-23T10:41:41.819679+00:00",
+    "last_success": "2026-10-24T09:58:34.999895+00:00",
     "last_error": null,
     "consecutive_failures": 0
   }
