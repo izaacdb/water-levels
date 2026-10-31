@@ -1,81 +1,81 @@
 {
   "bg-moew": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "cy-wdd": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "cz-povodi": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "de-ltv": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "el-eydap": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "es-miteco": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "pt-apa": {
     "last_success": "2026-10-11T11:47:10.058233+00:00",
     "last_error": "RemoteProtocolError: Server disconnected without sending a response.",
-    "consecutive_failures": 19
+    "consecutive_failures": 20
   },
   "uk-anglian": {
     "last_success": null,
     "last_error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.anglianwater.co.uk/services/water-supply/monitoring-water-resources'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
-    "consecutive_failures": 21
+    "consecutive_failures": 22
   },
   "uk-hafren-dyfrdwy": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-scottish-water": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-ses": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-severn-trent": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-south-west": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-southern": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   },
   "uk-wessex": {
     "last_success": "2026-10-30T11:50:55.252630+00:00",
-    "last_error": null,
-    "consecutive_failures": 0
+    "last_error": "HTTPStatusError: Server error '502 Bad Gateway' for url 'https://www.streamwaterdata.co.uk/api/search/v1/collections/all/items?q=Wessex+Water+Reservoir+Levels&limit=100'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502",
+    "consecutive_failures": 1
   },
   "uk-yorkshire": {
-    "last_success": "2026-10-30T11:50:55.252630+00:00",
+    "last_success": "2026-10-31T11:24:09.757366+00:00",
     "last_error": null,
     "consecutive_failures": 0
   }
